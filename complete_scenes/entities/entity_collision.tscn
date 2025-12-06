@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c522uyw28gd8c"]
+
+[ext_resource type="Script" uid="uid://b8mhtf1nyifki" path="res://complete_scenes/entities/entity_collision.gd" id="1_fbp2r"]
+
+[node name="EntityCollision" type="CollisionShape2D"]
+script = ExtResource("1_fbp2r")

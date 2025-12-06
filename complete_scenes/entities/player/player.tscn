@@ -1,0 +1,149 @@
+[gd_scene load_steps=14 format=3 uid="uid://xn5yhb7a3dga"]
+
+[ext_resource type="Script" uid="uid://cmcttel0tywal" path="res://complete_scenes/entities/player/player.gd" id="1_2ja1o"]
+[ext_resource type="Script" uid="uid://bkm2qpcymw18x" path="res://complete_scenes/entities/player/charcter_anim.gd" id="2_cjfkd"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_u2bhs"]
+[ext_resource type="Resource" uid="uid://cfqddltghxpse" path="res://config/input_actions/action_2d_walk.tres" id="2_usp81"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="3_1poog"]
+[ext_resource type="Resource" uid="uid://btj8l0x5cop8o" path="res://config/input_actions/action_2d_run.tres" id="3_3rt7g"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_hcnbt"]
+[ext_resource type="Resource" uid="uid://cb14wrl0wyswa" path="res://config/input_actions/action_2d_sneak.tres" id="4_lqk7r"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_t23pu"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cjfkd"]
+[ext_resource type="PackedScene" uid="uid://c522uyw28gd8c" path="res://complete_scenes/entities/entity_collision.tscn" id="7_hcnbt"]
+[ext_resource type="Script" uid="uid://c7cxlt2sxclx7" path="res://complete_scenes/entities/mouse_control_camer.gd" id="8_t23pu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t23pu"]
+
+[node name="Player" type="CharacterBody2D"]
+editor_description = "Наш братец-кролик"
+script = ExtResource("1_2ja1o")
+walk_action = ExtResource("2_usp81")
+run_action = ExtResource("3_3rt7g")
+sneak_action = ExtResource("4_lqk7r")
+
+[node name="CharcterAnim" type="Node2D" parent="."]
+script = ExtResource("2_cjfkd")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharcterAnim"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharcterAnim"]
+
+[node name="Polygon2D" type="Polygon2D" parent="CharcterAnim"]
+polygon = PackedVector2Array(-12, -17, -20, -27, -24, -45, -18, -47, -15, -34, 1, -37, 4, -51, 9, -50, 7, -37, 12, -29, 9, -19, 17, -5, 19, 13, -2, 15, -21, 14, -24, 6, -18, 5)
+
+[node name="PlayerStateChart" type="Node" parent="."]
+script = ExtResource("2_u2bhs")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="PlayerStateChart"]
+script = ExtResource("3_1poog")
+
+[node name="PlayerBehaviour" type="Node" parent="PlayerStateChart/Root"]
+script = ExtResource("4_hcnbt")
+initial_state = NodePath("Run")
+
+[node name="toStunned" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../Stunned")
+event = &"stunned"
+delay_in_seconds = "0.0"
+
+[node name="Run" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Run"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="toWalk" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Run"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Walk")
+event = &"walking"
+delay_in_seconds = "0.0"
+
+[node name="toSneak" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Run"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Sneak")
+event = &"sneaking"
+delay_in_seconds = "0.0"
+
+[node name="Walk" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Walk"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="toRun" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Walk"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Run")
+event = &"running"
+delay_in_seconds = "0.0"
+
+[node name="toSneak" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Walk"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Sneak")
+event = &"sneaking"
+delay_in_seconds = "0.0"
+
+[node name="Sneak" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Sneak"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.0"
+
+[node name="toRun" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Sneak"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Run")
+event = &"running"
+delay_in_seconds = "0.0"
+
+[node name="toWalk" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Sneak"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Walk")
+event = &"walking"
+delay_in_seconds = "0.0"
+
+[node name="Idle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toRun" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Idle"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Run")
+event = &"running"
+delay_in_seconds = "0.0"
+
+[node name="toWalk" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Idle"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Walk")
+event = &"walking"
+delay_in_seconds = "0.0"
+
+[node name="toSneak" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Idle"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Sneak")
+event = &"sneaking"
+delay_in_seconds = "0.0"
+
+[node name="Stunned" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Stunned"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+delay_in_seconds = "0.2"
+
+[node name="EntityCollision" parent="." instance=ExtResource("7_hcnbt")]
+shape = SubResource("CircleShape2D_t23pu")
+
+[node name="MouseControlCamera" type="Camera2D" parent="."]
+script = ExtResource("8_t23pu")
+metadata/_custom_type_script = "uid://c7cxlt2sxclx7"

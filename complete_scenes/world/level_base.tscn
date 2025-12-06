@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2ptp60qptf3r"]
+
+[ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/level_base.gd" id="1_ap5gr"]
+[ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_abcfb"]
+[ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="3_abcfb"]
+
+[sub_resource type="TileSet" id="TileSet_abcfb"]
+
+[sub_resource type="Gradient" id="Gradient_ap5gr"]
+colors = PackedColorArray(0, 0.28235295, 0, 1, 0.43, 0.33325, 0.1075, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ap5gr"]
+noise_type = 3
+frequency = 0.4596
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_abcfb"]
+noise = SubResource("FastNoiseLite_ap5gr")
+color_ramp = SubResource("Gradient_ap5gr")
+
+[node name="LevelBase" type="Node2D"]
+script = ExtResource("1_ap5gr")
+
+[node name="WorldMetadata" type="Node" parent="."]
+script = ExtResource("2_abcfb")
+metadata/_custom_type_script = "uid://rrcahhioggsb"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_abcfb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(950.9999, 549)
+scale = Vector2(3.8554688, 2.1640625)
+texture = SubResource("NoiseTexture2D_abcfb")
+
+[node name="Player" parent="." instance=ExtResource("3_abcfb")]
+position = Vector2(668, 436)
