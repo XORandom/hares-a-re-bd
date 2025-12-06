@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c4t2h68uq0b4b"
-path="res://.godot/imported/Goatsica-Regular.woff-fc851ab9a491bf8a8ff3cd4212d5c6ce.fontdata"
+uid="uid://bvh7i0dd7efcb"
+path="res://.godot/imported/TD Zvonar.otf-7b741a008cd319107463d1619487ba34.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/goatsica/Goatsica-Regular.woff"
-dest_files=["res://.godot/imported/Goatsica-Regular.woff-fc851ab9a491bf8a8ff3cd4212d5c6ce.fontdata"]
+source_file="res://assets/fonts/TD Zvonar/TD Zvonar.otf"
+dest_files=["res://.godot/imported/TD Zvonar.otf-7b741a008cd319107463d1619487ba34.fontdata"]
 
 [params]
 
