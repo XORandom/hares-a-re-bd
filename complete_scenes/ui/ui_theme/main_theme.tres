@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://ck3lqv73gdnwl"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://ck3lqv73gdnwl"]
 
 [ext_resource type="FontFile" uid="uid://bbly8g5hv0mvk" path="res://assets/fonts/wolgadeutsche/Wolgadeutsche.otf" id="1_682gp"]
 
@@ -18,6 +18,9 @@ bg_color = Color(0.21809414, 3.9106236e-08, 0.046828568, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vxml"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhuc7"]
+bg_color = Color(0, 0, 0, 0.47843137)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_682gp"]
 
 [resource]
@@ -35,4 +38,5 @@ MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 5
 MarginContainer/constants/margin_right = 5
 MarginContainer/constants/margin_top = 5
+Panel/styles/panel = SubResource("StyleBoxFlat_dhuc7")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_682gp")
