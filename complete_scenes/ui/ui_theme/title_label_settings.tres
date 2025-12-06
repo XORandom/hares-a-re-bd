@@ -1,9 +1,6 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cue3k7t74c58x"]
-
-[ext_resource type="FontFile" uid="uid://b7wl6y6lhts57" path="res://assets/fonts/Da Vinci Script.ttf" id="1_t5a35"]
+[gd_resource type="LabelSettings" format=3 uid="uid://cue3k7t74c58x"]
 
 [resource]
-font = ExtResource("1_t5a35")
 font_size = 184
 font_color = Color(0.3705771, 0, 0, 1)
 outline_size = 6

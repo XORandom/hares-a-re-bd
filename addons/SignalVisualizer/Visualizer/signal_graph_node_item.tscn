@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2lwtwp6kpwtb"]
 
-[ext_resource type="Script" path="res://addons/SignalVisualizer/Visualizer/signal_graph_node_item.gd" id="1_jrd34"]
-[ext_resource type="Script" path="res://addons/SignalVisualizer/Visualizer/resizable_label.gd" id="2_4wwd5"]
+[ext_resource type="Script" uid="uid://ciqj0od2j2tqd" path="res://addons/SignalVisualizer/Visualizer/signal_graph_node_item.gd" id="1_jrd34"]
+[ext_resource type="Script" uid="uid://bdvpgvqg57n2x" path="res://addons/SignalVisualizer/Visualizer/resizable_label.gd" id="2_4wwd5"]
 
 [node name="SignalItem" type="Control"]
 clip_contents = true
-custom_minimum_size = Vector2(51, 23)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

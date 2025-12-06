@@ -1,11 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://v5vg88it87oj"]
+[gd_scene load_steps=27 format=3 uid="uid://v5vg88it87oj"]
 
-[ext_resource type="Script" path="res://godot_state_charts_examples/platformer/ninja_frog/ninja_frog.gd" id="1_xi1lh"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_qw75p"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_g6c55"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="6_vmkuk"]
+[ext_resource type="Script" uid="uid://qid37o42he05" path="res://godot_state_charts_examples/platformer/ninja_frog/ninja_frog.gd" id="1_xi1lh"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_qw75p"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_g6c55"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_vmkuk"]
 [ext_resource type="Texture2D" uid="uid://bgswg1pgd01d1" path="res://godot_state_charts_examples/platformer/ninja_frog/full.png" id="7_fehuj"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_wswdv"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="9_wswdv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ethx"]
 radius = 12.0
@@ -110,12 +110,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_au2ov"]
 _data = {
-"RESET": SubResource("Animation_uq0h4"),
-"double_jump": SubResource("Animation_10ku2"),
-"fall": SubResource("Animation_ibg22"),
-"idle": SubResource("Animation_5rh2e"),
-"jump": SubResource("Animation_jaga7"),
-"walk": SubResource("Animation_6odvc")
+&"RESET": SubResource("Animation_uq0h4"),
+&"double_jump": SubResource("Animation_10ku2"),
+&"fall": SubResource("Animation_ibg22"),
+&"idle": SubResource("Animation_5rh2e"),
+&"jump": SubResource("Animation_jaga7"),
+&"walk": SubResource("Animation_6odvc")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k3ia7"]
@@ -167,8 +167,6 @@ states/Start/position = Vector2(210.5, 73.75)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_i3ow4"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_a52qu"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_1q7sj"), "Move", "DoubleJump", SubResource("AnimationNodeStateMachineTransition_4cnci"), "DoubleJump", "Move", SubResource("AnimationNodeStateMachineTransition_ddbej")]
 graph_offset = Vector2(84, -7)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_63x7j"]
-
 [node name="NinjaFrog" type="CharacterBody2D" groups=["player"]]
 input_pickable = true
 script = ExtResource("1_xi1lh")
@@ -179,7 +177,7 @@ shape = SubResource("CapsuleShape2D_1ethx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_au2ov")
+&"": SubResource("AnimationLibrary_au2ov")
 }
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -189,11 +187,9 @@ offset = Vector2(0, -12)
 hframes = 31
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_process = 0
 tree_root = SubResource("AnimationNodeStateMachine_ckafx")
 anim_player = NodePath("../AnimationPlayer")
-active = true
-process_callback = 0
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_63x7j")
 parameters/Move/blend_position = -0.380028
 
 [node name="StateChart" type="Node" parent="."]

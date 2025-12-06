@@ -111,6 +111,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -106.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Tree" type="Tree" parent="VBoxContainer/TabContainer/Current/Panel"]
 layout_mode = 1

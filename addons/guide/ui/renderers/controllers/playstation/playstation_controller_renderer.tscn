@@ -101,3 +101,6 @@ texture = ExtResource("19_oj5w7")
 
 [node name="Back" parent="HBoxContainer/Controls" index="18"]
 texture = ExtResource("20_p3s2m")
+
+[node name="TouchPad" parent="HBoxContainer/Controls" index="19"]
+texture = ExtResource("21_nht85")

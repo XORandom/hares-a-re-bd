@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://bphe0g2d306fe" path="res://godot_state_charts_examples/cooldown/icons/enchant-red-3.png" id="3_a8h0q"]
 [ext_resource type="Texture2D" uid="uid://bjmc4abduaxww" path="res://godot_state_charts_examples/cooldown/icons/fireball-eerie-2.png" id="4_jhd8u"]
 [ext_resource type="Texture2D" uid="uid://b87nmomi1l48x" path="res://godot_state_charts_examples/cooldown/icons/heal-jade-2.png" id="5_xxunm"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_d3pqh"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="7_l6ahs"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="8_pvst5"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="9_h41ei"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="10_5fig4"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="6_d3pqh"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="7_l6ahs"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="8_pvst5"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="9_h41ei"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="10_5fig4"]
 
 [node name="Cooldown Example" type="Node2D"]
 
@@ -75,6 +75,7 @@ script = ExtResource("9_h41ei")
 script = ExtResource("10_5fig4")
 to = NodePath("../../Cooldown")
 event = &"attack"
+delay_in_seconds = "0.0"
 
 [node name="Cooldown" type="Node" parent="StateChart/Root/AttackSkill"]
 editor_description = "Cooldown state for the attack skill. While the delayed transition is pending, this state will send status updates on the pending transition to the attack skill button. The attack skill button will then update itself and show the remaining cooldown."
@@ -83,7 +84,7 @@ script = ExtResource("9_h41ei")
 [node name="Back to Available" type="Node" parent="StateChart/Root/AttackSkill/Cooldown"]
 script = ExtResource("10_5fig4")
 to = NodePath("../../Available")
-delay_seconds = 1.0
+delay_in_seconds = "1.0"
 
 [node name="MagicSkill" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_pvst5")
@@ -97,6 +98,7 @@ script = ExtResource("9_h41ei")
 script = ExtResource("10_5fig4")
 to = NodePath("../../Cooldown")
 event = &"magic"
+delay_in_seconds = "0.0"
 
 [node name="Cooldown" type="Node" parent="StateChart/Root/MagicSkill"]
 editor_description = "Cooldown state for the magic skill. While the delayed transition is pending, this state will send status updates on the pending transition to the magic skill button. The magic  skill button will then update itself and show the remaining cooldown."
@@ -105,7 +107,7 @@ script = ExtResource("9_h41ei")
 [node name="Back to Available" type="Node" parent="StateChart/Root/MagicSkill/Cooldown"]
 script = ExtResource("10_5fig4")
 to = NodePath("../../Available")
-delay_seconds = 3.0
+delay_in_seconds = "3.0"
 
 [node name="HealSkill" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_pvst5")
@@ -119,6 +121,7 @@ script = ExtResource("9_h41ei")
 script = ExtResource("10_5fig4")
 to = NodePath("../../Cooldown")
 event = &"heal"
+delay_in_seconds = "0.0"
 
 [node name="Cooldown" type="Node" parent="StateChart/Root/HealSkill"]
 editor_description = "Cooldown state for the heal skill. While the delayed transition is pending, this state will send status updates on the pending transition to the heal skill button. The heal skill button will then update itself and show the remaining cooldown."
@@ -127,7 +130,7 @@ script = ExtResource("9_h41ei")
 [node name="Back to Available" type="Node" parent="StateChart/Root/HealSkill/Cooldown"]
 script = ExtResource("10_5fig4")
 to = NodePath("../../Available")
-delay_seconds = 10.0
+delay_in_seconds = "10.0"
 
 [connection signal="pressed" from="VBoxContainer/AttackSkillButton" to="StateChart" method="send_event" binds= ["attack"]]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MagicSkillButton" to="StateChart" method="send_event" binds= ["magic"]]

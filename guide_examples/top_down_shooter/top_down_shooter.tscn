@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://kmamxwy5rcyc"]
+[gd_scene load_steps=19 format=3 uid="uid://kmamxwy5rcyc"]
 
-[ext_resource type="Script" path="res://guide_examples/top_down_shooter/top_down_shooter.gd" id="1_gvlv5"]
-[ext_resource type="Script" path="res://guide_examples/top_down_shooter/player/player.gd" id="1_pm1t3"]
+[ext_resource type="Script" uid="uid://sh4xv5urdau8" path="res://guide_examples/top_down_shooter/top_down_shooter.gd" id="1_gvlv5"]
+[ext_resource type="Script" uid="uid://blx1seoclt48w" path="res://guide_examples/top_down_shooter/player/player.gd" id="1_pm1t3"]
 [ext_resource type="Resource" uid="uid://dhp7nup127wxw" path="res://guide_examples/top_down_shooter/mapping_contexts/keyboard_and_mouse.tres" id="2_bl5ot"]
 [ext_resource type="Texture2D" uid="uid://c22k1y6rbntlw" path="res://guide_examples/top_down_shooter/player/mrg0000.png" id="2_rc4yh"]
 [ext_resource type="Resource" uid="uid://dysrgn1ubf15g" path="res://guide_examples/top_down_shooter/mapping_contexts/controller.tres" id="3_tldv6"]
@@ -14,7 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dkr80d2pi0d41" path="res://addons/guide/debugger/guide_debugger.tscn" id="9_kqgcv"]
 [ext_resource type="PackedScene" uid="uid://c0fqv8e3tljmp" path="res://guide_examples/top_down_shooter/bolt/bolt.tscn" id="9_ybbsa"]
 [ext_resource type="Theme" uid="uid://dot0gi1yoqmrl" path="res://guide_examples/shared/ui_theme.tres" id="14_ipln3"]
-[ext_resource type="Script" path="res://guide_examples/shared/instructions_label.gd" id="15_d8ctw"]
+[ext_resource type="Script" uid="uid://w8q1xlqw60qh" path="res://guide_examples/shared/instructions_label.gd" id="15_d8ctw"]
+[ext_resource type="Script" uid="uid://cluhc11vixkf1" path="res://addons/guide/guide_action.gd" id="16_6no5b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jh0ar"]
 radius = 118.54
@@ -113,7 +114,7 @@ Fire with %s.
 
 Press any key or move the mouse to switch to 
 keyboard and mouse."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("5_hxqcn"), ExtResource("7_gtewy"), ExtResource("8_kmeb0")])
+actions = Array[ExtResource("16_6no5b")]([ExtResource("5_hxqcn"), ExtResource("7_gtewy"), ExtResource("8_kmeb0")])
 limit_to_context = ExtResource("3_tldv6")
 metadata/_edit_use_anchors_ = true
 
@@ -133,6 +134,6 @@ Move with %s.
 Fire with %s.
 
 Use any controller input to switch to controller."
-actions = Array[Resource("res://addons/guide/guide_action.gd")]([ExtResource("6_viqho"), ExtResource("7_gtewy"), ExtResource("8_kmeb0")])
+actions = Array[ExtResource("16_6no5b")]([ExtResource("6_viqho"), ExtResource("7_gtewy"), ExtResource("8_kmeb0")])
 limit_to_context = ExtResource("2_bl5ot")
 metadata/_edit_use_anchors_ = true
