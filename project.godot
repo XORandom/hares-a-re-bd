@@ -29,6 +29,8 @@ Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 GUIDE="*res://addons/guide/guide.gd"
+PoolManager="*res://autoloads/resources_manager/pool_manager.gd"
+GameStateManager="*res://autoloads/game_state_manager/game_state_manager.tscn"
 
 [debug]
 
@@ -57,6 +59,7 @@ folder_colors={
 "res://assets/": "red",
 "res://autoloads/": "gray",
 "res://complete_scenes/ui/ui_theme/": "red",
+"res://config/": "gray",
 "res://docs/": "purple",
 "res://godot_state_charts_examples/": "pink",
 "res://guide_examples/": "pink",
