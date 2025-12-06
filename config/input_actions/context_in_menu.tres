@@ -1,8 +1,27 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=3 format=3 uid="uid://duag7720owfq8"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=11 format=3 uid="uid://duag7720owfq8"]
 
 [ext_resource type="Script" uid="uid://cpplm41b5bt6m" path="res://addons/guide/guide_action_mapping.gd" id="1_vw221"]
+[ext_resource type="Resource" uid="uid://bpufxssanoee2" path="res://config/input_actions/action_k_escape.tres" id="2_3nre6"]
 [ext_resource type="Script" uid="uid://dsa1dnifd6w32" path="res://addons/guide/guide_mapping_context.gd" id="2_lxt5g"]
+[ext_resource type="Script" uid="uid://mtx1unc2aqn7" path="res://addons/guide/guide_input_mapping.gd" id="3_cmogw"]
+[ext_resource type="Script" uid="uid://cw71o87tvdx3q" path="res://addons/guide/inputs/guide_input_key.gd" id="4_kt6nm"]
+[ext_resource type="Script" uid="uid://bl8rjl4oaldje" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_jg73f"]
+[ext_resource type="Script" uid="uid://x74mnwgr08a7" path="res://addons/guide/triggers/guide_trigger.gd" id="6_0yfqj"]
+
+[sub_resource type="Resource" id="Resource_njs1x"]
+script = ExtResource("4_kt6nm")
+key = 4194305
+
+[sub_resource type="Resource" id="Resource_us3nr"]
+script = ExtResource("3_cmogw")
+input = SubResource("Resource_njs1x")
+
+[sub_resource type="Resource" id="Resource_c2nom"]
+script = ExtResource("1_vw221")
+action = ExtResource("2_3nre6")
+input_mappings = Array[ExtResource("3_cmogw")]([SubResource("Resource_us3nr")])
 
 [resource]
 script = ExtResource("2_lxt5g")
+mappings = Array[ExtResource("1_vw221")]([SubResource("Resource_c2nom")])
 metadata/_custom_type_script = "uid://dsa1dnifd6w32"
