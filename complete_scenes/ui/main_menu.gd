@@ -1,6 +1,10 @@
 extends Control
 
 
+## Куда игрок должен переходить, после нажатия кнопки играть
+@export_file("*.tscn") var game_scene_path : String = ""
+
+
 func _on_start_pressed() -> void:
 	pass # Replace with function body.
 
@@ -10,4 +14,4 @@ func _on_settings_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().quit()
