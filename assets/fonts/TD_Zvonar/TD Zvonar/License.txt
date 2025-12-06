@@ -1,0 +1,34 @@
+License
+"Free (for any type of use)"
+
+You are granted the following non-exclusive rights with respect to the Font:
+
+Right to reproduce the image (design) of the Font’s glyphs on any surfaces, including but not limited to paper, billboards, clothing—without any limitation on print runs. You are allowed to embed images of the Font’s glyphs into documents in a scalable format (e.g., EPS or PDF) as long as you do not grant others the right to edit these documents.
+
+Right to use the Font and Font Software in the creation of Logos.
+
+Right to use the Font and Font Software in Video Games developed for desktop operating systems such as Windows, Mac OS, Linux, as well as for gaming consoles like PlayStation, Xbox, Exeq, and others.
+
+The license allows you to install the Font Software on an unlimited number of Computers and use the Font in any applications that support font selection. These can include Microsoft Word, Adobe Photoshop, Illustrator, etc. You may create documents and raster images (JPEG, TIFF, PNG) and use them freely for printing, websites, and mobile apps. You may also use the Font to create any text in audiovisual works.
+
+What is an audiovisual work? The term, as used in the Civil Code of the Russian Federation, refers to a sequence of related images displayed with the help of technical means. In simpler terms, films, newsreels, TV broadcasts, commercials, music videos, etc., are considered audiovisual works. A program episode, TV series, film installment, or a video uploaded to YouTube also qualifies.
+
+The license grants the right to use the fonts in your Mobile Applications under development.
+
+Right to publicly display the Font’s glyphs on websites using the @font-face selector in CSS.
+
+Specifically:
+— You may use the Font to style websites using the @font-face mechanism.
+— You may use the Fonts in interactive web applications that allow site visitors to input or edit text styled with these Fonts.
+
+Right to use the Fonts in Electronic books, magazines, and other publications, including creating files in EPUB 2.01, EPUB 3, and KF8 formats.
+
+The license gives you the right to install the fonts on a Server, allowing users to customize templates for documents or other objects.
+
+Usage Restrictions:
+
+It is prohibited to modify, create new fonts based on it, rename it, alter the character set, restructure, or otherwise manipulate the Font Software file.
+
+It is prohibited to sell the font.
+
+https://tektovdmitry.ru/

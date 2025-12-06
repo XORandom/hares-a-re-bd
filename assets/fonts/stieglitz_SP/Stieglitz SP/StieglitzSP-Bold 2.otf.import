@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://b8igu6fawyqyg"
+path="res://.godot/imported/StieglitzSP-Bold 2.otf-c89092e6354e3195b256e912c17ef08b.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/stieglitz_SP/Stieglitz SP/StieglitzSP-Bold 2.otf"
+dest_files=["res://.godot/imported/StieglitzSP-Bold 2.otf-c89092e6354e3195b256e912c17ef08b.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
