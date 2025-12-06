@@ -1,0 +1,115 @@
+[gd_scene load_steps=2 format=3 uid="uid://bijr6gpgod2m2"]
+
+[ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="1_udnkd"]
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Турели" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 663.0
+offset_top = 936.0
+offset_right = 1255.0
+offset_bottom = 1067.0
+theme = ExtResource("1_udnkd")
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Турели"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Жизни" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 365.0
+offset_bottom = 89.0
+theme = ExtResource("1_udnkd")
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Жизни"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Вынослиовость" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 108.0
+offset_right = 365.0
+offset_bottom = 191.0
+theme = ExtResource("1_udnkd")
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Вынослиовость"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Подсказки по управлению" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 975.0
+offset_right = 632.0
+offset_bottom = 1058.0
+theme = ExtResource("1_udnkd")
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Подсказки по управлению"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel5" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 1279.0
+offset_top = 973.0
+offset_right = 1889.0
+offset_bottom = 1056.0
+theme = ExtResource("1_udnkd")
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel6" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = 660.0
+offset_top = 8.0
+offset_right = 1914.0
+offset_bottom = 162.0
+theme = ExtResource("1_udnkd")
+metadata/_edit_group_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
