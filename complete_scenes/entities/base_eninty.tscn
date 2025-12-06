@@ -3,4 +3,6 @@
 [ext_resource type="Script" uid="uid://cnildue6kf0hy" path="res://complete_scenes/entities/base_eninty.gd" id="1_nuea7"]
 
 [node name="BaseEninty" type="CharacterBody2D"]
+collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_nuea7")

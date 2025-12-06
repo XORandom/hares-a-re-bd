@@ -6,6 +6,7 @@ extends Control
 
 
 func _on_start_pressed() -> void:
+	SceneManager.call_deferred("change_scene", game_scene_path)
 	pass # Replace with function body.
 
 
