@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxvpx0511unt"]
+[gd_scene load_steps=7 format=3 uid="uid://bxvpx0511unt"]
 
 [ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="1_uhymq"]
 [ext_resource type="Script" uid="uid://b75gis1627wkl" path="res://complete_scenes/ui/main_menu.gd" id="1_vy6ls"]
 [ext_resource type="LabelSettings" uid="uid://cue3k7t74c58x" path="res://complete_scenes/ui/ui_theme/title_label_settings.tres" id="2_lk8p1"]
 [ext_resource type="PackedScene" uid="uid://ctojs5873o1f5" path="res://complete_scenes/ui/ui_elements/custom_button.tscn" id="2_rxbl0"]
+[ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="5_6uyg3"]
+[ext_resource type="Resource" uid="uid://duag7720owfq8" path="res://config/input_actions/context_in_menu.tres" id="6_pn8es"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,6 +15,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vy6ls")
+
+[node name="WorldMetadata" type="Node" parent="."]
+script = ExtResource("5_6uyg3")
+context_mode = ExtResource("6_pn8es")
+metadata/_custom_type_script = "uid://rrcahhioggsb"
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
