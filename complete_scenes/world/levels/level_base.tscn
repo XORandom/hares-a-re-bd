@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://b2ptp60qptf3r"]
+[gd_scene load_steps=18 format=3 uid="uid://b2ptp60qptf3r"]
 
-[ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/level_base.gd" id="1_ap5gr"]
+[ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/levels/level_base.gd" id="1_ap5gr"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_abcfb"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="3_abcfb"]
 [ext_resource type="Texture2D" uid="uid://bd5up235qejkl" path="res://assets/textures/parallax_textures/Iceberg/0-water.png" id="3_hudgs"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bvlj40e86g2kl" path="res://assets/textures/parallax_textures/Iceberg/3-mountains.png" id="8_wjbb7"]
 [ext_resource type="Texture2D" uid="uid://p7mjnfjremja" path="res://assets/textures/parallax_textures/Iceberg/4-icebergreflex.png" id="9_ru1sc"]
 [ext_resource type="Texture2D" uid="uid://3ayi106vw5rv" path="res://assets/textures/parallax_textures/Iceberg/5-iceberg.png" id="10_qmhhx"]
+[ext_resource type="PackedScene" uid="uid://v7a10sbutsov" path="res://complete_scenes/entities/enemy/black_hare.tscn" id="13_tennn"]
 
 [sub_resource type="TileSet" id="TileSet_abcfb"]
 
@@ -108,3 +109,7 @@ limit_right = 1860
 limit_bottom = 580
 
 [node name="GUI" parent="." instance=ExtResource("4_0mcoa")]
+
+[node name="BlackHare" parent="." instance=ExtResource("13_tennn")]
+position = Vector2(112, 320.00003)
+scale = Vector2(1.6688489, 1.6688489)
