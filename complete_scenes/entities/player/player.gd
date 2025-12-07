@@ -34,12 +34,12 @@ func _process(_delta: float) -> void:
 		last_direction = input_direction
 	Globals.player_direction = get_local_mouse_position().normalized() if input_direction == Vector2.ZERO else last_direction
 
-	velocity = input_direction * speed * 100 * _delta
-	#print(velocity)
-	move_and_slide()
+	velocity = input_direction * speed * _delta
+
 
 func _physics_process(_delta: float) -> void:
 	DebugPanel.show_debug_info([global_position], 0)
+	move_and_slide()
 
 func _ready() -> void:
 	walk_action.triggered.connect(on_walk_triggered)
