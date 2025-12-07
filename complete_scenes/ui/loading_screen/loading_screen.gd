@@ -12,9 +12,9 @@ extends Control
 
 ## На этой текстуре будут отображаться изображений загрузочного экрана
 @onready var texture_rect: TextureRect = $MarginContainer/VBoxContainer2/TextureRect
-
-##
-@onready var loading: Label = $MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/Loading
+#TODO
+#@onready var loading: Label = $MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/Loading
+@onready var margin_container: MarginContainer = $MarginContainer
 ##
 @onready var progress_number: Label = $MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/ProgressNumber
 ##
@@ -32,7 +32,7 @@ func _ready() -> void:
 
 #endregion
 
-	visible = false
+	margin_container.visible = false
 	# загружай ресурсы в фоновом режиме, пока текущая сцена работает
 	if SceneManager.next_scene == "":
 		scene_invalid(SceneManager.next_scene)
@@ -73,11 +73,8 @@ func scene_failed_to_load(scene_path: String) -> void:
 ## Если сцена не существует или введены некорректные данные
 func scene_invalid(scene_path: String) -> void:
 	push_error("scene: '%s' is invalid" %[scene_path])
-## Если сцена загрузилась нормально
-func scene_finished_loading(scene_path: String) -> void:
-	print("scene %s is loaded" %[scene_path])
-	pass
+
 
 ## Включаем видимость этой сцены, если игра загружается дольше
 func _on_timer_timeout() -> void:
-	visible = true
+	margin_container.visible = true
