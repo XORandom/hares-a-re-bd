@@ -207,7 +207,7 @@ offset_left = 1378.0
 offset_top = 915.0
 offset_right = 1418.0
 offset_bottom = 955.0
-rotation = 2568.8271
+rotation = 3326.2961
 pivot_offset = Vector2(20, 20)
 mouse_filter = 1
 script = ExtResource("1_i6xxv")
@@ -222,7 +222,7 @@ offset_left = 255.625
 offset_top = -44.0
 offset_right = 383.625
 offset_bottom = 84.0
-rotation = -2568.8271
+rotation = -3326.2961
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -240,7 +240,7 @@ offset_left = -193.81252
 offset_top = 215.48285
 offset_right = -65.812515
 offset_bottom = 343.48285
-rotation = -2568.8271
+rotation = -3326.2961
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -258,7 +258,7 @@ offset_left = -193.81247
 offset_top = -303.48288
 offset_right = -65.81247
 offset_bottom = -175.48288
-rotation = -2568.8271
+rotation = -3326.2961
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
