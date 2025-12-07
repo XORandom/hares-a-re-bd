@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://cyn3mwgmv8iq"
+path="res://.godot/imported/out.gif-e2627adeadcc17b27cd36f273163ebb9.tres"
+
+[deps]
+
+source_file="res://assets/textures/enemies/out.gif"
+dest_files=["res://.godot/imported/out.gif-e2627adeadcc17b27cd36f273163ebb9.tres"]
+
+[params]
+
+frames_per_second=30
