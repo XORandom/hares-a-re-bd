@@ -48,11 +48,13 @@ text = "Версия 0.0.1"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme = ExtResource("1_uhymq")
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
+theme = ExtResource("1_uhymq")
 text = "Зайцы плохо на тебя влияют"
 label_settings = ExtResource("2_lk8p1")
 
@@ -64,15 +66,20 @@ theme = ExtResource("1_uhymq")
 
 [node name="Start" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_rxbl0")]
 layout_mode = 2
+mouse_filter = 0
 text = "Начать игру"
+metadata/_edit_pinned_properties_ = [&"mouse_filter"]
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GridContainer"]
 visible = false
 layout_mode = 2
+theme = ExtResource("1_uhymq")
 
 [node name="Settings" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_rxbl0")]
 layout_mode = 2
+mouse_filter = 0
 text = "Настройки"
+metadata/_edit_pinned_properties_ = [&"mouse_filter"]
 
 [node name="Quit" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_rxbl0")]
 layout_mode = 2
