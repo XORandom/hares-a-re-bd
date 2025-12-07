@@ -63,6 +63,7 @@ folder_colors={
 "res://autoloads/": "gray",
 "res://complete_scenes/ui/loading_screen/loading_screen_images/": "red",
 "res://complete_scenes/ui/loading_screen/loading_screen_resources/": "teal",
+"res://complete_scenes/ui/ui_elements/cogs/cog_textures/": "red",
 "res://complete_scenes/ui/ui_theme/": "teal",
 "res://config/": "gray",
 "res://config/input_actions/": "teal",
