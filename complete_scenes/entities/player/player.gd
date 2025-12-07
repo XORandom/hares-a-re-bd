@@ -36,6 +36,8 @@ func _process(_delta: float) -> void:
 
 	velocity = input_direction * speed * _delta
 
+func  on_damage_taken() -> void:
+	pass
 
 func _physics_process(_delta: float) -> void:
 	DebugPanel.show_debug_info([global_position], 0)

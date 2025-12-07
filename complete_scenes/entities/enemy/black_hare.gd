@@ -4,3 +4,6 @@ extends BaseEntity
 
 func _ready() -> void:
 	pass
+
+func on_damage_taken() -> void:
+	pass

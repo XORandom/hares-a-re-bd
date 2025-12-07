@@ -1,4 +1,5 @@
-class_name  BaseEntity
+@abstract
+class_name BaseEntity
 extends CharacterBody2D
 
 
@@ -11,3 +12,6 @@ signal take_damage(damage:float, knockback_direction: Vector2)
 ## То, как объект будет выглядеть на карте
 @export var map_icon: Texture2D
 @export var hp: float = 100.0
+
+@abstract
+func on_damage_taken() -> void
