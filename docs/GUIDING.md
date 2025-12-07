@@ -38,3 +38,7 @@ res://config/input_actions/action_2d_sneak.tres
 ```GSCript
 if not Engine.is_editor_hint():
 ```
+
+## Карты нормалей
+Для них используется
+Texture `->` CanvasTexture
