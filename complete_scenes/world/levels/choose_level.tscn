@@ -1,0 +1,331 @@
+[gd_scene load_steps=41 format=3 uid="uid://dkar06pst402u"]
+
+[ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="1_ghntx"]
+[ext_resource type="Script" uid="uid://drn0toocsmfax" path="res://addons/better_vircle/vircle_node.gd" id="1_i6xxv"]
+[ext_resource type="Script" uid="uid://cgwlk72tmc21" path="res://complete_scenes/world/levels/choose_level.gd" id="1_uelcd"]
+[ext_resource type="Resource" uid="uid://duag7720owfq8" path="res://config/input_actions/context_in_menu.tres" id="2_6vj54"]
+[ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="3_dbn5n"]
+[ext_resource type="PackedScene" uid="uid://dwj01chvfaahq" path="res://complete_scenes/ui/ui_elements/planet_card_jungle.tscn" id="3_w87gs"]
+[ext_resource type="PackedScene" uid="uid://cgv54i8mtmh8h" path="res://complete_scenes/ui/ui_elements/planet_card_water.tscn" id="4_x0rvy"]
+[ext_resource type="PackedScene" uid="uid://02lnfm3yxh41" path="res://complete_scenes/ui/ui_elements/planet_card_ice.tscn" id="5_ghntx"]
+[ext_resource type="Texture2D" uid="uid://cpe3vo42n71nh" path="res://assets/textures/effects/sparkle.png" id="8_6vj54"]
+[ext_resource type="Texture2D" uid="uid://b6rtt6ucawr8w" path="res://assets/textures/Candles01/Tealight64px16frames.png" id="9_7jtaf"]
+
+[sub_resource type="Gradient" id="Gradient_6vj54"]
+offsets = PackedFloat32Array(0.77742946, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.49411765)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7jtaf"]
+noise_type = 2
+frequency = 0.0038
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uelcd"]
+noise = SubResource("FastNoiseLite_7jtaf")
+color_ramp = SubResource("Gradient_6vj54")
+
+[sub_resource type="Gradient" id="Gradient_lfiec"]
+offsets = PackedFloat32Array(0.169279, 0.61442006)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.46666667)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ig78i"]
+noise_type = 2
+frequency = 0.0091
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_daxav"]
+noise = SubResource("FastNoiseLite_ig78i")
+color_ramp = SubResource("Gradient_lfiec")
+
+[sub_resource type="Gradient" id="Gradient_318gq"]
+offsets = PackedFloat32Array(0.36363637, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.5019608)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ywn6"]
+noise_type = 2
+frequency = 0.0091
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fyu2f"]
+noise = SubResource("FastNoiseLite_0ywn6")
+color_ramp = SubResource("Gradient_318gq")
+seamless = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wi1ay"]
+bg_color = Color(0.11, 0.018333336, 0, 1)
+
+[sub_resource type="Environment" id="Environment_ghntx"]
+ambient_light_source = 2
+ambient_light_color = Color(0.19, 0.0798, 0.0798, 1)
+glow_enabled = true
+glow_normalized = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uelcd"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfiec"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig78i"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daxav"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_318gq"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ywn6"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyu2f"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxsk2"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wrfc"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omxfr"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6joif"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq6n8"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thou5"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8fui"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6rux"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua64f"]
+atlas = ExtResource("9_7jtaf")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgfxv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uelcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfiec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig78i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daxav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_318gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ywn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fyu2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxsk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omxfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6joif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq6n8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thou5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8fui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6rux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua64f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_uelcd"]
+offsets = PackedFloat32Array(0.6050157, 0.97805643)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lfiec"]
+gradient = SubResource("Gradient_uelcd")
+fill = 1
+fill_from = Vector2(0.47435898, 0.46153846)
+fill_to = Vector2(0, 0)
+
+[node name="ChooseLevel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uelcd")
+
+[node name="WorldMetadata" type="Node" parent="."]
+script = ExtResource("1_ghntx")
+context_mode = ExtResource("2_6vj54")
+metadata/_custom_type_script = "uid://rrcahhioggsb"
+
+[node name="Vircle" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1378.0
+offset_top = 915.0
+offset_right = 1418.0
+offset_bottom = 955.0
+rotation = 2568.0566
+pivot_offset = Vector2(20, 20)
+mouse_filter = 1
+script = ExtResource("1_i6xxv")
+radius = 299.625
+rotation_speed = 0.675
+metadata/_custom_type_script = "uid://drn0toocsmfax"
+
+[node name="TextureRect" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 255.625
+offset_top = -44.0
+offset_right = 383.625
+offset_bottom = 84.0
+rotation = -2568.0566
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("8_6vj54")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect"]
+position = Vector2(65.000015, 64.000015)
+color = Color(1, 0.9953333, 0.86, 1)
+energy = 3.25
+texture = SubResource("NoiseTexture2D_uelcd")
+texture_scale = 9.37
+
+[node name="TextureRect2" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -193.81252
+offset_top = 215.48285
+offset_right = -65.812515
+offset_bottom = 343.48285
+rotation = -2568.0566
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("8_6vj54")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect2"]
+position = Vector2(65.000015, 64.000015)
+color = Color(1, 0.7506667, 0.32, 1)
+energy = 1.79
+texture = SubResource("NoiseTexture2D_daxav")
+texture_scale = 7.51
+
+[node name="TextureRect3" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -193.81247
+offset_top = -303.48288
+offset_right = -65.81247
+offset_bottom = -175.48288
+rotation = -2568.0566
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("8_6vj54")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect3"]
+position = Vector2(65.000015, 64.000015)
+color = Color(1, 0.9953333, 0.86, 1)
+energy = 0.25
+texture = SubResource("NoiseTexture2D_fyu2f")
+texture_scale = 9.37
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("3_dbn5n")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wi1ay")
+
+[node name="PlanetCardJungle" parent="." instance=ExtResource("3_w87gs")]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 42.0
+offset_right = 606.0
+offset_bottom = 785.0
+
+[node name="PlanetCardWater" parent="." instance=ExtResource("4_x0rvy")]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 31.0
+offset_right = 1230.0
+offset_bottom = 774.0
+
+[node name="PlanetCardIce" parent="." instance=ExtResource("5_ghntx")]
+layout_mode = 0
+offset_left = 1288.0
+offset_top = 43.0
+offset_right = 1838.0
+offset_bottom = 786.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ghntx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1712, 946)
+scale = Vector2(3.6875, 3.6875)
+sprite_frames = SubResource("SpriteFrames_fgfxv")
+frame_progress = 0.54265386
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(1592, 997)
+scale = Vector2(3.6875, 3.6875)
+sprite_frames = SubResource("SpriteFrames_fgfxv")
+frame_progress = 0.39871788
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lfiec")
+
+[connection signal="pressed" from="PlanetCardJungle" to="." method="_on_planet_card_jungle_pressed"]
+[connection signal="pressed" from="PlanetCardWater" to="." method="_on_planet_card_water_pressed"]
+[connection signal="pressed" from="PlanetCardIce" to="." method="_on_planet_card_ice_pressed"]
