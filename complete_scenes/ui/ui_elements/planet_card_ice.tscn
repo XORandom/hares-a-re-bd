@@ -1,0 +1,333 @@
+[gd_scene load_steps=24 format=3 uid="uid://02lnfm3yxh41"]
+
+[ext_resource type="Script" uid="uid://cvmnnfcflln3o" path="res://complete_scenes/ui/ui_elements/planet_card_ice.gd" id="1_op0k2"]
+[ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="2_0hxwo"]
+[ext_resource type="SpriteFrames" uid="uid://270d852xjni6" path="res://complete_scenes/ui/ui_elements/spriteframes_ice_planet.tres" id="3_op0k2"]
+[ext_resource type="Texture2D" uid="uid://q73b15tjun6d" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_Steampunk_Cogs4.png" id="10_u5s6w"]
+[ext_resource type="Texture2D" uid="uid://xy76w3x0bg48" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_nnSteampunk_Cogs_n4.png" id="11_dd5mt"]
+[ext_resource type="Texture2D" uid="uid://by2d6ikr5pir1" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_Steampunk_Cogs6.png" id="14_km7wc"]
+[ext_resource type="Texture2D" uid="uid://doi7ihh2neutv" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_nnSteampunk_Cogs_n6.png" id="15_wlgkj"]
+[ext_resource type="Texture2D" uid="uid://btbh2nwt8orvd" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_Steampunk_Cogs9.png" id="20_2a7dv"]
+[ext_resource type="Texture2D" uid="uid://cfb1txkw0usly" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_nnSteampunk_Cogs_n9.png" id="21_3e2lw"]
+[ext_resource type="Texture2D" uid="uid://brt5k54n5g3a5" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_Steampunk_Cogs12.png" id="24_j8cgn"]
+[ext_resource type="Texture2D" uid="uid://ce0vucpsenf7u" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_nnSteampunk_Cogs_n12.png" id="25_424sr"]
+[ext_resource type="Texture2D" uid="uid://bx3esoxhvib3h" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_Steampunk_Cogs15.png" id="30_ovcn4"]
+[ext_resource type="Texture2D" uid="uid://8uemnehdtgyw" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_nnSteampunk_Cogs_n15.png" id="31_kyi7p"]
+[ext_resource type="Texture2D" uid="uid://d2evwhoyutg5t" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_Steampunk_Cogs16.png" id="32_j0j1a"]
+[ext_resource type="Texture2D" uid="uid://h7byw0dipcio" path="res://complete_scenes/ui/ui_elements/cogs/cog_textures/32x32_nnSteampunk_Cogs_n16.png" id="33_u8xwb"]
+[ext_resource type="Script" uid="uid://drn0toocsmfax" path="res://addons/better_vircle/vircle_node.gd" id="38_83qes"]
+[ext_resource type="Texture2D" uid="uid://cpe3vo42n71nh" path="res://assets/textures/effects/sparkle.png" id="39_dwqs8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_as5rv"]
+diffuse_texture = ExtResource("10_u5s6w")
+normal_texture = ExtResource("11_dd5mt")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gkpxl"]
+diffuse_texture = ExtResource("14_km7wc")
+normal_texture = ExtResource("15_wlgkj")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1cp62"]
+diffuse_texture = ExtResource("20_2a7dv")
+normal_texture = ExtResource("21_3e2lw")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h4jsc"]
+diffuse_texture = ExtResource("24_j8cgn")
+normal_texture = ExtResource("25_424sr")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1gd5h"]
+diffuse_texture = ExtResource("30_ovcn4")
+normal_texture = ExtResource("31_kyi7p")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_p2i8n"]
+diffuse_texture = ExtResource("32_j0j1a")
+normal_texture = ExtResource("33_u8xwb")
+
+[node name="PlanetCardIce" type="Button"]
+offset_right = 550.0
+offset_bottom = 743.0
+flat = true
+script = ExtResource("1_op0k2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_0hxwo")
+
+[node name="PlanetAnim" type="AnimatedSprite2D" parent="."]
+show_behind_parent = true
+light_mask = 524288
+z_index = 1
+position = Vector2(274.00003, 203.00002)
+scale = Vector2(2.5618937, 2.5618937)
+sprite_frames = ExtResource("3_op0k2")
+
+[node name="Description" type="RichTextLabel" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 404.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("2_0hxwo")
+bbcode_enabled = true
+text = "[center][font_size=90][font=res://assets/fonts/TD Zvonar/TD Zvonar.otf][wave amp=1.0 freq=-1.0 connected=1][color=CORNFLOWER_BLUE]Замороженный мир[/color][/wave][/font][/font_size][/center]
+[center][font_size=30][font=res://assets/fonts/TD Zvonar/TD Zvonar.otf][wave amp=1.0 freq=-1.0 connected=1][color=CORNFLOWER_BLUE]⫷⨮⁜⨭⫸[/color][/wave][/font][/font_size][/center]
+
+
+"
+
+[node name="Vircle" type="Control" parent="."]
+process_mode = 4
+anchors_preset = 0
+offset_left = 244.0
+offset_top = 192.0
+offset_right = 284.0
+offset_bottom = 232.0
+rotation = -130.93236
+pivot_offset = Vector2(20, 20)
+script = ExtResource("38_83qes")
+radius = 140.47
+rotation_speed = 0.245
+keep_upright = false
+metadata/_custom_type_script = "uid://drn0toocsmfax"
+
+[node name="TextureRect" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 96.47
+offset_top = -44.0
+offset_right = 224.47
+offset_bottom = 84.0
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect2" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 74.17088
+offset_top = 31.94381
+offset_right = 202.17088
+offset_bottom = 159.94382
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect2"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect3" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 14.353352
+offset_top = 83.776
+offset_right = 142.35335
+offset_bottom = 211.776
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect3"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect4" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -63.990967
+offset_top = 95.04022
+offset_right = 64.00903
+offset_bottom = 223.04022
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect4"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect5" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -135.98828
+offset_top = 62.160156
+offset_right = -7.9882813
+offset_bottom = 190.16016
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect5"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect6" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -178.77998
+offset_top = -4.4250183
+offset_right = -50.779984
+offset_bottom = 123.57498
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect6"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect7" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -178.77998
+offset_top = -83.574974
+offset_right = -50.779984
+offset_bottom = 44.425026
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect7"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect8" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -135.98828
+offset_top = -150.16016
+offset_right = -7.9882813
+offset_bottom = -22.160156
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect8"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect9" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -63.99099
+offset_top = -183.04022
+offset_right = 64.00901
+offset_bottom = -55.040222
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect9"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect10" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 14.353359
+offset_top = -171.776
+offset_right = 142.35336
+offset_bottom = -43.776
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect10"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="TextureRect11" type="TextureRect" parent="Vircle"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 74.170876
+offset_top = -119.94382
+offset_right = 202.17087
+offset_bottom = 8.056183
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("39_dwqs8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Vircle/TextureRect11"]
+position = Vector2(65.000015, 64.000015)
+color = Color(6.500178, 18.892157, 18.892157, 1)
+energy = 1.2
+texture = ExtResource("39_dwqs8")
+texture_scale = 2.6
+
+[node name="StaticCogs" type="Node2D" parent="."]
+
+[node name="CogStatic4" type="Sprite2D" parent="StaticCogs"]
+position = Vector2(456, 403)
+scale = Vector2(8, 8)
+texture = SubResource("CanvasTexture_as5rv")
+
+[node name="CogStatic5" type="Sprite2D" parent="StaticCogs"]
+position = Vector2(167, 307)
+scale = Vector2(8, 8)
+texture = SubResource("CanvasTexture_gkpxl")
+
+[node name="CogStatic7" type="Sprite2D" parent="StaticCogs"]
+position = Vector2(132, 130)
+scale = Vector2(8, 8)
+texture = SubResource("CanvasTexture_1cp62")
+
+[node name="CogStatic8" type="Sprite2D" parent="StaticCogs"]
+position = Vector2(78, 663)
+scale = Vector2(6, 6)
+texture = SubResource("CanvasTexture_h4jsc")
+
+[node name="CogStatic10" type="Sprite2D" parent="StaticCogs"]
+position = Vector2(233, 631)
+scale = Vector2(6, 6)
+texture = SubResource("CanvasTexture_1gd5h")
+
+[node name="CogStatic11bg" type="Sprite2D" parent="StaticCogs"]
+position = Vector2(422, 129)
+scale = Vector2(8, 8)
+texture = SubResource("CanvasTexture_p2i8n")
+
+[node name="RotatedCogs" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
