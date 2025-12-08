@@ -6,17 +6,23 @@
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_682gp"]
-bg_color = Color(0.16078432, 0, 0.047058824, 1)
-border_width_bottom = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wxkr"]
 bg_color = Color(0.21960784, 0, 0.047058824, 1)
 border_width_bottom = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wxkr"]
+bg_color = Color(0.20591833, 0.038921863, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 1
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvbco"]
-bg_color = Color(0.21809414, 3.9106236e-08, 0.046828568, 1)
+bg_color = Color(0.21960784, 0, 0.047058824, 1)
+border_width_left = 8
+border_width_bottom = 8
+border_color = Color(0.11886985, 0.032475267, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vxml"]
+border_width_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhuc7"]
 bg_color = Color(0, 0, 0, 0.47843137)
@@ -24,6 +30,8 @@ bg_color = Color(0, 0, 0, 0.47843137)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_682gp"]
 
 [resource]
+Button/colors/font_color = Color(0.49712867, 0.36123344, 0.28255734, 1)
+Button/colors/font_hover_color = Color(18.892157, 18.892157, 18.892157, 1)
 Button/font_sizes/font_size = 73
 Button/fonts/font = ExtResource("1_682gp")
 Button/styles/disabled = SubResource("StyleBoxFlat_d5rt5")
@@ -32,6 +40,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_3wxkr")
 Button/styles/normal = SubResource("StyleBoxFlat_dvbco")
 Button/styles/pressed = SubResource("StyleBoxFlat_0vxml")
 GridContainer/constants/v_separation = 52
+Label/colors/font_color = Color(5.708025, 5.708025, 5.708025, 1)
 Label/font_sizes/font_size = 26
 Label/fonts/font = ExtResource("1_682gp")
 MarginContainer/constants/margin_bottom = 5
