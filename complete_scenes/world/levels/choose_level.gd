@@ -3,20 +3,13 @@ extends Control
 
 ## Путь к ледяному миру
 @export_file("*.tscn") var ice_level_path : String = "uid://b2ptp60qptf3r"
-@export_file("*.tscn") var water_level_path : String = "uid://b2ptp60qptf3r"
-@export_file("*.tscn") var jungle_level_path : String = "uid://b2ptp60qptf3r"
-
-
-
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var animated_sprite_2d_2: AnimatedSprite2D = $AnimatedSprite2D2
+@export_file("*.tscn") var water_level_path : String = "uid://dgn5o863h2noa"
+@export_file("*.tscn") var jungle_level_path : String = "uid://4fmnr3wtbm7s"
 
 
 
 func  _ready() -> void:
-	animated_sprite_2d.play("default")
-	animated_sprite_2d_2.play("default")
-	animated_sprite_2d_2.set_frame_and_progress(2, 0.)
+	pass
 
 
 func _on_planet_card_jungle_pressed() -> void:

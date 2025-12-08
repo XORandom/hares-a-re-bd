@@ -56,6 +56,7 @@ text = "[center][font_size=90][font=res://assets/fonts/TD Zvonar/TD Zvonar.otf][
 "
 
 [node name="StaticCogs" type="Node2D" parent="."]
+visible = false
 
 [node name="CogStatic" type="Sprite2D" parent="StaticCogs"]
 position = Vector2(150, 298)
@@ -73,6 +74,7 @@ scale = Vector2(8, 8)
 texture = ExtResource("11_vnj7r")
 
 [node name="RotatedCogs" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -88,7 +90,7 @@ offset_left = 85.00002
 offset_top = 586.00006
 offset_right = 213.00002
 offset_bottom = 714.00006
-rotation = 5.8681393
+rotation = 6.272598
 pivot_offset = Vector2(63.999996, 64)
 texture = ExtResource("10_mmdwg")
 rotation_speed = 0.14358789
@@ -99,7 +101,7 @@ offset_left = -1.0
 offset_top = 549.0
 offset_right = 127.0
 offset_bottom = 677.0
-rotation = 1.6211618
+rotation = 1.2167234
 texture = ExtResource("11_enhtb")
 rotation_direction = 1
 rotation_speed = 0.14358789

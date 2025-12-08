@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dkar06pst402u"]
+[gd_scene load_steps=32 format=3 uid="uid://dkar06pst402u"]
 
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="1_ghntx"]
 [ext_resource type="Script" uid="uid://drn0toocsmfax" path="res://addons/better_vircle/vircle_node.gd" id="1_i6xxv"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cgv54i8mtmh8h" path="res://complete_scenes/ui/ui_elements/planet_card_water.tscn" id="4_x0rvy"]
 [ext_resource type="PackedScene" uid="uid://02lnfm3yxh41" path="res://complete_scenes/ui/ui_elements/planet_card_ice.tscn" id="5_ghntx"]
 [ext_resource type="Texture2D" uid="uid://cpe3vo42n71nh" path="res://assets/textures/effects/sparkle.png" id="8_6vj54"]
-[ext_resource type="Texture2D" uid="uid://b6rtt6ucawr8w" path="res://assets/textures/Candles01/Tealight64px16frames.png" id="9_7jtaf"]
 
 [sub_resource type="Gradient" id="Gradient_6vj54"]
 offsets = PackedFloat32Array(0.77742946, 1)
@@ -64,125 +63,1532 @@ glow_blend_mode = 0
 glow_hdr_threshold = 0.54
 glow_hdr_luminance_cap = 73.98
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uelcd"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="Shader" id="Shader_uelcd"]
+code = "//  Procedural Torch & Candle Shader (Fire + Smoke + Sparks)
+//  Author: CaptainLaptop
+//  License: CC0 / MIT
+//  Engine: Godot 4.x
+//
+//  Description:
+//  A fully procedural, particle-free fire simulation that
+//  generates animated flames, sparks, and smoke using only math.
+//
+//  Ideal for candles, torches, and other small light sources.
+//  Avoid large full-screen use as it can be fillrate-heavy.
+//
+//  Controls include flicker, wind, hue shift, color, and size.
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lfiec"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(64, 0, 64, 64)
+/* USAGE:
+1. Apply this shader to a CanvasItem (e.g., a ColorRect or a Sprite2D).
+2. The effect is drawn from the center of the node, growing upwards (Y-axis inverted).
+3. Adjust 'aspectRatio' to match your node's width/height ratio if not 1:1.
+*/
+shader_type canvas_item;
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ig78i"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_daxav"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_318gq"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(0, 64, 64, 64)
+// =============================================================================
+// GLOBAL CONTROL UNIFORMS
+// =============================================================================
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ywn6"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(64, 64, 64, 64)
+// Controls the overall speed of particle movement and animation
+uniform float speed : hint_range(0.1, 5.0) = 1.0;
+// Defines the size of the 'pixels' or blocks the fire is rendered in
+uniform float pixelSize : hint_range(0.001, 0.1) = 0.015;
+// Overall intensity multiplier for the colors
+uniform float alpha : hint_range(0.0, 1.0) = 0.95; 
+// Strength of the overall light flicker effect
+uniform float flickerStrength : hint_range(0.0, 0.5) = 0.15; 
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fyu2f"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(128, 64, 64, 64)
+// =============================================================================
+// COLOR & HUE UNIFORMS
+// =============================================================================
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bxsk2"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(192, 64, 64, 64)
+// Color near the top (smoke/darker)
+uniform vec3 toColor : source_color = vec3(0.4, 0.35, 0.2);  
+// Color near the base (hottest/brightest)
+uniform vec3 fromColor : source_color = vec3(0.9, 0.2, 0.1); 
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wrfc"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(0, 128, 64, 64)
+// Shifts the base color hue (HSV 'H' value)
+uniform float hueShift : hint_range(-1.0, 1.0) = 0.0; 
+// Multiplier for saturation (HSV 'S' value)
+uniform float saturationFactor : hint_range(0.0, 2.0) = 1.0; 
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_omxfr"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(64, 128, 64, 64)
+// =============================================================================
+// FIRE SIMULATION UNIFORMS
+// =============================================================================
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6joif"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(128, 128, 64, 64)
+// The number of individual fire particles calculated
+uniform float particleCount : hint_range(16.0, 512.0) = 128.0;
+// Base light brightness applied to particles
+uniform float brightness : hint_range(0.0001, 0.01) = 0.001;
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qq6n8"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(192, 128, 64, 64)
+// Horizontal influence of particle noise, determines flame width
+uniform float fireShift : hint_range(0.0, 0.5) = 0.15;
+// Frequency of the noise wave for horizontal flickering/wobble
+uniform float fireShiftFrequency : hint_range(1.0, 10.0) = 5.0;
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_thou5"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(0, 192, 64, 64)
+// x: Max horizontal span, y: Max vertical height of the fire
+uniform vec2 size = vec2(0.05, 0.75);
+// x: inner glow start, y: outer glow end (used in smoothstep for falloff)
+uniform vec2 glow = vec2(0.001, 0.04); 
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w8fui"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(64, 192, 64, 64)
+// =============================================================================
+// SPARKS UNIFORMS
+// =============================================================================
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6rux"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(128, 192, 64, 64)
+uniform float sparkCount : hint_range(1.0, 50.0) = 18.0; 
+uniform float sparkSize : hint_range(0.0005, 0.005) = 0.004; 
+uniform float sparkSpeed : hint_range(0.1, 3.0) = 0.15; 
+uniform vec3 sparkColor : source_color = vec3(1.0, 0.7, 0.0); 
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ua64f"]
-atlas = ExtResource("9_7jtaf")
-region = Rect2(192, 192, 64, 64)
+// =============================================================================
+// SMOKE UNIFORMS
+// =============================================================================
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fgfxv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uelcd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lfiec")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ig78i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_daxav")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_318gq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0ywn6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fyu2f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bxsk2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2wrfc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_omxfr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6joif")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qq6n8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_thou5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w8fui")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h6rux")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ua64f")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+uniform float smokeCount : hint_range(5.0, 50.0) = 20.0;
+uniform float smokeSize : hint_range(0.001, 0.05) = 0.015; 
+uniform float smokeDrift : hint_range(0.0, 0.5) = 0.2; 
+uniform vec3 smokeColor : source_color = vec3(0.05, 0.05, 0.05); 
+
+// =============================================================================
+// ENVIRONMENT UNIFORMS
+// =============================================================================
+
+// Constant horizontal force applied to all particles (wind)
+uniform float windForce : hint_range(-0.5, 0.5) = 0.0; 
+// Node's Width/Height ratio for correct aspect correction
+uniform float aspectRatio : hint_range(0.01, 5.0) = 1.0; 
+// Position offset (shifts the origin of the flame source)
+uniform vec2 posOffset = vec2(0.0, -0.5); 
+
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
+// 1D Hash function for generating particle randomness
+float Hash1(float t) {
+    return fract(cos(t * 124.97) * 248.842) - 0.5;
+}
+
+// Equivalent to GLSL's 'saturate' (clamps between 0.0 and 1.0)
+float saturate(float x) {
+    return clamp(x, 0.0, 1.0);
+}
+
+// --- HSV Utility Functions (Custom implementation for portability) ---
+
+// Converts RGB color space to HSV color space
+vec3 rgb_to_hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.w - q.y) / (6.0 * d + e) + q.z, d / (q.x + e), q.x);
+}
+
+// Converts HSV color space to RGB color space
+vec3 hsv_to_rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.w);
+    return c.z * mix(K.xxx, clamp(p - K.x, 0.0, 1.0), c.y);
+}
+
+
+// =============================================================================
+// PARTICLE SIMULATION FUNCTIONS
+// =============================================================================
+
+// Core fire particle simulation
+vec3 Simulate(vec2 uv, float t) {
+    vec3 res = vec3(0.0);
+    
+    for (float i = 0.0; i < particleCount; i++) {
+        // ct: Current time through the particle's lifecycle (0.0 to 1.0)
+        float ct = fract(t + (i + 1.0) / particleCount);
+        
+        // seed: Unique randomness based on ID and current cycle
+        float seed = Hash1((i + 1.0) * (t - ct));
+        
+        // dir: Base direction vector. WindForce affects X (horizontal).
+        vec2 dir = vec2(0.0, size.y); 
+        dir.x += windForce; 
+        
+        // Fire wobble/flicker (Horizontal noise based on time and seed)
+        dir.x += (cos(t * seed) * sin(ct * fireShiftFrequency)) * mix(0.0, fireShift, log(ct));
+        
+        // cb: Current brightness, fading out as particle ages (ct increases)
+        float cb = saturate(mix(brightness, 0.0, ct));
+        
+        // off: Initial horizontal offset randomized by seed
+        vec2 off = vec2(seed * size.x, 0.0); 
+        
+        // Accumulate color: mix base color to top color based on age (ct)
+        res += mix(fromColor * abs(seed), toColor, ct) 
+               // Apply glow/falloff using smoothstep on inverse distance
+               * smoothstep(glow.x, glow.y, cb / length((uv - off - (dir * ct))));
+    }
+    
+    return res;
+}
+
+// Simulation for sharp, fast-moving sparks
+vec3 SimulateSparks(vec2 uv, float t) {
+    vec3 sparkRes = vec3(0.0);
+    
+    t *= sparkSpeed; // Adjust time scale for spark speed
+    
+    for (float i = 0.0; i < sparkCount; i++) {
+        float particleId = (i + 1.0) * 133.0; 
+        float ct = fract(t + particleId / 100.0); // Lifecycle time
+        float seed = Hash1(particleId); 
+        
+        // High vertical velocity (2.5x flame height)
+        vec2 dir = vec2(seed * 0.4, size.y * 2.5); 
+        dir.x += windForce * 2.0; // Sparks are pushed harder by wind
+        
+        // Current particle center position
+        vec2 particle_center = vec2(seed * size.x * 0.3, 0.0) + (dir * ct); 
+        
+        float dist = length(uv - particle_center);
+        
+        // Create an extremely sharp, localized glow
+        float particle_influence = saturate(1.0 - dist / (sparkSize * 5.0)); 
+        float glow_falloff = pow(particle_influence, 15.0); // High power = sharp falloff
+        float lifespan_fade = saturate(1.0 - ct * 2.0); 
+
+        // Add contribution (boost intensity for visibility)
+        sparkRes += sparkColor * glow_falloff * lifespan_fade * 100.0; 
+    }
+    return sparkRes;
+}
+
+// Simulation for slow-moving, diffuse smoke
+vec3 SimulateSmoke(vec2 uv, float t) {
+    vec3 smokeRes = vec3(0.0);
+    
+    for (float i = 0.0; i < smokeCount; i++) {
+        float particleId = (i + 1.0) * 111.0;  
+        float ct = fract(t * 0.5 + particleId / 100.0); // Slower cycle
+        float seed = Hash1(particleId); 
+        
+        // Slower vertical velocity than fire, with horizontal drift
+        vec2 dir = vec2(seed * smokeDrift, size.y * 1.5); 
+        dir.x += windForce * 0.8; // Smoke is pushed by wind
+        
+        float cb = saturate(mix(brightness * 10.0, 0.0, ct * 1.5)); 
+        
+        // Starts near the top of the fire/smoke base
+        vec2 off = vec2(seed * size.x * 0.5, size.y * 0.6); 
+
+        // Add contribution: uses a larger smoothstep range for a diffused look
+        smokeRes += smokeColor * smoothstep(smokeSize, smokeSize * 2.0,
+            cb / length((uv - off - (dir * ct))));
+    }
+    return smokeRes;
+}
+
+
+// =============================================================================
+// FRAGMENT MAIN
+// =============================================================================
+
+void fragment() {
+    // 1. Coordinate Setup
+    vec2 frag_coords = UV * 2.0 - 1.0; // [-1, 1] range
+    frag_coords.x *= aspectRatio;      // Correct X-axis for aspect ratio
+    frag_coords.y *= -1.0;             // Invert Y so fire grows upwards
+    frag_coords -= posOffset;          // Apply source offset
+    
+    // 2. Pixelation effect
+    vec2 pixelated_frag = floor(frag_coords / pixelSize) * pixelSize;
+    
+    // 3. Run Simulations
+    float base_time = TIME + 100.0;
+    
+    vec3 fire_color = Simulate(pixelated_frag, base_time * speed);
+    vec3 spark_color = SimulateSparks(pixelated_frag, base_time);
+    vec3 smoke_color = SimulateSmoke(pixelated_frag, base_time);
+
+    vec3 result_color = fire_color + spark_color + smoke_color; 
+    
+    // 4. Hue & Saturation Control
+    vec3 hsv = rgb_to_hsv(result_color);
+    
+    hsv.x = fract(hsv.x + hueShift); // Apply hue shift (wrap around)
+    hsv.y *= saturationFactor;       // Apply saturation factor
+    
+    result_color = hsv_to_rgb(hsv);
+    
+    // 5. Apply Flicker
+    float flicker = (Hash1(base_time * 5.0) + 0.5) * flickerStrength; 
+    float intensity_mod = 1.0 + flicker; 
+    vec3 final_color = result_color * intensity_mod;
+
+    // 6. Alpha Calculation
+    // Use the max color channel intensity to define alpha (transparency)
+    float intensity = max(max(result_color.r, result_color.g), result_color.b);
+    
+    // Smoothstep ensures sharp cut-off on edges
+    float final_alpha = smoothstep(0.01, 0.5, intensity) * alpha;
+    
+    // Final output color
+    COLOR = vec4(final_color * alpha, final_alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfiec"]
+shader = SubResource("Shader_uelcd")
+shader_parameter/speed = 0.92500004067762
+shader_parameter/pixelSize = 0.0010000000475
+shader_parameter/alpha = 0.65200003097
+shader_parameter/flickerStrength = 0.15
+shader_parameter/toColor = Color(0.4, 0.35, 0.2, 1)
+shader_parameter/fromColor = Color(0.9, 0.3462, 0.261, 1)
+shader_parameter/hueShift = 1.0
+shader_parameter/saturationFactor = 0.4830000229425
+shader_parameter/particleCount = 111.2810045258475
+shader_parameter/brightness = 0.001
+shader_parameter/fireShift = 0.290000013775
+shader_parameter/fireShiftFrequency = 4.090000146775
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 18.0
+shader_parameter/sparkSize = 0.004
+shader_parameter/sparkSpeed = 0.15
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 20.0
+shader_parameter/smokeSize = 0.015
+shader_parameter/smokeDrift = 0.2
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.5)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lfiec"]
+
+[sub_resource type="Shader" id="Shader_lfiec"]
+code = "//  Procedural Torch & Candle Shader (Fire + Smoke + Sparks)
+//  Author: CaptainLaptop
+//  License: CC0 / MIT
+//  Engine: Godot 4.x
+//
+//  Description:
+//  A fully procedural, particle-free fire simulation that
+//  generates animated flames, sparks, and smoke using only math.
+//
+//  Ideal for candles, torches, and other small light sources.
+//  Avoid large full-screen use as it can be fillrate-heavy.
+//
+//  Controls include flicker, wind, hue shift, color, and size.
+
+/* USAGE:
+1. Apply this shader to a CanvasItem (e.g., a ColorRect or a Sprite2D).
+2. The effect is drawn from the center of the node, growing upwards (Y-axis inverted).
+3. Adjust 'aspectRatio' to match your node's width/height ratio if not 1:1.
+*/
+shader_type canvas_item;
+
+
+
+// =============================================================================
+// GLOBAL CONTROL UNIFORMS
+// =============================================================================
+
+// Controls the overall speed of particle movement and animation
+uniform float speed : hint_range(0.1, 5.0) = 1.0;
+// Defines the size of the 'pixels' or blocks the fire is rendered in
+uniform float pixelSize : hint_range(0.001, 0.1) = 0.015;
+// Overall intensity multiplier for the colors
+uniform float alpha : hint_range(0.0, 1.0) = 0.95; 
+// Strength of the overall light flicker effect
+uniform float flickerStrength : hint_range(0.0, 0.5) = 0.15; 
+
+// =============================================================================
+// COLOR & HUE UNIFORMS
+// =============================================================================
+
+// Color near the top (smoke/darker)
+uniform vec3 toColor : source_color = vec3(0.4, 0.35, 0.2);  
+// Color near the base (hottest/brightest)
+uniform vec3 fromColor : source_color = vec3(0.9, 0.2, 0.1); 
+
+// Shifts the base color hue (HSV 'H' value)
+uniform float hueShift : hint_range(-1.0, 1.0) = 0.0; 
+// Multiplier for saturation (HSV 'S' value)
+uniform float saturationFactor : hint_range(0.0, 2.0) = 1.0; 
+
+// =============================================================================
+// FIRE SIMULATION UNIFORMS
+// =============================================================================
+
+// The number of individual fire particles calculated
+uniform float particleCount : hint_range(16.0, 512.0) = 128.0;
+// Base light brightness applied to particles
+uniform float brightness : hint_range(0.0001, 0.01) = 0.001;
+
+// Horizontal influence of particle noise, determines flame width
+uniform float fireShift : hint_range(0.0, 0.5) = 0.15;
+// Frequency of the noise wave for horizontal flickering/wobble
+uniform float fireShiftFrequency : hint_range(1.0, 10.0) = 5.0;
+
+// x: Max horizontal span, y: Max vertical height of the fire
+uniform vec2 size = vec2(0.05, 0.75);
+// x: inner glow start, y: outer glow end (used in smoothstep for falloff)
+uniform vec2 glow = vec2(0.001, 0.04); 
+
+// =============================================================================
+// SPARKS UNIFORMS
+// =============================================================================
+
+uniform float sparkCount : hint_range(1.0, 50.0) = 18.0; 
+uniform float sparkSize : hint_range(0.0005, 0.005) = 0.004; 
+uniform float sparkSpeed : hint_range(0.1, 3.0) = 0.15; 
+uniform vec3 sparkColor : source_color = vec3(1.0, 0.7, 0.0); 
+
+// =============================================================================
+// SMOKE UNIFORMS
+// =============================================================================
+
+uniform float smokeCount : hint_range(5.0, 50.0) = 20.0;
+uniform float smokeSize : hint_range(0.001, 0.05) = 0.015; 
+uniform float smokeDrift : hint_range(0.0, 0.5) = 0.2; 
+uniform vec3 smokeColor : source_color = vec3(0.05, 0.05, 0.05); 
+
+// =============================================================================
+// ENVIRONMENT UNIFORMS
+// =============================================================================
+
+// Constant horizontal force applied to all particles (wind)
+uniform float windForce : hint_range(-0.5, 0.5) = 0.0; 
+// Node's Width/Height ratio for correct aspect correction
+uniform float aspectRatio : hint_range(0.01, 5.0) = 1.0; 
+// Position offset (shifts the origin of the flame source)
+uniform vec2 posOffset = vec2(0.0, -0.5); 
+
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
+// 1D Hash function for generating particle randomness
+float Hash1(float t) {
+    return fract(cos(t * 124.97) * 248.842) - 0.5;
+}
+
+// Equivalent to GLSL's 'saturate' (clamps between 0.0 and 1.0)
+float saturate(float x) {
+    return clamp(x, 0.0, 1.0);
+}
+
+// --- HSV Utility Functions (Custom implementation for portability) ---
+
+// Converts RGB color space to HSV color space
+vec3 rgb_to_hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.w - q.y) / (6.0 * d + e) + q.z, d / (q.x + e), q.x);
+}
+
+// Converts HSV color space to RGB color space
+vec3 hsv_to_rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.w);
+    return c.z * mix(K.xxx, clamp(p - K.x, 0.0, 1.0), c.y);
+}
+
+
+// =============================================================================
+// PARTICLE SIMULATION FUNCTIONS
+// =============================================================================
+
+// Core fire particle simulation
+vec3 Simulate(vec2 uv, float t) {
+    vec3 res = vec3(0.0);
+    
+    for (float i = 0.0; i < particleCount; i++) {
+        // ct: Current time through the particle's lifecycle (0.0 to 1.0)
+        float ct = fract(t + (i + 1.0) / particleCount);
+        
+        // seed: Unique randomness based on ID and current cycle
+        float seed = Hash1((i + 1.0) * (t - ct));
+        
+        // dir: Base direction vector. WindForce affects X (horizontal).
+        vec2 dir = vec2(0.0, size.y); 
+        dir.x += windForce; 
+        
+        // Fire wobble/flicker (Horizontal noise based on time and seed)
+        dir.x += (cos(t * seed) * sin(ct * fireShiftFrequency)) * mix(0.0, fireShift, log(ct));
+        
+        // cb: Current brightness, fading out as particle ages (ct increases)
+        float cb = saturate(mix(brightness, 0.0, ct));
+        
+        // off: Initial horizontal offset randomized by seed
+        vec2 off = vec2(seed * size.x, 0.0); 
+        
+        // Accumulate color: mix base color to top color based on age (ct)
+        res += mix(fromColor * abs(seed), toColor, ct) 
+               // Apply glow/falloff using smoothstep on inverse distance
+               * smoothstep(glow.x, glow.y, cb / length((uv - off - (dir * ct))));
+    }
+    
+    return res;
+}
+
+// Simulation for sharp, fast-moving sparks
+vec3 SimulateSparks(vec2 uv, float t) {
+    vec3 sparkRes = vec3(0.0);
+    
+    t *= sparkSpeed; // Adjust time scale for spark speed
+    
+    for (float i = 0.0; i < sparkCount; i++) {
+        float particleId = (i + 1.0) * 133.0; 
+        float ct = fract(t + particleId / 100.0); // Lifecycle time
+        float seed = Hash1(particleId); 
+        
+        // High vertical velocity (2.5x flame height)
+        vec2 dir = vec2(seed * 0.4, size.y * 2.5); 
+        dir.x += windForce * 2.0; // Sparks are pushed harder by wind
+        
+        // Current particle center position
+        vec2 particle_center = vec2(seed * size.x * 0.3, 0.0) + (dir * ct); 
+        
+        float dist = length(uv - particle_center);
+        
+        // Create an extremely sharp, localized glow
+        float particle_influence = saturate(1.0 - dist / (sparkSize * 5.0)); 
+        float glow_falloff = pow(particle_influence, 15.0); // High power = sharp falloff
+        float lifespan_fade = saturate(1.0 - ct * 2.0); 
+
+        // Add contribution (boost intensity for visibility)
+        sparkRes += sparkColor * glow_falloff * lifespan_fade * 100.0; 
+    }
+    return sparkRes;
+}
+
+// Simulation for slow-moving, diffuse smoke
+vec3 SimulateSmoke(vec2 uv, float t) {
+    vec3 smokeRes = vec3(0.0);
+    
+    for (float i = 0.0; i < smokeCount; i++) {
+        float particleId = (i + 1.0) * 111.0;  
+        float ct = fract(t * 0.5 + particleId / 100.0); // Slower cycle
+        float seed = Hash1(particleId); 
+        
+        // Slower vertical velocity than fire, with horizontal drift
+        vec2 dir = vec2(seed * smokeDrift, size.y * 1.5); 
+        dir.x += windForce * 0.8; // Smoke is pushed by wind
+        
+        float cb = saturate(mix(brightness * 10.0, 0.0, ct * 1.5)); 
+        
+        // Starts near the top of the fire/smoke base
+        vec2 off = vec2(seed * size.x * 0.5, size.y * 0.6); 
+
+        // Add contribution: uses a larger smoothstep range for a diffused look
+        smokeRes += smokeColor * smoothstep(smokeSize, smokeSize * 2.0,
+            cb / length((uv - off - (dir * ct))));
+    }
+    return smokeRes;
+}
+
+
+// =============================================================================
+// FRAGMENT MAIN
+// =============================================================================
+
+void fragment() {
+    // 1. Coordinate Setup
+    vec2 frag_coords = UV * 2.0 - 1.0; // [-1, 1] range
+    frag_coords.x *= aspectRatio;      // Correct X-axis for aspect ratio
+    frag_coords.y *= -1.0;             // Invert Y so fire grows upwards
+    frag_coords -= posOffset;          // Apply source offset
+    
+    // 2. Pixelation effect
+    vec2 pixelated_frag = floor(frag_coords / pixelSize) * pixelSize;
+    
+    // 3. Run Simulations
+    float base_time = TIME + 100.0;
+    
+    vec3 fire_color = Simulate(pixelated_frag, base_time * speed);
+    vec3 spark_color = SimulateSparks(pixelated_frag, base_time);
+    vec3 smoke_color = SimulateSmoke(pixelated_frag, base_time);
+
+    vec3 result_color = fire_color + spark_color + smoke_color; 
+    
+    // 4. Hue & Saturation Control
+    vec3 hsv = rgb_to_hsv(result_color);
+    
+    hsv.x = fract(hsv.x + hueShift); // Apply hue shift (wrap around)
+    hsv.y *= saturationFactor;       // Apply saturation factor
+    
+    result_color = hsv_to_rgb(hsv);
+    
+    // 5. Apply Flicker
+    float flicker = (Hash1(base_time * 5.0) + 0.5) * flickerStrength; 
+    float intensity_mod = 1.0 + flicker; 
+    vec3 final_color = result_color * intensity_mod;
+
+    // 6. Alpha Calculation
+    // Use the max color channel intensity to define alpha (transparency)
+    float intensity = max(max(result_color.r, result_color.g), result_color.b);
+    
+    // Smoothstep ensures sharp cut-off on edges
+    float final_alpha = smoothstep(0.01, 0.5, intensity) * alpha;
+    
+    // Final output color
+    COLOR = vec4(final_color * alpha, final_alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ig78i"]
+shader = SubResource("Shader_lfiec")
+shader_parameter/speed = 0.92500004067762
+shader_parameter/pixelSize = 0.0010000000475
+shader_parameter/alpha = 1.0
+shader_parameter/flickerStrength = 0.26800001273
+shader_parameter/toColor = Color(0.4, 0.35, 0.2, 1)
+shader_parameter/fromColor = Color(0.9, 0.2, 0.1, 1)
+shader_parameter/hueShift = -0.3599999696
+shader_parameter/saturationFactor = 0.4830000229425
+shader_parameter/particleCount = 111.2810045258475
+shader_parameter/brightness = 0.001
+shader_parameter/fireShift = 0.06000000285
+shader_parameter/fireShiftFrequency = 8.6410003629475
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 18.0
+shader_parameter/sparkSize = 0.004
+shader_parameter/sparkSpeed = 0.15
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 20.0
+shader_parameter/smokeSize = 0.015
+shader_parameter/smokeDrift = 0.2
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.5)
+
+[sub_resource type="Shader" id="Shader_7jtaf"]
+code = "//  Procedural Torch & Candle Shader (Fire + Smoke + Sparks)
+//  Author: CaptainLaptop
+//  License: CC0 / MIT
+//  Engine: Godot 4.x
+//
+//  Description:
+//  A fully procedural, particle-free fire simulation that
+//  generates animated flames, sparks, and smoke using only math.
+//
+//  Ideal for candles, torches, and other small light sources.
+//  Avoid large full-screen use as it can be fillrate-heavy.
+//
+//  Controls include flicker, wind, hue shift, color, and size.
+
+/* USAGE:
+1. Apply this shader to a CanvasItem (e.g., a ColorRect or a Sprite2D).
+2. The effect is drawn from the center of the node, growing upwards (Y-axis inverted).
+3. Adjust 'aspectRatio' to match your node's width/height ratio if not 1:1.
+*/
+shader_type canvas_item;
+
+
+
+// =============================================================================
+// GLOBAL CONTROL UNIFORMS
+// =============================================================================
+
+// Controls the overall speed of particle movement and animation
+uniform float speed : hint_range(0.1, 5.0) = 1.0;
+// Defines the size of the 'pixels' or blocks the fire is rendered in
+uniform float pixelSize : hint_range(0.001, 0.1) = 0.015;
+// Overall intensity multiplier for the colors
+uniform float alpha : hint_range(0.0, 1.0) = 0.95; 
+// Strength of the overall light flicker effect
+uniform float flickerStrength : hint_range(0.0, 0.5) = 0.15; 
+
+// =============================================================================
+// COLOR & HUE UNIFORMS
+// =============================================================================
+
+// Color near the top (smoke/darker)
+uniform vec3 toColor : source_color = vec3(0.4, 0.35, 0.2);  
+// Color near the base (hottest/brightest)
+uniform vec3 fromColor : source_color = vec3(0.9, 0.2, 0.1); 
+
+// Shifts the base color hue (HSV 'H' value)
+uniform float hueShift : hint_range(-1.0, 1.0) = 0.0; 
+// Multiplier for saturation (HSV 'S' value)
+uniform float saturationFactor : hint_range(0.0, 2.0) = 1.0; 
+
+// =============================================================================
+// FIRE SIMULATION UNIFORMS
+// =============================================================================
+
+// The number of individual fire particles calculated
+uniform float particleCount : hint_range(16.0, 512.0) = 128.0;
+// Base light brightness applied to particles
+uniform float brightness : hint_range(0.0001, 0.01) = 0.001;
+
+// Horizontal influence of particle noise, determines flame width
+uniform float fireShift : hint_range(0.0, 0.5) = 0.15;
+// Frequency of the noise wave for horizontal flickering/wobble
+uniform float fireShiftFrequency : hint_range(1.0, 10.0) = 5.0;
+
+// x: Max horizontal span, y: Max vertical height of the fire
+uniform vec2 size = vec2(0.05, 0.75);
+// x: inner glow start, y: outer glow end (used in smoothstep for falloff)
+uniform vec2 glow = vec2(0.001, 0.04); 
+
+// =============================================================================
+// SPARKS UNIFORMS
+// =============================================================================
+
+uniform float sparkCount : hint_range(1.0, 50.0) = 18.0; 
+uniform float sparkSize : hint_range(0.0005, 0.005) = 0.004; 
+uniform float sparkSpeed : hint_range(0.1, 3.0) = 0.15; 
+uniform vec3 sparkColor : source_color = vec3(1.0, 0.7, 0.0); 
+
+// =============================================================================
+// SMOKE UNIFORMS
+// =============================================================================
+
+uniform float smokeCount : hint_range(5.0, 50.0) = 20.0;
+uniform float smokeSize : hint_range(0.001, 0.05) = 0.015; 
+uniform float smokeDrift : hint_range(0.0, 0.5) = 0.2; 
+uniform vec3 smokeColor : source_color = vec3(0.05, 0.05, 0.05); 
+
+// =============================================================================
+// ENVIRONMENT UNIFORMS
+// =============================================================================
+
+// Constant horizontal force applied to all particles (wind)
+uniform float windForce : hint_range(-0.5, 0.5) = 0.0; 
+// Node's Width/Height ratio for correct aspect correction
+uniform float aspectRatio : hint_range(0.01, 5.0) = 1.0; 
+// Position offset (shifts the origin of the flame source)
+uniform vec2 posOffset = vec2(0.0, -0.5); 
+
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
+// 1D Hash function for generating particle randomness
+float Hash1(float t) {
+    return fract(cos(t * 124.97) * 248.842) - 0.5;
+}
+
+// Equivalent to GLSL's 'saturate' (clamps between 0.0 and 1.0)
+float saturate(float x) {
+    return clamp(x, 0.0, 1.0);
+}
+
+// --- HSV Utility Functions (Custom implementation for portability) ---
+
+// Converts RGB color space to HSV color space
+vec3 rgb_to_hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.w - q.y) / (6.0 * d + e) + q.z, d / (q.x + e), q.x);
+}
+
+// Converts HSV color space to RGB color space
+vec3 hsv_to_rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.w);
+    return c.z * mix(K.xxx, clamp(p - K.x, 0.0, 1.0), c.y);
+}
+
+
+// =============================================================================
+// PARTICLE SIMULATION FUNCTIONS
+// =============================================================================
+
+// Core fire particle simulation
+vec3 Simulate(vec2 uv, float t) {
+    vec3 res = vec3(0.0);
+    
+    for (float i = 0.0; i < particleCount; i++) {
+        // ct: Current time through the particle's lifecycle (0.0 to 1.0)
+        float ct = fract(t + (i + 1.0) / particleCount);
+        
+        // seed: Unique randomness based on ID and current cycle
+        float seed = Hash1((i + 1.0) * (t - ct));
+        
+        // dir: Base direction vector. WindForce affects X (horizontal).
+        vec2 dir = vec2(0.0, size.y); 
+        dir.x += windForce; 
+        
+        // Fire wobble/flicker (Horizontal noise based on time and seed)
+        dir.x += (cos(t * seed) * sin(ct * fireShiftFrequency)) * mix(0.0, fireShift, log(ct));
+        
+        // cb: Current brightness, fading out as particle ages (ct increases)
+        float cb = saturate(mix(brightness, 0.0, ct));
+        
+        // off: Initial horizontal offset randomized by seed
+        vec2 off = vec2(seed * size.x, 0.0); 
+        
+        // Accumulate color: mix base color to top color based on age (ct)
+        res += mix(fromColor * abs(seed), toColor, ct) 
+               // Apply glow/falloff using smoothstep on inverse distance
+               * smoothstep(glow.x, glow.y, cb / length((uv - off - (dir * ct))));
+    }
+    
+    return res;
+}
+
+// Simulation for sharp, fast-moving sparks
+vec3 SimulateSparks(vec2 uv, float t) {
+    vec3 sparkRes = vec3(0.0);
+    
+    t *= sparkSpeed; // Adjust time scale for spark speed
+    
+    for (float i = 0.0; i < sparkCount; i++) {
+        float particleId = (i + 1.0) * 133.0; 
+        float ct = fract(t + particleId / 100.0); // Lifecycle time
+        float seed = Hash1(particleId); 
+        
+        // High vertical velocity (2.5x flame height)
+        vec2 dir = vec2(seed * 0.4, size.y * 2.5); 
+        dir.x += windForce * 2.0; // Sparks are pushed harder by wind
+        
+        // Current particle center position
+        vec2 particle_center = vec2(seed * size.x * 0.3, 0.0) + (dir * ct); 
+        
+        float dist = length(uv - particle_center);
+        
+        // Create an extremely sharp, localized glow
+        float particle_influence = saturate(1.0 - dist / (sparkSize * 5.0)); 
+        float glow_falloff = pow(particle_influence, 15.0); // High power = sharp falloff
+        float lifespan_fade = saturate(1.0 - ct * 2.0); 
+
+        // Add contribution (boost intensity for visibility)
+        sparkRes += sparkColor * glow_falloff * lifespan_fade * 100.0; 
+    }
+    return sparkRes;
+}
+
+// Simulation for slow-moving, diffuse smoke
+vec3 SimulateSmoke(vec2 uv, float t) {
+    vec3 smokeRes = vec3(0.0);
+    
+    for (float i = 0.0; i < smokeCount; i++) {
+        float particleId = (i + 1.0) * 111.0;  
+        float ct = fract(t * 0.5 + particleId / 100.0); // Slower cycle
+        float seed = Hash1(particleId); 
+        
+        // Slower vertical velocity than fire, with horizontal drift
+        vec2 dir = vec2(seed * smokeDrift, size.y * 1.5); 
+        dir.x += windForce * 0.8; // Smoke is pushed by wind
+        
+        float cb = saturate(mix(brightness * 10.0, 0.0, ct * 1.5)); 
+        
+        // Starts near the top of the fire/smoke base
+        vec2 off = vec2(seed * size.x * 0.5, size.y * 0.6); 
+
+        // Add contribution: uses a larger smoothstep range for a diffused look
+        smokeRes += smokeColor * smoothstep(smokeSize, smokeSize * 2.0,
+            cb / length((uv - off - (dir * ct))));
+    }
+    return smokeRes;
+}
+
+
+// =============================================================================
+// FRAGMENT MAIN
+// =============================================================================
+
+void fragment() {
+    // 1. Coordinate Setup
+    vec2 frag_coords = UV * 2.0 - 1.0; // [-1, 1] range
+    frag_coords.x *= aspectRatio;      // Correct X-axis for aspect ratio
+    frag_coords.y *= -1.0;             // Invert Y so fire grows upwards
+    frag_coords -= posOffset;          // Apply source offset
+    
+    // 2. Pixelation effect
+    vec2 pixelated_frag = floor(frag_coords / pixelSize) * pixelSize;
+    
+    // 3. Run Simulations
+    float base_time = TIME + 100.0;
+    
+    vec3 fire_color = Simulate(pixelated_frag, base_time * speed);
+    vec3 spark_color = SimulateSparks(pixelated_frag, base_time);
+    vec3 smoke_color = SimulateSmoke(pixelated_frag, base_time);
+
+    vec3 result_color = fire_color + spark_color + smoke_color; 
+    
+    // 4. Hue & Saturation Control
+    vec3 hsv = rgb_to_hsv(result_color);
+    
+    hsv.x = fract(hsv.x + hueShift); // Apply hue shift (wrap around)
+    hsv.y *= saturationFactor;       // Apply saturation factor
+    
+    result_color = hsv_to_rgb(hsv);
+    
+    // 5. Apply Flicker
+    float flicker = (Hash1(base_time * 5.0) + 0.5) * flickerStrength; 
+    float intensity_mod = 1.0 + flicker; 
+    vec3 final_color = result_color * intensity_mod;
+
+    // 6. Alpha Calculation
+    // Use the max color channel intensity to define alpha (transparency)
+    float intensity = max(max(result_color.r, result_color.g), result_color.b);
+    
+    // Smoothstep ensures sharp cut-off on edges
+    float final_alpha = smoothstep(0.01, 0.5, intensity) * alpha;
+    
+    // Final output color
+    COLOR = vec4(final_color * alpha, final_alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uelcd"]
+shader = SubResource("Shader_7jtaf")
+shader_parameter/speed = 0.65000002761512
+shader_parameter/pixelSize = 0.0010000000475
+shader_parameter/alpha = 1.0
+shader_parameter/flickerStrength = 0.302000014345
+shader_parameter/toColor = Color(0.4, 0.35, 0.2, 1)
+shader_parameter/fromColor = Color(0.9, 0.2, 0.1, 1)
+shader_parameter/hueShift = 0.02200004854500004
+shader_parameter/saturationFactor = 1.2470000592325001
+shader_parameter/particleCount = 111.2810045258475
+shader_parameter/brightness = 0.00110000004497
+shader_parameter/fireShift = 0.402000019095
+shader_parameter/fireShiftFrequency = 5.102000194845
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 18.0
+shader_parameter/sparkSize = 0.004
+shader_parameter/sparkSpeed = 0.15
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 20.0
+shader_parameter/smokeSize = 0.015
+shader_parameter/smokeDrift = 0.2
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.5)
+
+[sub_resource type="Shader" id="Shader_ig78i"]
+code = "//  Procedural Torch & Candle Shader (Fire + Smoke + Sparks)
+//  Author: CaptainLaptop
+//  License: CC0 / MIT
+//  Engine: Godot 4.x
+//
+//  Description:
+//  A fully procedural, particle-free fire simulation that
+//  generates animated flames, sparks, and smoke using only math.
+//
+//  Ideal for candles, torches, and other small light sources.
+//  Avoid large full-screen use as it can be fillrate-heavy.
+//
+//  Controls include flicker, wind, hue shift, color, and size.
+
+/* USAGE:
+1. Apply this shader to a CanvasItem (e.g., a ColorRect or a Sprite2D).
+2. The effect is drawn from the center of the node, growing upwards (Y-axis inverted).
+3. Adjust 'aspectRatio' to match your node's width/height ratio if not 1:1.
+*/
+shader_type canvas_item;
+
+
+
+// =============================================================================
+// GLOBAL CONTROL UNIFORMS
+// =============================================================================
+
+// Controls the overall speed of particle movement and animation
+uniform float speed : hint_range(0.1, 5.0) = 1.0;
+// Defines the size of the 'pixels' or blocks the fire is rendered in
+uniform float pixelSize : hint_range(0.001, 0.1) = 0.015;
+// Overall intensity multiplier for the colors
+uniform float alpha : hint_range(0.0, 1.0) = 0.95; 
+// Strength of the overall light flicker effect
+uniform float flickerStrength : hint_range(0.0, 0.5) = 0.15; 
+
+// =============================================================================
+// COLOR & HUE UNIFORMS
+// =============================================================================
+
+// Color near the top (smoke/darker)
+uniform vec3 toColor : source_color = vec3(0.4, 0.35, 0.2);  
+// Color near the base (hottest/brightest)
+uniform vec3 fromColor : source_color = vec3(0.9, 0.2, 0.1); 
+
+// Shifts the base color hue (HSV 'H' value)
+uniform float hueShift : hint_range(-1.0, 1.0) = 0.0; 
+// Multiplier for saturation (HSV 'S' value)
+uniform float saturationFactor : hint_range(0.0, 2.0) = 1.0; 
+
+// =============================================================================
+// FIRE SIMULATION UNIFORMS
+// =============================================================================
+
+// The number of individual fire particles calculated
+uniform float particleCount : hint_range(16.0, 512.0) = 128.0;
+// Base light brightness applied to particles
+uniform float brightness : hint_range(0.0001, 0.01) = 0.001;
+
+// Horizontal influence of particle noise, determines flame width
+uniform float fireShift : hint_range(0.0, 0.5) = 0.15;
+// Frequency of the noise wave for horizontal flickering/wobble
+uniform float fireShiftFrequency : hint_range(1.0, 10.0) = 5.0;
+
+// x: Max horizontal span, y: Max vertical height of the fire
+uniform vec2 size = vec2(0.05, 0.75);
+// x: inner glow start, y: outer glow end (used in smoothstep for falloff)
+uniform vec2 glow = vec2(0.001, 0.04); 
+
+// =============================================================================
+// SPARKS UNIFORMS
+// =============================================================================
+
+uniform float sparkCount : hint_range(1.0, 50.0) = 18.0; 
+uniform float sparkSize : hint_range(0.0005, 0.005) = 0.004; 
+uniform float sparkSpeed : hint_range(0.1, 3.0) = 0.15; 
+uniform vec3 sparkColor : source_color = vec3(1.0, 0.7, 0.0); 
+
+// =============================================================================
+// SMOKE UNIFORMS
+// =============================================================================
+
+uniform float smokeCount : hint_range(5.0, 50.0) = 20.0;
+uniform float smokeSize : hint_range(0.001, 0.05) = 0.015; 
+uniform float smokeDrift : hint_range(0.0, 0.5) = 0.2; 
+uniform vec3 smokeColor : source_color = vec3(0.05, 0.05, 0.05); 
+
+// =============================================================================
+// ENVIRONMENT UNIFORMS
+// =============================================================================
+
+// Constant horizontal force applied to all particles (wind)
+uniform float windForce : hint_range(-0.5, 0.5) = 0.0; 
+// Node's Width/Height ratio for correct aspect correction
+uniform float aspectRatio : hint_range(0.01, 5.0) = 1.0; 
+// Position offset (shifts the origin of the flame source)
+uniform vec2 posOffset = vec2(0.0, -0.5); 
+
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
+// 1D Hash function for generating particle randomness
+float Hash1(float t) {
+    return fract(cos(t * 124.97) * 248.842) - 0.5;
+}
+
+// Equivalent to GLSL's 'saturate' (clamps between 0.0 and 1.0)
+float saturate(float x) {
+    return clamp(x, 0.0, 1.0);
+}
+
+// --- HSV Utility Functions (Custom implementation for portability) ---
+
+// Converts RGB color space to HSV color space
+vec3 rgb_to_hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.w - q.y) / (6.0 * d + e) + q.z, d / (q.x + e), q.x);
+}
+
+// Converts HSV color space to RGB color space
+vec3 hsv_to_rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.w);
+    return c.z * mix(K.xxx, clamp(p - K.x, 0.0, 1.0), c.y);
+}
+
+
+// =============================================================================
+// PARTICLE SIMULATION FUNCTIONS
+// =============================================================================
+
+// Core fire particle simulation
+vec3 Simulate(vec2 uv, float t) {
+    vec3 res = vec3(0.0);
+    
+    for (float i = 0.0; i < particleCount; i++) {
+        // ct: Current time through the particle's lifecycle (0.0 to 1.0)
+        float ct = fract(t + (i + 1.0) / particleCount);
+        
+        // seed: Unique randomness based on ID and current cycle
+        float seed = Hash1((i + 1.0) * (t - ct));
+        
+        // dir: Base direction vector. WindForce affects X (horizontal).
+        vec2 dir = vec2(0.0, size.y); 
+        dir.x += windForce; 
+        
+        // Fire wobble/flicker (Horizontal noise based on time and seed)
+        dir.x += (cos(t * seed) * sin(ct * fireShiftFrequency)) * mix(0.0, fireShift, log(ct));
+        
+        // cb: Current brightness, fading out as particle ages (ct increases)
+        float cb = saturate(mix(brightness, 0.0, ct));
+        
+        // off: Initial horizontal offset randomized by seed
+        vec2 off = vec2(seed * size.x, 0.0); 
+        
+        // Accumulate color: mix base color to top color based on age (ct)
+        res += mix(fromColor * abs(seed), toColor, ct) 
+               // Apply glow/falloff using smoothstep on inverse distance
+               * smoothstep(glow.x, glow.y, cb / length((uv - off - (dir * ct))));
+    }
+    
+    return res;
+}
+
+// Simulation for sharp, fast-moving sparks
+vec3 SimulateSparks(vec2 uv, float t) {
+    vec3 sparkRes = vec3(0.0);
+    
+    t *= sparkSpeed; // Adjust time scale for spark speed
+    
+    for (float i = 0.0; i < sparkCount; i++) {
+        float particleId = (i + 1.0) * 133.0; 
+        float ct = fract(t + particleId / 100.0); // Lifecycle time
+        float seed = Hash1(particleId); 
+        
+        // High vertical velocity (2.5x flame height)
+        vec2 dir = vec2(seed * 0.4, size.y * 2.5); 
+        dir.x += windForce * 2.0; // Sparks are pushed harder by wind
+        
+        // Current particle center position
+        vec2 particle_center = vec2(seed * size.x * 0.3, 0.0) + (dir * ct); 
+        
+        float dist = length(uv - particle_center);
+        
+        // Create an extremely sharp, localized glow
+        float particle_influence = saturate(1.0 - dist / (sparkSize * 5.0)); 
+        float glow_falloff = pow(particle_influence, 15.0); // High power = sharp falloff
+        float lifespan_fade = saturate(1.0 - ct * 2.0); 
+
+        // Add contribution (boost intensity for visibility)
+        sparkRes += sparkColor * glow_falloff * lifespan_fade * 100.0; 
+    }
+    return sparkRes;
+}
+
+// Simulation for slow-moving, diffuse smoke
+vec3 SimulateSmoke(vec2 uv, float t) {
+    vec3 smokeRes = vec3(0.0);
+    
+    for (float i = 0.0; i < smokeCount; i++) {
+        float particleId = (i + 1.0) * 111.0;  
+        float ct = fract(t * 0.5 + particleId / 100.0); // Slower cycle
+        float seed = Hash1(particleId); 
+        
+        // Slower vertical velocity than fire, with horizontal drift
+        vec2 dir = vec2(seed * smokeDrift, size.y * 1.5); 
+        dir.x += windForce * 0.8; // Smoke is pushed by wind
+        
+        float cb = saturate(mix(brightness * 10.0, 0.0, ct * 1.5)); 
+        
+        // Starts near the top of the fire/smoke base
+        vec2 off = vec2(seed * size.x * 0.5, size.y * 0.6); 
+
+        // Add contribution: uses a larger smoothstep range for a diffused look
+        smokeRes += smokeColor * smoothstep(smokeSize, smokeSize * 2.0,
+            cb / length((uv - off - (dir * ct))));
+    }
+    return smokeRes;
+}
+
+
+// =============================================================================
+// FRAGMENT MAIN
+// =============================================================================
+
+void fragment() {
+    // 1. Coordinate Setup
+    vec2 frag_coords = UV * 2.0 - 1.0; // [-1, 1] range
+    frag_coords.x *= aspectRatio;      // Correct X-axis for aspect ratio
+    frag_coords.y *= -1.0;             // Invert Y so fire grows upwards
+    frag_coords -= posOffset;          // Apply source offset
+    
+    // 2. Pixelation effect
+    vec2 pixelated_frag = floor(frag_coords / pixelSize) * pixelSize;
+    
+    // 3. Run Simulations
+    float base_time = TIME + 100.0;
+    
+    vec3 fire_color = Simulate(pixelated_frag, base_time * speed);
+    vec3 spark_color = SimulateSparks(pixelated_frag, base_time);
+    vec3 smoke_color = SimulateSmoke(pixelated_frag, base_time);
+
+    vec3 result_color = fire_color + spark_color + smoke_color; 
+    
+    // 4. Hue & Saturation Control
+    vec3 hsv = rgb_to_hsv(result_color);
+    
+    hsv.x = fract(hsv.x + hueShift); // Apply hue shift (wrap around)
+    hsv.y *= saturationFactor;       // Apply saturation factor
+    
+    result_color = hsv_to_rgb(hsv);
+    
+    // 5. Apply Flicker
+    float flicker = (Hash1(base_time * 5.0) + 0.5) * flickerStrength; 
+    float intensity_mod = 1.0 + flicker; 
+    vec3 final_color = result_color * intensity_mod;
+
+    // 6. Alpha Calculation
+    // Use the max color channel intensity to define alpha (transparency)
+    float intensity = max(max(result_color.r, result_color.g), result_color.b);
+    
+    // Smoothstep ensures sharp cut-off on edges
+    float final_alpha = smoothstep(0.01, 0.5, intensity) * alpha;
+    
+    // Final output color
+    COLOR = vec4(final_color * alpha, final_alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_daxav"]
+shader = SubResource("Shader_ig78i")
+shader_parameter/speed = 0.65000002761512
+shader_parameter/pixelSize = 0.0010000000475
+shader_parameter/alpha = 1.0
+shader_parameter/flickerStrength = 0.302000014345
+shader_parameter/toColor = Color(0.4, 0.35, 0.2, 1)
+shader_parameter/fromColor = Color(0.9, 0.2, 0.1, 1)
+shader_parameter/hueShift = 0.02200004854500004
+shader_parameter/saturationFactor = 1.2700000603250001
+shader_parameter/particleCount = 116.854004790565
+shader_parameter/brightness = 0.00110000004497
+shader_parameter/fireShift = 0.402000019095
+shader_parameter/fireShiftFrequency = 9.24800039178
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 8.6400003629
+shader_parameter/sparkSize = 0.004
+shader_parameter/sparkSpeed = 0.15
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 20.0
+shader_parameter/smokeSize = 0.015
+shader_parameter/smokeDrift = 0.2
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.5)
+
+[sub_resource type="Shader" id="Shader_318gq"]
+code = "//  Procedural Torch & Candle Shader (Fire + Smoke + Sparks)
+//  Author: CaptainLaptop
+//  License: CC0 / MIT
+//  Engine: Godot 4.x
+//
+//  Description:
+//  A fully procedural, particle-free fire simulation that
+//  generates animated flames, sparks, and smoke using only math.
+//
+//  Ideal for candles, torches, and other small light sources.
+//  Avoid large full-screen use as it can be fillrate-heavy.
+//
+//  Controls include flicker, wind, hue shift, color, and size.
+
+/* USAGE:
+1. Apply this shader to a CanvasItem (e.g., a ColorRect or a Sprite2D).
+2. The effect is drawn from the center of the node, growing upwards (Y-axis inverted).
+3. Adjust 'aspectRatio' to match your node's width/height ratio if not 1:1.
+*/
+shader_type canvas_item;
+
+
+
+// =============================================================================
+// GLOBAL CONTROL UNIFORMS
+// =============================================================================
+
+// Controls the overall speed of particle movement and animation
+uniform float speed : hint_range(0.1, 5.0) = 1.0;
+// Defines the size of the 'pixels' or blocks the fire is rendered in
+uniform float pixelSize : hint_range(0.001, 0.1) = 0.015;
+// Overall intensity multiplier for the colors
+uniform float alpha : hint_range(0.0, 1.0) = 0.95; 
+// Strength of the overall light flicker effect
+uniform float flickerStrength : hint_range(0.0, 0.5) = 0.15; 
+
+// =============================================================================
+// COLOR & HUE UNIFORMS
+// =============================================================================
+
+// Color near the top (smoke/darker)
+uniform vec3 toColor : source_color = vec3(0.4, 0.35, 0.2);  
+// Color near the base (hottest/brightest)
+uniform vec3 fromColor : source_color = vec3(0.9, 0.2, 0.1); 
+
+// Shifts the base color hue (HSV 'H' value)
+uniform float hueShift : hint_range(-1.0, 1.0) = 0.0; 
+// Multiplier for saturation (HSV 'S' value)
+uniform float saturationFactor : hint_range(0.0, 2.0) = 1.0; 
+
+// =============================================================================
+// FIRE SIMULATION UNIFORMS
+// =============================================================================
+
+// The number of individual fire particles calculated
+uniform float particleCount : hint_range(16.0, 512.0) = 128.0;
+// Base light brightness applied to particles
+uniform float brightness : hint_range(0.0001, 0.01) = 0.001;
+
+// Horizontal influence of particle noise, determines flame width
+uniform float fireShift : hint_range(0.0, 0.5) = 0.15;
+// Frequency of the noise wave for horizontal flickering/wobble
+uniform float fireShiftFrequency : hint_range(1.0, 10.0) = 5.0;
+
+// x: Max horizontal span, y: Max vertical height of the fire
+uniform vec2 size = vec2(0.05, 0.75);
+// x: inner glow start, y: outer glow end (used in smoothstep for falloff)
+uniform vec2 glow = vec2(0.001, 0.04); 
+
+// =============================================================================
+// SPARKS UNIFORMS
+// =============================================================================
+
+uniform float sparkCount : hint_range(1.0, 50.0) = 18.0; 
+uniform float sparkSize : hint_range(0.0005, 0.005) = 0.004; 
+uniform float sparkSpeed : hint_range(0.1, 3.0) = 0.15; 
+uniform vec3 sparkColor : source_color = vec3(1.0, 0.7, 0.0); 
+
+// =============================================================================
+// SMOKE UNIFORMS
+// =============================================================================
+
+uniform float smokeCount : hint_range(5.0, 50.0) = 20.0;
+uniform float smokeSize : hint_range(0.001, 0.05) = 0.015; 
+uniform float smokeDrift : hint_range(0.0, 0.5) = 0.2; 
+uniform vec3 smokeColor : source_color = vec3(0.05, 0.05, 0.05); 
+
+// =============================================================================
+// ENVIRONMENT UNIFORMS
+// =============================================================================
+
+// Constant horizontal force applied to all particles (wind)
+uniform float windForce : hint_range(-0.5, 0.5) = 0.0; 
+// Node's Width/Height ratio for correct aspect correction
+uniform float aspectRatio : hint_range(0.01, 5.0) = 1.0; 
+// Position offset (shifts the origin of the flame source)
+uniform vec2 posOffset = vec2(0.0, -0.5); 
+
+
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
+// 1D Hash function for generating particle randomness
+float Hash1(float t) {
+    return fract(cos(t * 124.97) * 248.842) - 0.5;
+}
+
+// Equivalent to GLSL's 'saturate' (clamps between 0.0 and 1.0)
+float saturate(float x) {
+    return clamp(x, 0.0, 1.0);
+}
+
+// --- HSV Utility Functions (Custom implementation for portability) ---
+
+// Converts RGB color space to HSV color space
+vec3 rgb_to_hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.w - q.y) / (6.0 * d + e) + q.z, d / (q.x + e), q.x);
+}
+
+// Converts HSV color space to RGB color space
+vec3 hsv_to_rgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.w);
+    return c.z * mix(K.xxx, clamp(p - K.x, 0.0, 1.0), c.y);
+}
+
+
+// =============================================================================
+// PARTICLE SIMULATION FUNCTIONS
+// =============================================================================
+
+// Core fire particle simulation
+vec3 Simulate(vec2 uv, float t) {
+    vec3 res = vec3(0.0);
+    
+    for (float i = 0.0; i < particleCount; i++) {
+        // ct: Current time through the particle's lifecycle (0.0 to 1.0)
+        float ct = fract(t + (i + 1.0) / particleCount);
+        
+        // seed: Unique randomness based on ID and current cycle
+        float seed = Hash1((i + 1.0) * (t - ct));
+        
+        // dir: Base direction vector. WindForce affects X (horizontal).
+        vec2 dir = vec2(0.0, size.y); 
+        dir.x += windForce; 
+        
+        // Fire wobble/flicker (Horizontal noise based on time and seed)
+        dir.x += (cos(t * seed) * sin(ct * fireShiftFrequency)) * mix(0.0, fireShift, log(ct));
+        
+        // cb: Current brightness, fading out as particle ages (ct increases)
+        float cb = saturate(mix(brightness, 0.0, ct));
+        
+        // off: Initial horizontal offset randomized by seed
+        vec2 off = vec2(seed * size.x, 0.0); 
+        
+        // Accumulate color: mix base color to top color based on age (ct)
+        res += mix(fromColor * abs(seed), toColor, ct) 
+               // Apply glow/falloff using smoothstep on inverse distance
+               * smoothstep(glow.x, glow.y, cb / length((uv - off - (dir * ct))));
+    }
+    
+    return res;
+}
+
+// Simulation for sharp, fast-moving sparks
+vec3 SimulateSparks(vec2 uv, float t) {
+    vec3 sparkRes = vec3(0.0);
+    
+    t *= sparkSpeed; // Adjust time scale for spark speed
+    
+    for (float i = 0.0; i < sparkCount; i++) {
+        float particleId = (i + 1.0) * 133.0; 
+        float ct = fract(t + particleId / 100.0); // Lifecycle time
+        float seed = Hash1(particleId); 
+        
+        // High vertical velocity (2.5x flame height)
+        vec2 dir = vec2(seed * 0.4, size.y * 2.5); 
+        dir.x += windForce * 2.0; // Sparks are pushed harder by wind
+        
+        // Current particle center position
+        vec2 particle_center = vec2(seed * size.x * 0.3, 0.0) + (dir * ct); 
+        
+        float dist = length(uv - particle_center);
+        
+        // Create an extremely sharp, localized glow
+        float particle_influence = saturate(1.0 - dist / (sparkSize * 5.0)); 
+        float glow_falloff = pow(particle_influence, 15.0); // High power = sharp falloff
+        float lifespan_fade = saturate(1.0 - ct * 2.0); 
+
+        // Add contribution (boost intensity for visibility)
+        sparkRes += sparkColor * glow_falloff * lifespan_fade * 100.0; 
+    }
+    return sparkRes;
+}
+
+// Simulation for slow-moving, diffuse smoke
+vec3 SimulateSmoke(vec2 uv, float t) {
+    vec3 smokeRes = vec3(0.0);
+    
+    for (float i = 0.0; i < smokeCount; i++) {
+        float particleId = (i + 1.0) * 111.0;  
+        float ct = fract(t * 0.5 + particleId / 100.0); // Slower cycle
+        float seed = Hash1(particleId); 
+        
+        // Slower vertical velocity than fire, with horizontal drift
+        vec2 dir = vec2(seed * smokeDrift, size.y * 1.5); 
+        dir.x += windForce * 0.8; // Smoke is pushed by wind
+        
+        float cb = saturate(mix(brightness * 10.0, 0.0, ct * 1.5)); 
+        
+        // Starts near the top of the fire/smoke base
+        vec2 off = vec2(seed * size.x * 0.5, size.y * 0.6); 
+
+        // Add contribution: uses a larger smoothstep range for a diffused look
+        smokeRes += smokeColor * smoothstep(smokeSize, smokeSize * 2.0,
+            cb / length((uv - off - (dir * ct))));
+    }
+    return smokeRes;
+}
+
+
+// =============================================================================
+// FRAGMENT MAIN
+// =============================================================================
+
+void fragment() {
+    // 1. Coordinate Setup
+    vec2 frag_coords = UV * 2.0 - 1.0; // [-1, 1] range
+    frag_coords.x *= aspectRatio;      // Correct X-axis for aspect ratio
+    frag_coords.y *= -1.0;             // Invert Y so fire grows upwards
+    frag_coords -= posOffset;          // Apply source offset
+    
+    // 2. Pixelation effect
+    vec2 pixelated_frag = floor(frag_coords / pixelSize) * pixelSize;
+    
+    // 3. Run Simulations
+    float base_time = TIME + 100.0;
+    
+    vec3 fire_color = Simulate(pixelated_frag, base_time * speed);
+    vec3 spark_color = SimulateSparks(pixelated_frag, base_time);
+    vec3 smoke_color = SimulateSmoke(pixelated_frag, base_time);
+
+    vec3 result_color = fire_color + spark_color + smoke_color; 
+    
+    // 4. Hue & Saturation Control
+    vec3 hsv = rgb_to_hsv(result_color);
+    
+    hsv.x = fract(hsv.x + hueShift); // Apply hue shift (wrap around)
+    hsv.y *= saturationFactor;       // Apply saturation factor
+    
+    result_color = hsv_to_rgb(hsv);
+    
+    // 5. Apply Flicker
+    float flicker = (Hash1(base_time * 5.0) + 0.5) * flickerStrength; 
+    float intensity_mod = 1.0 + flicker; 
+    vec3 final_color = result_color * intensity_mod;
+
+    // 6. Alpha Calculation
+    // Use the max color channel intensity to define alpha (transparency)
+    float intensity = max(max(result_color.r, result_color.g), result_color.b);
+    
+    // Smoothstep ensures sharp cut-off on edges
+    float final_alpha = smoothstep(0.01, 0.5, intensity) * alpha;
+    
+    // Final output color
+    COLOR = vec4(final_color * alpha, final_alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ywn6"]
+shader = SubResource("Shader_318gq")
+shader_parameter/speed = 0.65000002761512
+shader_parameter/pixelSize = 0.0010000000475
+shader_parameter/alpha = 1.0
+shader_parameter/flickerStrength = 0.090000004275
+shader_parameter/toColor = Color(0.4, 0.35, 0.2, 1)
+shader_parameter/fromColor = Color(0.9, 0.2, 0.1, 1)
+shader_parameter/hueShift = 0.02200004854500004
+shader_parameter/saturationFactor = 1.2250000581875
+shader_parameter/particleCount = 116.854004790565
+shader_parameter/brightness = 0.00110000004497
+shader_parameter/fireShift = 0.5
+shader_parameter/fireShiftFrequency = 5.4050002092375
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 18.0
+shader_parameter/sparkSize = 0.004
+shader_parameter/sparkSpeed = 0.15
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 20.0
+shader_parameter/smokeSize = 0.015
+shader_parameter/smokeDrift = 0.2
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.5)
 
 [node name="ChooseLevel" type="Control"]
 layout_mode = 3
@@ -204,7 +1610,7 @@ offset_left = 1378.0
 offset_top = 915.0
 offset_right = 1418.0
 offset_bottom = 955.0
-rotation = 4201.7314
+rotation = 5305.7705
 pivot_offset = Vector2(20, 20)
 mouse_filter = 1
 script = ExtResource("1_i6xxv")
@@ -219,7 +1625,7 @@ offset_left = 255.625
 offset_top = -44.0
 offset_right = 383.625
 offset_bottom = 84.0
-rotation = -4201.7314
+rotation = -5305.7705
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -237,7 +1643,7 @@ offset_left = -193.81252
 offset_top = 215.48285
 offset_right = -65.812515
 offset_bottom = 343.48285
-rotation = -4201.7314
+rotation = -5305.7705
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -255,7 +1661,7 @@ offset_left = -193.81247
 offset_top = -303.48288
 offset_right = -65.81247
 offset_bottom = -175.48288
-rotation = -4201.7314
+rotation = -5305.7705
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -279,41 +1685,87 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wi1ay")
 
 [node name="PlanetCardJungle" parent="." instance=ExtResource("3_w87gs")]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 42.0
-offset_right = 606.0
-offset_bottom = 785.0
+offset_left = 75.0
+offset_right = 625.0
 
 [node name="PlanetCardWater" parent="." instance=ExtResource("4_x0rvy")]
 layout_mode = 0
-offset_left = 680.0
-offset_top = 31.0
-offset_right = 1230.0
-offset_bottom = 774.0
+offset_left = 693.0
+offset_right = 1243.0
 
 [node name="PlanetCardIce" parent="." instance=ExtResource("5_ghntx")]
 layout_mode = 0
-offset_left = 1288.0
-offset_top = 43.0
-offset_right = 1838.0
-offset_bottom = 786.0
+offset_left = 1320.0
+offset_right = 1870.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ghntx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
-position = Vector2(1712, 984.99994)
-scale = Vector2(3.6875, 3.6875)
-sprite_frames = SubResource("SpriteFrames_fgfxv")
-frame_progress = 0.54265386
+[node name="CandleFlame1" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_lfiec")
+layout_mode = 0
+offset_left = 183.0
+offset_top = 443.00006
+offset_right = 695.0
+offset_bottom = 955.00006
+scale = Vector2(0.6580614, 0.7099736)
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_lfiec")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-modulate = Color(2.184344, 2.184344, 2.184344, 1)
-position = Vector2(1606, 1011.00006)
-scale = Vector2(3.6875, 3.6875)
-sprite_frames = SubResource("SpriteFrames_fgfxv")
-frame_progress = 0.39871788
+[node name="CandleFlame2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ig78i")
+layout_mode = 0
+offset_left = 687.0
+offset_top = 440.00006
+offset_right = 1199.0
+offset_bottom = 952.00006
+scale = Vector2(0.6580614, 0.7099736)
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_lfiec")
+
+[node name="CandleFlame3" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ig78i")
+layout_mode = 0
+offset_left = 935.0
+offset_top = 436.00003
+offset_right = 1447.0
+offset_bottom = 948.0
+scale = Vector2(0.6580614, 0.7099736)
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_lfiec")
+
+[node name="CandleFlame4" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_uelcd")
+layout_mode = 0
+offset_left = 1264.0
+offset_top = 443.00003
+offset_right = 1776.0
+offset_bottom = 955.0
+scale = Vector2(0.6580614, 0.7099736)
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_lfiec")
+
+[node name="CandleFlame5" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_daxav")
+layout_mode = 0
+offset_left = 1435.0
+offset_top = 438.0
+offset_right = 1947.0
+offset_bottom = 950.00006
+scale = Vector2(0.6580614, 0.7099736)
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_lfiec")
+
+[node name="CandleFlame6" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_0ywn6")
+layout_mode = 0
+offset_left = 1597.0
+offset_top = 444.00006
+offset_right = 2109.0
+offset_bottom = 956.0001
+scale = Vector2(0.6580614, 0.7099736)
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_lfiec")
 
 [connection signal="pressed" from="PlanetCardJungle" to="." method="_on_planet_card_jungle_pressed"]
 [connection signal="pressed" from="PlanetCardWater" to="." method="_on_planet_card_water_pressed"]

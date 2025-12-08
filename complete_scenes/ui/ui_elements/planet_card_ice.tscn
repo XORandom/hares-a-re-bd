@@ -88,10 +88,10 @@ text = "[center][font_size=90][font=res://assets/fonts/TD Zvonar/TD Zvonar.otf][
 [node name="Vircle" type="Control" parent="."]
 process_mode = 4
 anchors_preset = 0
-offset_left = 244.0
-offset_top = 192.0
-offset_right = 284.0
-offset_bottom = 232.0
+offset_left = 264.0
+offset_top = 188.0
+offset_right = 304.0
+offset_bottom = 228.0
 rotation = -130.93236
 pivot_offset = Vector2(20, 20)
 script = ExtResource("38_83qes")
@@ -288,6 +288,7 @@ texture = ExtResource("39_dwqs8")
 texture_scale = 2.6
 
 [node name="StaticCogs" type="Node2D" parent="."]
+visible = false
 
 [node name="CogStatic4" type="Sprite2D" parent="StaticCogs"]
 position = Vector2(456, 403)
@@ -320,6 +321,7 @@ scale = Vector2(8, 8)
 texture = SubResource("CanvasTexture_p2i8n")
 
 [node name="RotatedCogs" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
