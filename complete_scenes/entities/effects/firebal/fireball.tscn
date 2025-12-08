@@ -327,13 +327,15 @@ process_material = SubResource("10")
 
 [node name="FireCore" type="GPUParticles2D" parent="."]
 self_modulate = Color(1.1, 1.1, 1.1, 1)
-amount = 32
+amount = 64
 texture = ExtResource("4")
+lifetime = 2.44
 randomness = 1.0
 visibility_rect = Rect2(-512, -300, 1024, 600)
 process_material = SubResource("15")
 
 [node name="CoreSparkles" type="GPUParticles2D" parent="."]
+visible = false
 self_modulate = Color(1.1, 1.1, 1.1, 1)
 amount = 32
 texture = ExtResource("5")
@@ -343,10 +345,9 @@ visibility_rect = Rect2(-512, -300, 1024, 600)
 process_material = SubResource("16")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(1, 0.227451, 0.227451, 1)
 energy = 0.0
 texture = ExtResource("1")
-texture_scale = 5.0
+texture_scale = 3.1
 
 [node name="Glow" type="Sprite2D" parent="."]
 visible = false
