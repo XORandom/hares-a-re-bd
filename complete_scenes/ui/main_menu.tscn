@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxvpx0511unt"]
+[gd_scene load_steps=14 format=3 uid="uid://bxvpx0511unt"]
 
 [ext_resource type="Material" uid="uid://elvtq0w3ejo7" path="res://complete_scenes/ui/main_menu_doom-like_melting.tres" id="1_pn8es"]
 [ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="1_uhymq"]
@@ -8,6 +8,30 @@
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="5_6uyg3"]
 [ext_resource type="Resource" uid="uid://duag7720owfq8" path="res://config/input_actions/context_in_menu.tres" id="6_pn8es"]
 [ext_resource type="Script" uid="uid://bop73kxi0jt8t" path="res://complete_scenes/ui/sub_viewport_container.gd" id="6_r3jnv"]
+[ext_resource type="Script" uid="uid://ckstas3mq2saq" path="res://complete_scenes/ui/point_light_2d.gd" id="9_5ofbu"]
+
+[sub_resource type="Gradient" id="Gradient_r3jnv"]
+offsets = PackedFloat32Array(0, 0.5714286)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r3jnv"]
+frequency = 0.0032
+offset = Vector3(321.42, 0, 0)
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5ofbu"]
+noise = SubResource("FastNoiseLite_r3jnv")
+color_ramp = SubResource("Gradient_r3jnv")
+
+[sub_resource type="Environment" id="Environment_5ofbu"]
+background_mode = 3
+glow_enabled = true
+glow_strength = 0.9
+glow_mix = 0.0
+glow_bloom = 0.07
+glow_blend_mode = 0
+glow_hdr_threshold = 0.71
+glow_hdr_scale = 0.0
+glow_map_strength = 1.0
 
 [node name="MainMenu" type="Control"]
 material = ExtResource("1_pn8es")
@@ -57,7 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.078833334, 0, 0.11, 1)
+color = Color(0.08649468, 0.0017919726, 0.025901021, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewportContainer/SubViewport"]
 anchors_preset = 15
@@ -95,6 +119,7 @@ theme = ExtResource("1_uhymq")
 [node name="Start" parent="SubViewportContainer/SubViewport/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_rxbl0")]
 layout_mode = 2
 mouse_filter = 0
+theme_type_variation = &"FlatButton"
 text = "Начать игру"
 metadata/_edit_pinned_properties_ = [&"mouse_filter"]
 
@@ -120,6 +145,21 @@ custom_minimum_size = Vector2(0, 16.555)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_uhymq")
+
+[node name="PointLight2D" type="PointLight2D" parent="SubViewportContainer/SubViewport"]
+scale = Vector2(7.8710938, 4.453125)
+blend_mode = 1
+texture = SubResource("NoiseTexture2D_5ofbu")
+script = ExtResource("9_5ofbu")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="SubViewportContainer/SubViewport"]
+rotation = -2.412045
+color = Color(1, 0.81200004, 0.53, 1)
+energy = 0.7
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+process_mode = 3
+environment = SubResource("Environment_5ofbu")
 
 [connection signal="pressed" from="SubViewportContainer/SubViewport/MarginContainer/VBoxContainer/GridContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="SubViewportContainer/SubViewport/MarginContainer/VBoxContainer/GridContainer/Settings" to="." method="_on_settings_pressed"]
