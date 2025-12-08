@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="1_bscni"]
 [ext_resource type="Script" uid="uid://qa4xfjnvxbq5" path="res://complete_scenes/ui/ui_elements/custom_button.gd" id="1_u3pxb"]
-[ext_resource type="Texture2D" uid="uid://brjpgtkba5dw7" path="res://assets/icon.svg" id="3_lgyn2"]
+[ext_resource type="Texture2D" uid="uid://bgrb6iavyw3xo" path="res://assets/textures/effects/T_5x5_menacing.png" id="3_lgyn2"]
 
 [node name="CustomButton" type="Button"]
 custom_minimum_size = Vector2(400, 100)
@@ -12,16 +12,17 @@ theme = ExtResource("1_bscni")
 script = ExtResource("1_u3pxb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-self_modulate = Color(0.6027341, 0.6027341, 0.6027341, 1)
+modulate = Color(0.07190548, 0.07190548, 0.07190548, 1)
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = -26.0
-offset_right = 26.0
-offset_bottom = 24.0
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 6.1799927
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_lgyn2")
+expand_mode = 1
