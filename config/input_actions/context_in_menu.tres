@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=11 format=3 uid="uid://duag7720owfq8"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=16 format=3 uid="uid://duag7720owfq8"]
 
 [ext_resource type="Script" uid="uid://cpplm41b5bt6m" path="res://addons/guide/guide_action_mapping.gd" id="1_vw221"]
 [ext_resource type="Resource" uid="uid://bpufxssanoee2" path="res://config/input_actions/action_k_escape.tres" id="2_3nre6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cw71o87tvdx3q" path="res://addons/guide/inputs/guide_input_key.gd" id="4_kt6nm"]
 [ext_resource type="Script" uid="uid://bl8rjl4oaldje" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_jg73f"]
 [ext_resource type="Script" uid="uid://x74mnwgr08a7" path="res://addons/guide/triggers/guide_trigger.gd" id="6_0yfqj"]
+[ext_resource type="Resource" uid="uid://do7cbjhhm2abf" path="res://config/input_actions/action_start_game.tres" id="7_cmogw"]
 
 [sub_resource type="Resource" id="Resource_njs1x"]
 script = ExtResource("4_kt6nm")
@@ -21,7 +22,23 @@ script = ExtResource("1_vw221")
 action = ExtResource("2_3nre6")
 input_mappings = Array[ExtResource("3_cmogw")]([SubResource("Resource_us3nr")])
 
+[sub_resource type="Resource" id="Resource_kt6nm"]
+script = ExtResource("4_kt6nm")
+key = 49
+
+[sub_resource type="Resource" id="Resource_jg73f"]
+script = ExtResource("3_cmogw")
+input = SubResource("Resource_kt6nm")
+
+[sub_resource type="Resource" id="Resource_0yfqj"]
+script = ExtResource("3_cmogw")
+
+[sub_resource type="Resource" id="Resource_ofr5m"]
+script = ExtResource("1_vw221")
+action = ExtResource("7_cmogw")
+input_mappings = Array[ExtResource("3_cmogw")]([SubResource("Resource_jg73f"), SubResource("Resource_0yfqj")])
+
 [resource]
 script = ExtResource("2_lxt5g")
-mappings = Array[ExtResource("1_vw221")]([SubResource("Resource_c2nom")])
+mappings = Array[ExtResource("1_vw221")]([SubResource("Resource_c2nom"), SubResource("Resource_ofr5m")])
 metadata/_custom_type_script = "uid://dsa1dnifd6w32"
