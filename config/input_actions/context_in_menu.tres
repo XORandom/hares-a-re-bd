@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://cw71o87tvdx3q" path="res://addons/guide/inputs/guide_input_key.gd" id="4_kt6nm"]
 [ext_resource type="Script" uid="uid://bl8rjl4oaldje" path="res://addons/guide/modifiers/guide_modifier.gd" id="5_jg73f"]
 [ext_resource type="Script" uid="uid://x74mnwgr08a7" path="res://addons/guide/triggers/guide_trigger.gd" id="6_0yfqj"]
-[ext_resource type="Resource" path="res://config/input_actions/action_menu_start_game.tres" id="7_jg73f"]
-[ext_resource type="Resource" path="res://config/input_actions/action_menu_open_settings.tres" id="8_0yfqj"]
-[ext_resource type="Resource" path="res://config/input_actions/action_menu_game_quit.tres" id="9_njs1x"]
+[ext_resource type="Resource" uid="uid://do7cbjhhm2abf" path="res://config/input_actions/action_menu_start_game.tres" id="7_jg73f"]
+[ext_resource type="Resource" uid="uid://cnc5ap5j2k36f" path="res://config/input_actions/action_menu_open_settings.tres" id="8_0yfqj"]
+[ext_resource type="Resource" uid="uid://cippswk7mhqrh" path="res://config/input_actions/action_menu_game_quit.tres" id="9_njs1x"]
 
 [sub_resource type="Resource" id="Resource_njs1x"]
 script = ExtResource("4_kt6nm")

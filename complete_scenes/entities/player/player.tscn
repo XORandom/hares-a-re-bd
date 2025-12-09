@@ -10,7 +10,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dl81rccljv110" path="res://complete_scenes/entities/player/play_sprite.tres" id="5_usp81"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cjfkd"]
 [ext_resource type="PackedScene" uid="uid://c522uyw28gd8c" path="res://complete_scenes/entities/entity_collision.tscn" id="7_hcnbt"]
-[ext_resource type="Script" path="res://complete_scenes/entities/player/sight_hud.gd" id="11_ld7iu"]
+[ext_resource type="Script" uid="uid://cttowtr5jicft" path="res://complete_scenes/entities/player/sight_hud.gd" id="11_ld7iu"]
 
 [sub_resource type="Animation" id="Animation_gdswy"]
 resource_name = "attack_left"
