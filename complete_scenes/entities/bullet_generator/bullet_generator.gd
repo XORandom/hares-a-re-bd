@@ -26,7 +26,7 @@ enum BULLET_TYPES {
 ## Разброс снарядов в градусах
 @export_range(0.0, 40., 0.1) var spread_degrees: float = 0.0
 ## Скорость перезарядки
-@export_range(0.01, 10., 0.01,"or_greater") var recharge_time: float = 1.
+@export_range(0.01, 10., 0.01, "or_greater") var recharge_time: float = 1.
 
 ## Таймер перезарядки
 var reload_timer: Timer
