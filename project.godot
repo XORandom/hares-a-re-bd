@@ -34,6 +34,8 @@ PoolManager="*res://autoloads/resources_manager/pool_manager.gd"
 GameStateManager="*res://autoloads/game_state_manager/game_state_manager.tscn"
 DebugPanel="*res://autoloads/dev_tools/debug_panel.tscn"
 SceneManager="*res://autoloads/scene_manager/scene_manager.gd"
+EventBus="*res://autoloads/game_manager/event_bus.gd"
+TimeManager="*res://autoloads/game_manager/time_manager.gd"
 
 [debug]
 
@@ -53,7 +55,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/better_vircle/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg")
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/better_vircle/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/guide/plugin.cfg", "res://addons/nhb_functions_on_the_fly/plugin.cfg")
 
 [file_customization]
 
