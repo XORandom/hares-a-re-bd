@@ -49,12 +49,23 @@ signal player_change_direction(tree_node: String)
 ## [b]Отправитель:[/b] модуль получения урона #TODO сделать срочно
 ## [br][br]
 ## [b]Получатель:[/b] player_hud
-signal PLAYER_HEALTH_UPDATED(health: float)
-signal PLAYER_HEALTH_Damage(damage: float)
+signal player_health_updated(health: float)
+signal player_health_damage(damage: float)
  	#Подаем сигнал об изменении здоровья
-	#EventBus.emit_signal("PLAYER_HEALTH_UPDATED", new_health)
+	#EventBus.emit_signal("player_health_updated", new_health)
 
 
 ## Сообщает, что в сцене есть world environment, а значит можно включить тени
 ## [br][br]
 signal world_environment_applied()
+
+## Сообщает, что пытались изменить значение очков на отрицательное[br]
+## К примеру купить турель на которую очков не хватает
+## [br][br]
+## Посылаем сигнал, к примеру для подсказки об этом[br]
+## EventBus.game_score_is_negative.emit()
+## [br][br]
+## [b]Отправитель:[/b]
+## [br][br]
+## [b]Получатель:[/b]
+signal game_score_is_negative()
