@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mwnfq42hbvqp"]
+
+[ext_resource type="Script" uid="uid://cpdvkawy5bcbl" path="res://complete_scenes/entities/bullet_generator/bullet_generator.gd" id="1_6cjba"]
+
+[node name="BulletGenerator" type="Node2D"]
+script = ExtResource("1_6cjba")
