@@ -27,14 +27,17 @@ extends BaseEntity
 ## Состояние отдыха
 @onready var idle: AtomicState  = $PlayerStateChart/Root/PlayerBehaviour/Idle
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	input_direction = walk_action.value_axis_2d.normalized()
 	print(input_direction)
 	if input_direction != last_direction and input_direction != Vector2.ZERO:
 		last_direction = input_direction
 	Globals.player_direction = get_local_mouse_position().normalized() if input_direction == Vector2.ZERO else last_direction
+	#position += walk_action.value_axis_2d.normalized() * speed * delta
+	#position += run.value_axis_2d.normalized() * speed * delta
+	position += input_direction * speed * delta
 
-	velocity = input_direction * speed * _delta
+	#velocity = input_direction * speed * delta
 
 func  on_damage_taken() -> void:
 	pass
