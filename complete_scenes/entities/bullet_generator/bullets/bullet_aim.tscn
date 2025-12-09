@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://q6cmkt1540n3"]
+
+[ext_resource type="Script" uid="uid://bafjhjs1cbxsq" path="res://complete_scenes/entities/bullet_generator/bullets/bullet_aim.gd" id="1_adqbb"]
+[ext_resource type="Texture2D" uid="uid://yk5onquijwsb" path="res://assets/textures/effects/glowing_circle.png" id="2_adqbb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjfih"]
+radius = 6.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nvqw3"]
+polygon = PackedVector2Array(-15, -5, -5, -5, 2, -4, 2, 4, -5, 5, -15, 5)
+
+[node name="BulletAim" type="Area2D"]
+script = ExtResource("1_adqbb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, 0)
+rotation = 1.5708
+scale = Vector2(0.472501, 0.472501)
+texture = ExtResource("2_adqbb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 0)
+shape = SubResource("CircleShape2D_hjfih")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(10, 0)
+occluder = SubResource("OccluderPolygon2D_nvqw3")
