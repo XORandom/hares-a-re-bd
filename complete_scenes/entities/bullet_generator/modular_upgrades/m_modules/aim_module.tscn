@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3datcrbyww8n"]
+
+[ext_resource type="Script" uid="uid://dg108qc7yt2j5" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_modules/aim_module.gd" id="1_mmowk"]
+
+[node name="AimModule" type="Node2D"]
+script = ExtResource("1_mmowk")
