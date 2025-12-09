@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://xn5yhb7a3dga"]
+[gd_scene load_steps=71 format=3 uid="uid://xn5yhb7a3dga"]
 
 [ext_resource type="Script" uid="uid://cmcttel0tywal" path="res://complete_scenes/entities/player/player.gd" id="1_2ja1o"]
 [ext_resource type="Script" uid="uid://bkm2qpcymw18x" path="res://complete_scenes/entities/player/charcter_anim.gd" id="2_cjfkd"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cjfkd"]
 [ext_resource type="PackedScene" uid="uid://c522uyw28gd8c" path="res://complete_scenes/entities/entity_collision.tscn" id="7_hcnbt"]
 [ext_resource type="Script" uid="uid://cttowtr5jicft" path="res://complete_scenes/entities/player/sight_hud.gd" id="11_ld7iu"]
+[ext_resource type="PackedScene" uid="uid://mwnfq42hbvqp" path="res://complete_scenes/entities/bullet_generator/bullet_generator.tscn" id="12_usp81"]
+[ext_resource type="PackedScene" uid="uid://b1hqnsgksjc52" path="res://complete_scenes/entities/pickup/pickup.tscn" id="13_3rt7g"]
 
 [sub_resource type="Animation" id="Animation_gdswy"]
 resource_name = "attack_left"
@@ -464,8 +466,13 @@ z_index = 5
 color = Color(0.32, 0, 0, 1)
 polygon = PackedVector2Array(-4, -2, 0, -4, 4, -2, 4, 3, 0, 5, -4, 3)
 
+[node name="BulletGenerator" parent="SightHUD/Polygon2D" instance=ExtResource("12_usp81")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightHUD"]
 shape = SubResource("CircleShape2D_ld7iu")
+
+[node name="Pickup" parent="." instance=ExtResource("13_3rt7g")]
+position = Vector2(616, -183)
 
 [connection signal="state_processing" from="PlayerStateChart/Root/PlayerBehaviour/Run" to="." method="_on_run_state_processing"]
 [connection signal="state_processing" from="PlayerStateChart/Root/PlayerBehaviour/Walk" to="." method="_on_walk_state_processing"]
