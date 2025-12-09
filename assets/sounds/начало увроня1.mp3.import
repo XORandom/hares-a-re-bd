@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnu4nando8teu"
+path="res://.godot/imported/начало увроня1.mp3-138d4cdb2d9fd1f48553a9483525c368.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/начало увроня1.mp3"
+dest_files=["res://.godot/imported/начало увроня1.mp3-138d4cdb2d9fd1f48553a9483525c368.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

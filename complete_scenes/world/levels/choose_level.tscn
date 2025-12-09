@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dkar06pst402u"]
+[gd_scene load_steps=33 format=3 uid="uid://dkar06pst402u"]
 
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="1_ghntx"]
 [ext_resource type="Script" uid="uid://drn0toocsmfax" path="res://addons/better_vircle/vircle_node.gd" id="1_i6xxv"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cgv54i8mtmh8h" path="res://complete_scenes/ui/ui_elements/planet_card_water.tscn" id="4_x0rvy"]
 [ext_resource type="PackedScene" uid="uid://02lnfm3yxh41" path="res://complete_scenes/ui/ui_elements/planet_card_ice.tscn" id="5_ghntx"]
 [ext_resource type="Texture2D" uid="uid://cpe3vo42n71nh" path="res://assets/textures/effects/sparkle.png" id="8_6vj54"]
+[ext_resource type="AudioStream" uid="uid://bnwbvsguxw88m" path="res://assets/sounds/выбор уровня.mp3" id="10_uelcd"]
 
 [sub_resource type="Gradient" id="Gradient_6vj54"]
 offsets = PackedFloat32Array(0.77742946, 1)
@@ -1610,7 +1611,7 @@ offset_left = 1378.0
 offset_top = 915.0
 offset_right = 1418.0
 offset_bottom = 955.0
-rotation = 5808.3076
+rotation = 5824.465
 pivot_offset = Vector2(20, 20)
 mouse_filter = 1
 script = ExtResource("1_i6xxv")
@@ -1625,7 +1626,7 @@ offset_left = 255.625
 offset_top = -44.0
 offset_right = 383.625
 offset_bottom = 84.0
-rotation = -5808.3076
+rotation = -5824.465
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -1643,7 +1644,7 @@ offset_left = -193.81252
 offset_top = 215.48285
 offset_right = -65.812515
 offset_bottom = 343.48285
-rotation = -5808.3076
+rotation = -5824.465
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -1661,7 +1662,7 @@ offset_left = -193.81247
 offset_top = -303.48288
 offset_right = -65.81247
 offset_bottom = -175.48288
-rotation = -5808.3076
+rotation = -5824.465
 pivot_offset = Vector2(64, 64)
 texture = ExtResource("8_6vj54")
 
@@ -1766,6 +1767,10 @@ offset_bottom = 956.0001
 scale = Vector2(0.6580614, 0.7099736)
 mouse_filter = 2
 texture = SubResource("NoiseTexture2D_lfiec")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_uelcd")
+autoplay = true
 
 [connection signal="pressed" from="PlanetCardJungle" to="." method="_on_planet_card_jungle_pressed"]
 [connection signal="pressed" from="PlanetCardWater" to="." method="_on_planet_card_water_pressed"]
