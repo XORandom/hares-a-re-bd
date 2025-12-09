@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1hqnsgksjc52"]
+
+[ext_resource type="Script" uid="uid://dw6xh1c32mgm7" path="res://complete_scenes/entities/pickup/pickup.gd" id="1_xtbyf"]
+[ext_resource type="Texture2D" uid="uid://yk5onquijwsb" path="res://assets/textures/effects/glowing_circle.png" id="2_xtbyf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lqk7r"]
+radius = 35.128338
+
+[node name="Pickup" type="Area2D"]
+editor_description = "Вот и наш Макгаффин "
+script = ExtResource("1_xtbyf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xtbyf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lqk7r")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
