@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2ptp60qptf3r"]
+[gd_scene load_steps=19 format=3 uid="uid://b2ptp60qptf3r"]
 
 [ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/levels/level_ice.gd" id="1_wardp"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_fsvwh"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_84lrg"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_hyhj0"]
 [ext_resource type="PackedScene" uid="uid://gjujxrfcpgk7" path="res://complete_scenes/entities/effects/env_effects/wind_trail.tscn" id="13_wardp"]
+[ext_resource type="AudioStream" uid="uid://dac14m4plsmdu" path="res://assets/sounds/ледяной мир.wav" id="14_fsvwh"]
 
 [sub_resource type="TileSet" id="TileSet_abcfb"]
 
@@ -113,3 +114,7 @@ limit_bottom = 565
 [node name="WindTrail" parent="." instance=ExtResource("13_wardp")]
 position = Vector2(-171.00002, -92)
 scale = Vector2(9.3, 2.74)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_fsvwh")
+autoplay = true
