@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2dkt4bwqumgy"]
+
+[ext_resource type="Script" uid="uid://5fwqun8fv4wq" path="res://complete_scenes/entities/bullet_generator/bullets/bullet_base.gd" id="1_jtyk1"]
+[ext_resource type="Texture2D" uid="uid://bgrb6iavyw3xo" path="res://assets/textures/effects/T_5x5_menacing.png" id="2_jtyk1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3s2tg"]
+radius = 6.08276
+
+[node name="BulletBase" type="Area2D"]
+editor_description = "Обычная пуля, передающая направление и столкновение.
+Для её использование нужен BulletGenerator"
+z_index = 10
+collision_layer = 320
+collision_mask = 107
+script = ExtResource("1_jtyk1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3s2tg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.6, 0, 1)
+scale = Vector2(1.7599, 1.7599)
+texture = ExtResource("2_jtyk1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
