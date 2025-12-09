@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b861oskqwywby"]
+
+[ext_resource type="Texture2D" uid="uid://dixba3af08tg3" path="res://complete_scenes/entities/effects/stars_effect/star.png" id="1_bfjbe"]
+
+[sub_resource type="Curve" id="Curve_t83pu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.54251, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="StarsEffect" type="CPUParticles2D"]
+scale = Vector2(0.2, 0.2)
+amount = 5
+texture = ExtResource("1_bfjbe")
+emission_shape = 3
+emission_rect_extents = Vector2(200, 200)
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_t83pu")
