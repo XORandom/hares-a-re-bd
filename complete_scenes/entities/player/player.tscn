@@ -33,6 +33,8 @@ hframes = 10
 visible = false
 polygon = PackedVector2Array(-12, -17, -20, -27, -24, -45, -18, -47, -15, -34, 1, -37, 4, -51, 9, -50, 7, -37, 12, -29, 9, -19, 17, -5, 19, 13, -2, 15, -21, 14, -24, 6, -18, 5)
 
+[node name="AnimationTree" type="AnimationTree" parent="CharcterAnim"]
+
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")
 metadata/_custom_type_script = "uid://couw105c3bde4"
