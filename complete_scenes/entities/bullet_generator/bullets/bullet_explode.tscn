@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvjvmch5ct2u3"]
+
+[ext_resource type="Script" uid="uid://bik4evevxaeu4" path="res://complete_scenes/entities/bullet_generator/bullets/bullet_explode.gd" id="1_lvghb"]
+
+[sub_resource type="Resource" id="Resource_lvghb"]
+metadata/__load_path__ = "res://complete_scenes/composition_elements/bullet_elements/bullet_base.gd"
+
+[node name="BulletExplode" type="Area2D"]
+script = ExtResource("1_lvghb")
+metadata/_custom_type_script = SubResource("Resource_lvghb")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
