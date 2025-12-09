@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://xn5yhb7a3dga"]
+[gd_scene load_steps=70 format=3 uid="uid://xn5yhb7a3dga"]
 
 [ext_resource type="Script" uid="uid://cmcttel0tywal" path="res://complete_scenes/entities/player/player.gd" id="1_2ja1o"]
 [ext_resource type="Script" uid="uid://bkm2qpcymw18x" path="res://complete_scenes/entities/player/charcter_anim.gd" id="2_cjfkd"]
@@ -8,63 +8,10 @@
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_hcnbt"]
 [ext_resource type="PackedScene" uid="uid://cnmhlhtwvswct" path="res://complete_scenes/entities/shotgun/shotgun.tscn" id="4_qj4o6"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_t23pu"]
+[ext_resource type="SpriteFrames" uid="uid://bsdhwx7fa55x8" path="res://complete_scenes/entities/player/play_sprite.tres" id="5_usp81"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cjfkd"]
 [ext_resource type="PackedScene" uid="uid://c522uyw28gd8c" path="res://complete_scenes/entities/entity_collision.tscn" id="7_hcnbt"]
 [ext_resource type="Script" uid="uid://cttowtr5jicft" path="res://complete_scenes/entities/player/sight_hud.gd" id="11_ld7iu"]
-
-[sub_resource type="Animation" id="Animation_qj4o6"]
-resource_name = "walk_up"
-
-[sub_resource type="Animation" id="Animation_ld7iu"]
-resource_name = "walk_down"
-
-[sub_resource type="Animation" id="Animation_usp81"]
-resource_name = "walk_left"
-
-[sub_resource type="Animation" id="Animation_3rt7g"]
-resource_name = "walk_right"
-
-[sub_resource type="Animation" id="Animation_lqk7r"]
-resource_name = "idle_up"
-
-[sub_resource type="Animation" id="Animation_scn60"]
-resource_name = "idle_down"
-
-[sub_resource type="Animation" id="Animation_cjfkd"]
-resource_name = "idle_left"
-
-[sub_resource type="Animation" id="Animation_bqy1l"]
-resource_name = "idle_right"
-
-[sub_resource type="Animation" id="Animation_qq88n"]
-resource_name = "run_up"
-
-[sub_resource type="Animation" id="Animation_dkd4c"]
-resource_name = "run_down"
-
-[sub_resource type="Animation" id="Animation_t4on0"]
-resource_name = "run_left"
-
-[sub_resource type="Animation" id="Animation_k2xfj"]
-resource_name = "run_right"
-
-[sub_resource type="Animation" id="Animation_jh0sj"]
-resource_name = "sneak_up"
-
-[sub_resource type="Animation" id="Animation_vobx8"]
-resource_name = "sneak_down"
-
-[sub_resource type="Animation" id="Animation_7wec4"]
-resource_name = "sneak_left"
-
-[sub_resource type="Animation" id="Animation_g2u6c"]
-resource_name = "sneak_right"
-
-[sub_resource type="Animation" id="Animation_8mu28"]
-resource_name = "paw_strike_left"
-
-[sub_resource type="Animation" id="Animation_lfs3t"]
-resource_name = "paw_strike_right"
 
 [sub_resource type="Animation" id="Animation_h160s"]
 resource_name = "bunny_hop_left"
@@ -72,17 +19,8 @@ resource_name = "bunny_hop_left"
 [sub_resource type="Animation" id="Animation_s4x6o"]
 resource_name = "bunny_hop_right"
 
-[sub_resource type="Animation" id="Animation_gu78p"]
-resource_name = "interact_left"
-
-[sub_resource type="Animation" id="Animation_gaaw8"]
-resource_name = "interact_right"
-
-[sub_resource type="Animation" id="Animation_idsnt"]
-resource_name = "interact_up"
-
-[sub_resource type="Animation" id="Animation_ubdj6"]
-resource_name = "interact_down"
+[sub_resource type="Animation" id="Animation_q3w2v"]
+resource_name = "collect_resources_down"
 
 [sub_resource type="Animation" id="Animation_1wgyc"]
 resource_name = "collect_resources_left"
@@ -93,11 +31,78 @@ resource_name = "collect_resources_right"
 [sub_resource type="Animation" id="Animation_exwes"]
 resource_name = "collect_resources_up"
 
-[sub_resource type="Animation" id="Animation_q3w2v"]
-resource_name = "collect_resources_down"
+[sub_resource type="Animation" id="Animation_scn60"]
+resource_name = "idle_down"
+
+[sub_resource type="Animation" id="Animation_cjfkd"]
+resource_name = "idle_left"
+
+[sub_resource type="Animation" id="Animation_bqy1l"]
+resource_name = "idle_right"
+
+[sub_resource type="Animation" id="Animation_lqk7r"]
+resource_name = "idle_up"
+
+[sub_resource type="Animation" id="Animation_ubdj6"]
+resource_name = "interact_down"
+
+[sub_resource type="Animation" id="Animation_gu78p"]
+resource_name = "interact_left"
+
+[sub_resource type="Animation" id="Animation_gaaw8"]
+resource_name = "interact_right"
+
+[sub_resource type="Animation" id="Animation_idsnt"]
+resource_name = "interact_up"
+
+[sub_resource type="Animation" id="Animation_8mu28"]
+resource_name = "paw_strike_left"
+
+[sub_resource type="Animation" id="Animation_lfs3t"]
+resource_name = "paw_strike_right"
+
+[sub_resource type="Animation" id="Animation_dkd4c"]
+resource_name = "run_down"
+
+[sub_resource type="Animation" id="Animation_t4on0"]
+resource_name = "run_left"
+
+[sub_resource type="Animation" id="Animation_k2xfj"]
+resource_name = "run_right"
+
+[sub_resource type="Animation" id="Animation_qq88n"]
+resource_name = "run_up"
+
+[sub_resource type="Animation" id="Animation_vobx8"]
+resource_name = "sneak_down"
+
+[sub_resource type="Animation" id="Animation_7wec4"]
+resource_name = "sneak_left"
+
+[sub_resource type="Animation" id="Animation_g2u6c"]
+resource_name = "sneak_right"
+
+[sub_resource type="Animation" id="Animation_jh0sj"]
+resource_name = "sneak_up"
+
+[sub_resource type="Animation" id="Animation_ld7iu"]
+resource_name = "walk_down"
+
+[sub_resource type="Animation" id="Animation_usp81"]
+resource_name = "walk_left"
+
+[sub_resource type="Animation" id="Animation_3rt7g"]
+resource_name = "walk_right"
+
+[sub_resource type="Animation" id="Animation_qj4o6"]
+resource_name = "walk_up"
+
+[sub_resource type="Animation" id="Animation_gdswy"]
+resource_name = "attack_left"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qj4o6"]
 _data = {
+&"attack_left": SubResource("Animation_gdswy"),
 &"bunny_hop_left": SubResource("Animation_h160s"),
 &"bunny_hop_right": SubResource("Animation_s4x6o"),
 &"collect_resources_down": SubResource("Animation_q3w2v"),
@@ -275,6 +280,10 @@ parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Shotgun" parent="CharcterAnim" instance=ExtResource("4_qj4o6")]
 rotation = -0.49620593
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharcterAnim"]
+sprite_frames = ExtResource("5_usp81")
+animation = &"wound"
 
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")
