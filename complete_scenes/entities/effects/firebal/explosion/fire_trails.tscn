@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://f5l8qog5qdbm"]
 
-[ext_resource type="Texture2D" uid="uid://csigpqbqdwueq" path="res://complete_scenes/entities/effects/explosion/scraps_gradient.tres" id="1_ueoew"]
+[ext_resource type="Texture2D" uid="uid://csigpqbqdwueq" path="res://complete_scenes/entities/effects/firebal/explosion/scraps_gradient.tres" id="1_ueoew"]
 [ext_resource type="Texture2D" uid="uid://crw55kqug2wqt" path="res://assets/textures/effects/puff_smooth.png" id="2_brooh"]
 
 [sub_resource type="Curve" id="6"]

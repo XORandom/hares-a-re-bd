@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=3 uid="uid://3owm1bforxoy"]
 
 [ext_resource type="Texture2D" uid="uid://cpe3vo42n71nh" path="res://assets/textures/effects/sparkle.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://d06gxxvj4deb5" path="res://complete_scenes/entities/effects/explosion/explosion_gradient.tres" id="2"]
-[ext_resource type="PackedScene" uid="uid://f5l8qog5qdbm" path="res://complete_scenes/entities/effects/explosion/fire_trails.tscn" id="2_u51ya"]
+[ext_resource type="Texture2D" uid="uid://d06gxxvj4deb5" path="res://complete_scenes/entities/effects/firebal/explosion/explosion_gradient.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://f5l8qog5qdbm" path="res://complete_scenes/entities/effects/firebal/explosion/fire_trails.tscn" id="2_u51ya"]
 [ext_resource type="Texture2D" uid="uid://bsrf7la6iadde" path="res://assets/textures/effects/puff.png" id="3"]
 
 [sub_resource type="Gradient" id="1"]

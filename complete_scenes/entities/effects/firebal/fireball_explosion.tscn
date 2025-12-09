@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8dy5potnbu4x"]
 
-[ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://complete_scenes/entities/effects/explosion/explosion.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://3owm1bforxoy" path="res://complete_scenes/entities/effects/firebal/explosion/explosion.tscn" id="1"]
 
 [sub_resource type="Animation" id="17"]
 length = 3.0
