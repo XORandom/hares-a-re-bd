@@ -9,7 +9,15 @@ extends Node
 var vin: bool = false
 
 ## Количество очков,на которые будет покупать игрок турели
-var score: int = 0
+var score: int = 0:
+	get:
+		print("кто-то считывает значение количества очков")
+		return score
+	set(value):
+		# Проверяем на отрицательные значения
+		EventBus.game_score_is_negative.emit()
+
+		score = value
 ## Пользовательские настройки: громкость музыки, звука; язык
 #var user_prefs:
 #var save:
