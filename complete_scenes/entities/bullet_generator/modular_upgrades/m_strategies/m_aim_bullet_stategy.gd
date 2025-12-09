@@ -5,6 +5,8 @@ extends BaseBulletStrategy
 ##
 ##
 
+#TODO сделать модуль
+
 ## Добавляемый урон пуле
 @export var aim_module_scene: PackedScene = preload("uid://c3datcrbyww8n")
 
