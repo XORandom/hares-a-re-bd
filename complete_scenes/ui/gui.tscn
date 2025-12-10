@@ -59,19 +59,46 @@ metadata/_edit_group_ = true
 layout_mode = 1
 offset_right = 484.0
 
-[node name="Life" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
-layout_mode = 2
-
-[node name="Life2" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
-layout_mode = 2
-
-[node name="Life3" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
-layout_mode = 2
-
-[node name="Life4" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
-layout_mode = 2
-
 [node name="Life5" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life6" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life7" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life8" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life9" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life10" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life11" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life12" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life13" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life14" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life15" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life16" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life17" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
+layout_mode = 2
+
+[node name="Life18" parent="Control/Жизни/LifeHBoxContainer" instance=ExtResource("3_n6gs8")]
 layout_mode = 2
 
 [node name="Патроны" type="Panel" parent="Control"]

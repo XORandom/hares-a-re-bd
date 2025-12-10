@@ -168,8 +168,9 @@ func on_action_emotion_wheel() -> void:
 	#TODO если будет
 #endregion
 
-func  on_damage_taken() -> void:
+func  on_damage_taken(damage) -> void:
 	player_state_chart.send_event("stunned")
+	#EventBus.player_health_updated(Globals.player)
 	pass
 
 func _physics_process(_delta: float) -> void:

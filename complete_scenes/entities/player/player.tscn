@@ -537,14 +537,30 @@ radius = 36.013885
 [sub_resource type="CircleShape2D" id="CircleShape2D_dkd4c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ld7iu"]
-radius = 900.0
+radius = 336.0476
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 editor_description = "Наш братец-кролик"
 collision_mask = 598
 motion_mode = 1
 script = ExtResource("1_2ja1o")
+action_2d_attack = null
+action_2d_attack_aiming = null
+action_2d_attack_fluffy_ball = null
+action_2d_bunny_hop = null
+action_2d_collect_resources = null
+action_2d_interact = null
+action_2d_leap = null
+action_2d_paw_strike = null
+action_emotion_wheel = null
+run_action = null
+sneak_action = null
+walk_action = null
 speed = 400.0
+speed_max = null
+speed_min = null
+speed_normal = null
+hp = null
 
 [node name="CharcterAnim" type="Node2D" parent="."]
 script = ExtResource("2_cjfkd")
@@ -958,7 +974,6 @@ texture = ExtResource("13_3rt7g")
 shape = SubResource("CircleShape2D_dkd4c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightHUD"]
-visible = false
 shape = SubResource("CircleShape2D_ld7iu")
 metadata/_edit_lock_ = true
 
