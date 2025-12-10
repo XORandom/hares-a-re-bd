@@ -15,6 +15,7 @@ extends Node2D
 @onready var muzzle: Sprite2D = $Marker2D/Muzzle
 
 func _ready() -> void:
+	# Не смотря на предупреждение, ошибки тут нет
 	collision_shape_2d.shape.radius = shotgun_radius
 
 func _physics_process(_delta: float) -> void:
