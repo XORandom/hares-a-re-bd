@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://4fmnr3wtbm7s"]
+[gd_scene load_steps=14 format=3 uid="uid://4fmnr3wtbm7s"]
 
 [ext_resource type="Script" uid="uid://dagvepwai61pw" path="res://complete_scenes/world/levels/level_jungle.gd" id="1_6xlmo"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_kw4o1"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bxbam7tu6gyhe" path="res://assets/sounds/мир джунглей.wav" id="11_4hptw"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_ko8o4"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_mevl2"]
+[ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="12_wtpsk"]
 [ext_resource type="PackedScene" uid="uid://c1t8m2dogk1at" path="res://complete_scenes/entities/effects/env_effects/rain.tscn" id="13_6xlmo"]
 
 [sub_resource type="TileSet" id="TileSet_abcfb"]
@@ -17,9 +18,15 @@
 [node name="LevelJungle" type="Node2D"]
 script = ExtResource("1_6xlmo")
 
+[node name="StartMessage" parent="." instance=ExtResource("12_wtpsk")]
+
 [node name="WorldMetadata" type="Node" parent="."]
 script = ExtResource("2_kw4o1")
 metadata/_custom_type_script = "uid://rrcahhioggsb"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_4hptw")
+autoplay = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_abcfb")
@@ -74,7 +81,3 @@ limit_bottom = 580
 [node name="Rain" parent="." instance=ExtResource("13_6xlmo")]
 position = Vector2(-1660, -644)
 scale = Vector2(1.864879, 1.0795848)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_4hptw")
-autoplay = true
