@@ -83,7 +83,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="RotatingTextureRect" parent="RotatedCogs" instance=ExtResource("10_82avr")]
 layout_mode = 0
@@ -91,7 +91,7 @@ offset_left = 90.000015
 offset_top = 254.0
 offset_right = 218.00002
 offset_bottom = 382.0
-rotation = 1.810936
+rotation = 0.39830127
 
 [node name="RotatingTextureRect2" parent="RotatedCogs" instance=ExtResource("10_82avr")]
 layout_mode = 0
@@ -99,7 +99,7 @@ offset_left = 238.00002
 offset_top = -9.999985
 offset_right = 366.0
 offset_bottom = 118.000015
-rotation = 5.353157
+rotation = 3.940552
 pivot_offset = Vector2(63.999992, 64)
 texture = ExtResource("11_vv6ok")
 

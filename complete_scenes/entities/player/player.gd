@@ -258,6 +258,7 @@ func _on_collect_resources_state_entered() -> void:
 
 func _on_shot_state_entered() -> void:
 	animated_sprite_2d.play("attack_r")
+
 	if animated_sprite_2d.flip_h:
 		animation_player.play("attack_left")
 	else:
