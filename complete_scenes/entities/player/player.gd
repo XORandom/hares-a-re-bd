@@ -127,3 +127,24 @@ func _on_stunned_state_entered() -> void:
 	speed = 0
 	animated_sprite_2d.play("wound_r")
 	pass # Replace with function body.
+
+
+func _on_death_state_entered() -> void:
+	animated_sprite_2d.play("death_r")
+	await animated_sprite_2d.animation_finished
+	EventBus.CHARACTER_DIED.emit()
+
+
+func _on_attack_state_entered() -> void:
+	animated_sprite_2d.play("attack_r")
+	pass # Replace with function body.
+
+
+func _on_paw_strike_state_entered() -> void:
+	animated_sprite_2d.play("paw_strike_r")
+	pass # Replace with function body.
+
+
+func _on_collect_resources_state_entered() -> void:
+	animated_sprite_2d.play("collect_resurses_r")
+	pass # Replace with function body.

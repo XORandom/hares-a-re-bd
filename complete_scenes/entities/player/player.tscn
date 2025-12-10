@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://xn5yhb7a3dga"]
+[gd_scene load_steps=47 format=3 uid="uid://xn5yhb7a3dga"]
 
 [ext_resource type="Script" uid="uid://cmcttel0tywal" path="res://complete_scenes/entities/player/player.gd" id="1_2ja1o"]
 [ext_resource type="Script" uid="uid://bkm2qpcymw18x" path="res://complete_scenes/entities/player/charcter_anim.gd" id="2_cjfkd"]
@@ -10,6 +10,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dl81rccljv110" path="res://complete_scenes/entities/player/play_sprite.tres" id="5_usp81"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_cjfkd"]
 [ext_resource type="PackedScene" uid="uid://c522uyw28gd8c" path="res://complete_scenes/entities/entity_collision.tscn" id="7_hcnbt"]
+[ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="10_3rt7g"]
 [ext_resource type="Script" uid="uid://cttowtr5jicft" path="res://complete_scenes/entities/player/sight_hud.gd" id="11_ld7iu"]
 [ext_resource type="PackedScene" uid="uid://mwnfq42hbvqp" path="res://complete_scenes/entities/bullet_generator/bullet_generator.tscn" id="12_usp81"]
 
@@ -133,6 +134,11 @@ _data = {
 &"walk_up": SubResource("Animation_qj4o6")
 }
 
+[sub_resource type="Resource" id="Resource_lqk7r"]
+script = ExtResource("10_3rt7g")
+expression = ""
+metadata/_custom_type_script = "uid://le5w1cm0ul8p"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23pu"]
 radius = 36.013885
 
@@ -160,9 +166,9 @@ rotation = -0.49620593
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharcterAnim"]
 position = Vector2(-2, -61)
 sprite_frames = ExtResource("5_usp81")
-animation = &"flaffy_boll_r"
+animation = &"attack_r"
 autoplay = "idle_r"
-frame_progress = 0.94869024
+frame_progress = 0.44663385
 
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")
@@ -184,7 +190,7 @@ delay_in_seconds = "0.0"
 [node name="toDeath" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../Stunned")
-event = &"stunned"
+event = &"death"
 delay_in_seconds = "0.0"
 
 [node name="Run" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
@@ -271,6 +277,12 @@ to = NodePath("../../Sneak")
 event = &"sneaking"
 delay_in_seconds = "0.0"
 
+[node name="toAim" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Idle"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Aim")
+event = &"aiming"
+delay_in_seconds = "0.0"
+
 [node name="Stunned" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
 script = ExtResource("5_t23pu")
 
@@ -281,6 +293,34 @@ delay_in_seconds = "0.2"
 
 [node name="Death" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
 script = ExtResource("5_t23pu")
+
+[node name="Aim" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Aim"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+event = &"idle"
+guard = SubResource("Resource_lqk7r")
+delay_in_seconds = "0.5"
+
+[node name="PawStrike" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/PawStrike"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.8"
+
+[node name="CollectResources" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
+script = ExtResource("5_t23pu")
+
+[node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/CollectResources"]
+script = ExtResource("6_cjfkd")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_in_seconds = "0.8"
 
 [node name="PlayerMode" type="Node" parent="PlayerStateChart/Root"]
 script = ExtResource("4_hcnbt")
@@ -368,3 +408,7 @@ shape = SubResource("CircleShape2D_ld7iu")
 [connection signal="state_processing" from="PlayerStateChart/Root/PlayerBehaviour/Sneak" to="." method="_on_sneak_state_processing"]
 [connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/Stunned" to="." method="_on_stunned_state_entered"]
+[connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/Death" to="." method="_on_death_state_entered"]
+[connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/Aim" to="." method="_on_attack_state_entered"]
+[connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/PawStrike" to="." method="_on_paw_strike_state_entered"]
+[connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/CollectResources" to="." method="_on_collect_resources_state_entered"]
