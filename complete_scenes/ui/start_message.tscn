@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://ta1xkvppt17a"]
+
+[ext_resource type="Script" uid="uid://dx2m4oiwkflcl" path="res://complete_scenes/ui/start_message.gd" id="1_6wylx"]
+[ext_resource type="Theme" uid="uid://ck3lqv73gdnwl" path="res://complete_scenes/ui/ui_theme/main_theme.tres" id="2_5pxry"]
+
+[node name="StartMessage" type="CanvasLayer"]
+script = ExtResource("1_6wylx")
+start_message = "Бей косых!"
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 377.0
+offset_top = 270.0
+offset_right = 1521.0
+offset_bottom = 694.0
+theme = ExtResource("2_5pxry")
+
+[node name="MessagePanel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = ExtResource("2_5pxry")
+theme_override_font_sizes/normal_font_size = 231
+bbcode_enabled = true
+text = "Бей косых!"
+
+[connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
