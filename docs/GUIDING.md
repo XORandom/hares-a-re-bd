@@ -50,6 +50,7 @@ Texture `->` CanvasTexture
 (res://autoloads/loading_screen/loading_screen.tscn)
 не отображает себя по таймеру.
 
+#TODO
 Решил поменять сам принцип загрузки
 ТеперьLoadingScreen не отвечает за загрузку ресурсов
 Это делает класс MySceneLoader, а LoadingScreen лишь появляется,
