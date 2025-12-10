@@ -77,7 +77,6 @@ scale = Vector2(9.3, 2.74)
 
 [node name="BlackHare" parent="." instance=ExtResource("8_dnag4")]
 position = Vector2(-635, -259)
-collision_layer = 4
 
 [node name="BlackHare2" parent="." instance=ExtResource("8_dnag4")]
 position = Vector2(-16, -684)

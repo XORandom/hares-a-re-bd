@@ -41,4 +41,4 @@ signal take_damage(damage:float, knockback_direction: Vector2)
 @export var hp: float = 100.0
 
 @abstract
-func on_damage_taken(damage: float) -> void
+func on_damage_taken() -> void

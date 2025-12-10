@@ -118,7 +118,6 @@ animations = [{
 radius = 67.11929
 
 [node name="BlackHare" type="CharacterBody2D" groups=["Enemy"]]
-collision_layer = 4
 script = ExtResource("1_6we3h")
 metadata/_custom_type_script = "uid://cnildue6kf0hy"
 

@@ -5,7 +5,7 @@ var motion = Vector2()
 func _ready() -> void:
 	pass
 
-func on_damage_taken(damage) -> void:
+func on_damage_taken() -> void:
 	queue_free()
 
 
