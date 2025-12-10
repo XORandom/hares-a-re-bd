@@ -70,6 +70,7 @@ extends BaseEntity
 
 #endregion
 
+@onready var animation_player: AnimationPlayer = $CharcterAnim/AnimationPlayer
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $CharcterAnim/AnimatedSprite2D
 
@@ -257,6 +258,10 @@ func _on_collect_resources_state_entered() -> void:
 
 func _on_shot_state_entered() -> void:
 	animated_sprite_2d.play("attack_r")
+	if animated_sprite_2d.flip_h:
+		animation_player.play("attack_left")
+	else:
+		animation_player.play("attack_right")
 	pass # Replace with function body.
 
 
