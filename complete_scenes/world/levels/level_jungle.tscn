@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://4fmnr3wtbm7s"]
+[gd_scene load_steps=22 format=4 uid="uid://4fmnr3wtbm7s"]
 
 [ext_resource type="Script" uid="uid://dagvepwai61pw" path="res://complete_scenes/world/levels/level_jungle.gd" id="1_6xlmo"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_kw4o1"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_mevl2"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="12_wtpsk"]
 [ext_resource type="PackedScene" uid="uid://c1t8m2dogk1at" path="res://complete_scenes/entities/effects/env_effects/rain.tscn" id="13_6xlmo"]
+[ext_resource type="Script" uid="uid://dob6ny5ruq3xt" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_base_bullet_strategy.gd" id="14_emvkl"]
+[ext_resource type="Resource" uid="uid://d30ljv4n0c4np" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_speed.tres" id="15_5a8iv"]
+[ext_resource type="Resource" uid="uid://b0ywasmguay6y" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_damage.tres" id="16_lyy8k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6yljs"]
 texture = ExtResource("7_qg8th")
@@ -253,5 +256,10 @@ position = Vector2(-334, 973)
 
 [node name="LaserTurret" parent="." instance=ExtResource("12_6xlmo")]
 position = Vector2(1560, 803)
+black_list = Array[String](["Enemy", "Player"])
+
+[node name="BulletGenerator" parent="LaserTurret/GunSprite" index="0"]
+upgrades = Array[ExtResource("14_emvkl")]([ExtResource("15_5a8iv"), ExtResource("15_5a8iv"), ExtResource("15_5a8iv"), ExtResource("16_lyy8k")])
 
 [editable path="BaseTurret"]
+[editable path="LaserTurret"]
