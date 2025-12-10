@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dob6ny5ruq3xt" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_base_bullet_strategy.gd" id="5_y83g5"]
 [ext_resource type="Resource" uid="uid://d30ljv4n0c4np" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_speed.tres" id="6_f4k1s"]
 [ext_resource type="Resource" uid="uid://b0ywasmguay6y" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_damage.tres" id="7_vumrj"]
-[ext_resource type="AudioStream" uid="uid://dqnphffc74y78" path="res://complete_scenes/entities/shotgun/shotgurn_res/gunshot-desert-eagle-pistol-fascinatedsound-3-3-00-01.mp3" id="8_o05n7"]
+[ext_resource type="AudioStream" uid="uid://brwdjb43ogb7j" path="res://complete_scenes/world/interactive_objects/lazer_turret/lazer_turret_res/fat-laser-cannon_gkby6b4u.mp3" id="8_8aaym"]
 
 [sub_resource type="Animation" id="Animation_u4uep"]
 length = 0.001
@@ -99,7 +99,7 @@ debug_color = Color(1, 0, 0, 0)
 [node name="BaseSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_8aaym")
 animation = &"idle_ne"
-frame_progress = 0.095159054
+frame_progress = 0.042186942
 
 [node name="GunSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(12.000001, 4.6666656)
@@ -113,9 +113,9 @@ position = Vector2(9, 0)
 upgrades = Array[ExtResource("5_y83g5")]([ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("7_vumrj")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_o05n7")
-volume_db = 5.181
-pitch_scale = 0.64
+stream = ExtResource("8_8aaym")
+volume_db = 24.0
+pitch_scale = 0.74
 attenuation = 2.5491211
 
 [connection signal="body_entered" from="AggroZone" to="." method="_on_aggro_zone_body_entered"]
