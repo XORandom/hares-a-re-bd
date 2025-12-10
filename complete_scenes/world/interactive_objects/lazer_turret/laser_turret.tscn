@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://epocgg6kv78w" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret.gd" id="1_5xb8v"]
 [ext_resource type="SpriteFrames" uid="uid://bkyughei30vyt" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret_sprite_frames.tres" id="2_8aaym"]
-[ext_resource type="PackedScene" uid="uid://mwnfq42hbvqp" path="res://complete_scenes/entities/bullet_generator/bullet_generator.tscn" id="4_vnogg"]
+[ext_resource type="Script" uid="uid://cpdvkawy5bcbl" path="res://complete_scenes/entities/bullet_generator/bullet_generator.gd" id="3_8kje0"]
 [ext_resource type="Script" uid="uid://dob6ny5ruq3xt" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_base_bullet_strategy.gd" id="5_y83g5"]
 [ext_resource type="Resource" uid="uid://d30ljv4n0c4np" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_speed.tres" id="6_f4k1s"]
 [ext_resource type="Resource" uid="uid://b0ywasmguay6y" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_damage.tres" id="7_vumrj"]
@@ -100,10 +100,12 @@ sprite_frames = SubResource("SpriteFrames_tcm3k")
 animation = &"shot"
 offset = Vector2(1, 0)
 
-[node name="BulletGenerator" parent="GunSprite" instance=ExtResource("4_vnogg")]
+[node name="BulletGenerator" type="Node2D" parent="GunSprite"]
 unique_name_in_owner = true
 position = Vector2(-0.49999905, 0.42857152)
-upgrades = Array[ExtResource("5_y83g5")]([ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("7_vumrj")])
+script = ExtResource("3_8kje0")
+chosen_type = 2
+upgrades = Array[ExtResource("5_y83g5")]([ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("7_vumrj"), null])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_8aaym")
