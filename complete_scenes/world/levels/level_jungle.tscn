@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://4fmnr3wtbm7s"]
+[gd_scene load_steps=17 format=4 uid="uid://4fmnr3wtbm7s"]
 
 [ext_resource type="Script" uid="uid://dagvepwai61pw" path="res://complete_scenes/world/levels/level_jungle.gd" id="1_6xlmo"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_kw4o1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://xfhcjf765s2y" path="res://assets/textures/world_textures/forest_tile.png" id="9_lq8um"]
 [ext_resource type="AudioStream" uid="uid://bxbam7tu6gyhe" path="res://assets/sounds/мир джунглей.wav" id="11_4hptw"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_ko8o4"]
+[ext_resource type="PackedScene" uid="uid://b5scy887qcf2e" path="res://complete_scenes/world/interactive_objects/lazer_turret/base_turret.tscn" id="11_wtpsk"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_mevl2"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="12_wtpsk"]
 [ext_resource type="PackedScene" uid="uid://c1t8m2dogk1at" path="res://complete_scenes/entities/effects/env_effects/rain.tscn" id="13_6xlmo"]
@@ -100,3 +101,6 @@ limit_left = -1221
 limit_top = -1083
 limit_right = 2794
 limit_bottom = 1519
+
+[node name="BaseTurret" parent="." instance=ExtResource("11_wtpsk")]
+position = Vector2(-629, 328)

@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4pk3fb211evf"]
+[gd_scene load_steps=14 format=3 uid="uid://b5scy887qcf2e"]
 
-[ext_resource type="Script" uid="uid://epocgg6kv78w" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret.gd" id="1_5xb8v"]
-[ext_resource type="SpriteFrames" uid="uid://bkyughei30vyt" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret_sprite_frames.tres" id="2_8aaym"]
-[ext_resource type="Texture2D" uid="uid://h5mcsjplum1y" path="res://assets/textures/effects/T_3x3_rage.png" id="3_ig1h2"]
-[ext_resource type="PackedScene" uid="uid://mwnfq42hbvqp" path="res://complete_scenes/entities/bullet_generator/bullet_generator.tscn" id="4_vnogg"]
-[ext_resource type="Script" uid="uid://dob6ny5ruq3xt" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_base_bullet_strategy.gd" id="5_y83g5"]
-[ext_resource type="Resource" uid="uid://d30ljv4n0c4np" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_speed.tres" id="6_f4k1s"]
-[ext_resource type="Resource" uid="uid://b0ywasmguay6y" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_damage.tres" id="7_vumrj"]
-[ext_resource type="AudioStream" uid="uid://dqnphffc74y78" path="res://complete_scenes/entities/shotgun/shotgurn_res/gunshot-desert-eagle-pistol-fascinatedsound-3-3-00-01.mp3" id="8_o05n7"]
+[ext_resource type="Script" uid="uid://byn7i6i1rptqb" path="res://complete_scenes/world/interactive_objects/lazer_turret/base_turret.gd" id="1_4goqj"]
+[ext_resource type="SpriteFrames" uid="uid://bhf4044fxa4yu" path="res://complete_scenes/world/interactive_objects/lazer_turret/base_turret_sprite_frames.tres" id="2_jwwrn"]
+[ext_resource type="Texture2D" uid="uid://h5mcsjplum1y" path="res://assets/textures/effects/T_3x3_rage.png" id="3_ahijb"]
+[ext_resource type="PackedScene" uid="uid://mwnfq42hbvqp" path="res://complete_scenes/entities/bullet_generator/bullet_generator.tscn" id="3_xqic7"]
+[ext_resource type="AudioStream" uid="uid://dqnphffc74y78" path="res://complete_scenes/entities/shotgun/shotgurn_res/gunshot-desert-eagle-pistol-fascinatedsound-3-3-00-01.mp3" id="4_i1b81"]
+[ext_resource type="Script" uid="uid://dob6ny5ruq3xt" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_base_bullet_strategy.gd" id="4_qjcjr"]
+[ext_resource type="Resource" uid="uid://d30ljv4n0c4np" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_speed.tres" id="5_hwho7"]
+[ext_resource type="Resource" uid="uid://b0ywasmguay6y" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_damage.tres" id="8_ogcjm"]
 
 [sub_resource type="Animation" id="Animation_u4uep"]
 length = 0.001
@@ -54,7 +54,7 @@ radius = 456.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ig1h2")
+"texture": ExtResource("3_ahijb")
 }],
 "loop": false,
 "name": &"shot",
@@ -62,14 +62,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ig1h2")
+"texture": ExtResource("3_ahijb")
 }],
 "loop": true,
 "name": &"turret_idle",
 "speed": 5.0
 }]
 
-[node name="LaserTurret" type="Node2D" groups=["Turret", "Turrets"]]
+[node name="BaseTurret" type="Node2D" groups=["Turret", "Turrets"]]
 editor_description = "Обычная, турель, которую можно поместить на врага или игрока
 
 Не является RigitBody, поскольку это скорее оружие или компонент сущности, чем сущность.
@@ -77,7 +77,9 @@ editor_description = "Обычная, турель, которую можно п
 "
 z_index = 10
 z_as_relative = false
-script = ExtResource("1_5xb8v")
+script = ExtResource("1_4goqj")
+white_list = Array[String](["Player"])
+black_list = Array[String](["Enemy"])
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(456, 0)
@@ -97,9 +99,12 @@ shape = SubResource("CircleShape2D_vn0kc")
 debug_color = Color(1, 0, 0, 0)
 
 [node name="BaseSprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_8aaym")
-animation = &"idle_ne"
-frame_progress = 0.095159054
+sprite_frames = ExtResource("2_jwwrn")
+animation = &"attack_w"
+
+[node name="BaseSprite2" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_jwwrn")
+animation = &"attack_w"
 
 [node name="GunSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(12.000001, 4.6666656)
@@ -107,13 +112,13 @@ sprite_frames = SubResource("SpriteFrames_tcm3k")
 animation = &"turret_idle"
 offset = Vector2(1, 0)
 
-[node name="BulletGenerator" parent="GunSprite" instance=ExtResource("4_vnogg")]
+[node name="BulletGenerator" parent="GunSprite" instance=ExtResource("3_xqic7")]
 unique_name_in_owner = true
 position = Vector2(9, 0)
-upgrades = Array[ExtResource("5_y83g5")]([ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("7_vumrj")])
+upgrades = Array[ExtResource("4_qjcjr")]([ExtResource("5_hwho7"), ExtResource("5_hwho7"), ExtResource("5_hwho7"), ExtResource("8_ogcjm")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_o05n7")
+stream = ExtResource("4_i1b81")
 volume_db = 5.181
 pitch_scale = 0.64
 attenuation = 2.5491211
