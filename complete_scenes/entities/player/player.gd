@@ -5,12 +5,32 @@ extends BaseEntity
 ##
 ## Братец-кролик
 
-## Управление для ходьбы
-@export var walk_action: GUIDEAction = preload("uid://cfqddltghxpse")
+##
+@export var action_2d_attack: GUIDEAction = preload("uid://cdxjy5y8av6s3")
+##
+@export var action_2d_attack_aiming: GUIDEAction = preload("uid://ceprtv2da5m4e")
+##
+@export var action_2d_attack_fluffy_ball: GUIDEAction = preload("uid://vvijfq34br47")
+##
+@export var action_2d_bunny_hop: GUIDEAction = preload("uid://cqh8gjbglemp3")
+##
+@export var action_2d_collect_resources: GUIDEAction = preload("uid://dkq4hk7p00vwh")
+##
+@export var action_2d_interact: GUIDEAction = preload("uid://dywvxybxq6wic")
+##
+@export var action_2d_leap: GUIDEAction = preload("uid://dtau516cvw114")
+##
+@export var action_2d_paw_strike: GUIDEAction = preload("uid://pcgn6iwjwpka")
+##
+@export var action_emotion_wheel: GUIDEAction = preload("uid://bjlqm18uk8rbo")
+##
 ## Управление для бега
 @export var run_action: GUIDEAction = preload("uid://btj8l0x5cop8o")
 ## Управление для подкрадывания
 @export var sneak_action: GUIDEAction = preload("uid://cb14wrl0wyswa")
+## Управление для ходьбы
+@export var walk_action: GUIDEAction = preload("uid://cfqddltghxpse")
+
 
 ## Вектор направления движения
 @onready var input_direction: Vector2 = Vector2.ZERO
@@ -82,19 +102,6 @@ func on_sneak_triggered() -> void:
 	DebugPanel.show_debug_info(["on_sneak_triggered"], 1)
 	if not sneak.active:
 		player_state_chart.send_event("sneaking")
-
-
-func _on_run_state_processing(delta: float) -> void:
-	animated_sprite_2d.animation
-	pass # Replace with function body.
-
-
-func _on_walk_state_processing(delta: float) -> void:
-	pass # Replace with function body.
-
-
-func _on_sneak_state_processing(delta: float) -> void:
-	pass # Replace with function body.
 
 ## Делаем здесь, а не в on_run_triggered,
 ## потому что конечный автомат также проверяет необходимость
