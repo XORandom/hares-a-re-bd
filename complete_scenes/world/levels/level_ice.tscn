@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2ptp60qptf3r"]
+[gd_scene load_steps=20 format=3 uid="uid://b2ptp60qptf3r"]
 
 [ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/levels/level_ice.gd" id="1_wardp"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_fsvwh"]
 [ext_resource type="Texture2D" uid="uid://bd5up235qejkl" path="res://assets/textures/parallax_textures/Iceberg/0-water.png" id="3_c773e"]
 [ext_resource type="Texture2D" uid="uid://cdd53ik2goy2" path="res://assets/textures/parallax_textures/Iceberg/1-Sky.png" id="4_7a0g1"]
+[ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="5_c773e"]
 [ext_resource type="Texture2D" uid="uid://bga5usegnkqr0" path="res://assets/textures/parallax_textures/Iceberg/2-1-water reflex.png" id="5_puybf"]
 [ext_resource type="Texture2D" uid="uid://dhocogw73vvnt" path="res://assets/textures/parallax_textures/Iceberg/2-2-water reflex back.png" id="6_b23k5"]
 [ext_resource type="Texture2D" uid="uid://c8x3du0u204ju" path="res://assets/textures/parallax_textures/Iceberg/2-cloud.png" id="7_whpym"]
@@ -34,6 +35,15 @@ script = ExtResource("1_wardp")
 [node name="WorldMetadata" type="Node" parent="."]
 script = ExtResource("2_fsvwh")
 metadata/_custom_type_script = "uid://rrcahhioggsb"
+
+[node name="StartMessage" parent="." instance=ExtResource("5_c773e")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_fsvwh")
+autoplay = true
+
+[node name="GUI" parent="." instance=ExtResource("12_hyhj0")]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_abcfb")
@@ -108,12 +118,6 @@ limit_top = -580
 limit_right = 1605
 limit_bottom = 565
 
-[node name="GUI" parent="." instance=ExtResource("12_hyhj0")]
-
 [node name="WindTrail" parent="." instance=ExtResource("13_wardp")]
 position = Vector2(-171.00002, -92)
 scale = Vector2(9.3, 2.74)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("14_fsvwh")
-autoplay = true
