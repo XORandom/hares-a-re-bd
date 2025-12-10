@@ -73,6 +73,7 @@ func on_sneak_triggered() -> void:
 
 
 func _on_run_state_processing(delta: float) -> void:
+
 	pass # Replace with function body.
 
 
@@ -81,4 +82,29 @@ func _on_walk_state_processing(delta: float) -> void:
 
 
 func _on_sneak_state_processing(delta: float) -> void:
+	pass # Replace with function body.
+
+
+func _on_run_state_entered() -> void:
+	speed = speed_max
+	pass # Replace with function body.
+
+
+func _on_walk_state_entered() -> void:
+	speed = speed_normal
+	pass # Replace with function body.
+
+
+func _on_sneak_state_entered() -> void:
+	speed = speed_min
+	pass # Replace with function body.
+
+
+func _on_idle_state_entered() -> void:
+	speed = speed_normal
+	pass # Replace with function body.
+
+
+func _on_stunned_state_entered() -> void:
+	speed = 0
 	pass # Replace with function body.
