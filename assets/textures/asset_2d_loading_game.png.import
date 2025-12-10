@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5xofypgfdg77"
-path="res://.godot/imported/2-midmountain.png-97dc576af662c128697dc574e3b5e1d7.ctex"
+uid="uid://baoo5xkmy5na2"
+path="res://.godot/imported/asset_2d_loading_game.png-887aca645aebeaf15c253701d7326eca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parallax_textures/Winternight/2-midmountain.png"
-dest_files=["res://.godot/imported/2-midmountain.png-97dc576af662c128697dc574e3b5e1d7.ctex"]
+source_file="res://assets/textures/asset_2d_loading_game.png"
+dest_files=["res://.godot/imported/asset_2d_loading_game.png-887aca645aebeaf15c253701d7326eca.ctex"]
 
 [params]
 

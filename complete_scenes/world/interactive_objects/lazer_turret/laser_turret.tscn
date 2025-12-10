@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4pk3fb211evf"]
+[gd_scene load_steps=13 format=3 uid="uid://c4pk3fb211evf"]
 
 [ext_resource type="Script" uid="uid://epocgg6kv78w" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret.gd" id="1_5xb8v"]
 [ext_resource type="SpriteFrames" uid="uid://bkyughei30vyt" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret_sprite_frames.tres" id="2_8aaym"]
-[ext_resource type="Texture2D" uid="uid://h5mcsjplum1y" path="res://assets/textures/effects/T_3x3_rage.png" id="3_ig1h2"]
 [ext_resource type="PackedScene" uid="uid://mwnfq42hbvqp" path="res://complete_scenes/entities/bullet_generator/bullet_generator.tscn" id="4_vnogg"]
 [ext_resource type="Script" uid="uid://dob6ny5ruq3xt" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_base_bullet_strategy.gd" id="5_y83g5"]
 [ext_resource type="Resource" uid="uid://d30ljv4n0c4np" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/mr_speed.tres" id="6_f4k1s"]
@@ -52,18 +51,12 @@ radius = 456.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tcm3k"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_ig1h2")
-}],
+"frames": [],
 "loop": false,
 "name": &"shot",
 "speed": 20.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_ig1h2")
-}],
+"frames": [],
 "loop": true,
 "name": &"turret_idle",
 "speed": 5.0
@@ -98,18 +91,18 @@ debug_color = Color(1, 0, 0, 0)
 
 [node name="BaseSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_8aaym")
-animation = &"idle_ne"
-frame_progress = 0.042186942
+animation = &"idle_e"
+autoplay = "idle_e"
 
 [node name="GunSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(12.000001, 4.6666656)
 sprite_frames = SubResource("SpriteFrames_tcm3k")
-animation = &"turret_idle"
+animation = &"shot"
 offset = Vector2(1, 0)
 
 [node name="BulletGenerator" parent="GunSprite" instance=ExtResource("4_vnogg")]
 unique_name_in_owner = true
-position = Vector2(9, 0)
+position = Vector2(-0.49999905, 0.42857152)
 upgrades = Array[ExtResource("5_y83g5")]([ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("6_f4k1s"), ExtResource("7_vumrj")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

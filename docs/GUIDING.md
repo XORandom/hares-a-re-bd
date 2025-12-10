@@ -25,6 +25,7 @@ res://config/input_actions/action_2d_sneak.tres
 
 ## Направления вращения
 `get_angle_to(get_global_mouse_position())`
+турели к примеру angle
 			-1,5
 -3 или 3	  @			0
 			 1.5

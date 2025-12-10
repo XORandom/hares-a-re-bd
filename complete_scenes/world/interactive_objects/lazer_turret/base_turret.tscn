@@ -103,10 +103,12 @@ sprite_frames = ExtResource("2_jwwrn")
 animation = &"attack_w"
 
 [node name="BaseSprite2" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = ExtResource("2_jwwrn")
 animation = &"attack_w"
 
 [node name="GunSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 scale = Vector2(12.000001, 4.6666656)
 sprite_frames = SubResource("SpriteFrames_tcm3k")
 animation = &"turret_idle"

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://p6sx2conrdhw" path="res://complete_scenes/world/levels/level_water.gd" id="1_cakpg"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_aney7"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="3_cakpg"]
-[ext_resource type="PackedScene" uid="uid://b5scy887qcf2e" path="res://complete_scenes/world/interactive_objects/lazer_turret/base_turret.tscn" id="7_fw7cn"]
+[ext_resource type="PackedScene" uid="uid://c4pk3fb211evf" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret.tscn" id="8_hseon"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_e21rw"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_3ad0w"]
 [ext_resource type="AudioStream" uid="uid://co5l4xcq0jrd3" path="res://assets/sounds/водный мир.wav" id="12_q86vi"]
@@ -54,5 +54,9 @@ tile_set = SubResource("TileSet_hseon")
 [node name="Interactive" type="TileMapLayer" parent="Level"]
 tile_set = SubResource("TileSet_hseon")
 
-[node name="BaseTurret" parent="." instance=ExtResource("7_fw7cn")]
-position = Vector2(210, 924)
+[node name="LaserTurret" parent="." instance=ExtResource("8_hseon")]
+position = Vector2(1021, 966)
+rotation_speed = null
+reload_time = null
+white_list = null
+black_list = Array[String](["Player"])

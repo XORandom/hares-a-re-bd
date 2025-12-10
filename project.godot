@@ -17,6 +17,7 @@ config/description="ГеймДжем ФКН 2
 https://cs.hse.ru/gamejam/2025/"
 run/main_scene="uid://bxvpx0511unt"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/image="uid://baoo5xkmy5na2"
 config/icon="res://assets/icon.svg"
 
 [audio]

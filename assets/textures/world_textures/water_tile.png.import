@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3ayi106vw5rv"
-path="res://.godot/imported/5-iceberg.png-1e49171921dc310c480e0e772de05caf.ctex"
+uid="uid://biegb4twfk740"
+path="res://.godot/imported/water_tile.png-3ffb476d0d7857717b64849aa3a88908.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/parallax_textures/Iceberg/5-iceberg.png"
-dest_files=["res://.godot/imported/5-iceberg.png-1e49171921dc310c480e0e772de05caf.ctex"]
+source_file="res://assets/textures/world_textures/water_tile.png"
+dest_files=["res://.godot/imported/water_tile.png-3ffb476d0d7857717b64849aa3a88908.ctex"]
 
 [params]
 

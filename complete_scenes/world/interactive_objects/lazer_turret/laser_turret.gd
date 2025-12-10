@@ -23,6 +23,7 @@ extends Node2D
 ## Ограничения поворота справа
 #@export_range(0, 180, 1.) var clamp_rotation_right:
 
+#HACK так не должно быть, но просто спрайт будет невидимый 1.5 часа до дедлайна
 ## Спрайт оружия
 @onready var gun_sprite: AnimatedSprite2D = $GunSprite
 ## Спайт самой турели
@@ -40,6 +41,9 @@ var target_list: Array[Node2D] = []
 ## Текущая активная цель
 var current_target: Node2D = null
 
+var angle: float
+
+var shot_now: bool = false
 
 func _ready() -> void:
 	# Подключаемся к таймеру BulletGenerator
@@ -61,11 +65,39 @@ func _physics_process(delta: float) -> void:
 			### Добавим более плавное вращение, когда башня не мгновенно поворачивается к цели, а с определенной скоростью
 			##print(lerp_angle(global_rotation, angle_to_target, .2))
 		# --- лучший вариант ---
-		var angle: float = lerp_angle(gun_sprite.global_rotation, angle_to_target, 1.)
+		angle = lerp_angle(gun_sprite.global_rotation, angle_to_target, 1.)
 		## На сколько турель перемещается в одном кадре.
 		var angle_delta: float = rotation_speed * delta
+		#var angle: float = atan2(direction.y, direction.x)
 		angle = clamp(angle, gun_sprite.global_rotation-angle_delta, gun_sprite.global_rotation+angle_delta)
 		ray_cast_2d.global_rotation = angle
+
+
+		# Вместо поворота - выбор спрайта
+		#турели к примеру angle
+		#	-2.3	#-1,5	-0.7
+		#-3 или 3	  @			0
+		#	2/3	 	1.5		0.7
+		DebugPanel.show_debug_info(["angle", angle], 4)
+		if !shot_now:
+			if angle < 0:
+				angle += TAU
+			if angle < PI / 4:
+				base_sprite.play("idle_e")
+			elif angle < PI / 2:
+				base_sprite.play("idle_se")
+			elif angle < 3 * PI / 4:
+				base_sprite.play("idle_s")
+			elif angle < PI:
+				base_sprite.play("idle_sw")
+			elif angle < 5 * PI / 4:
+				base_sprite.play("idle_w")
+			elif angle < 3 * PI / 2:
+				base_sprite.play("idle_nw")
+			elif angle < 7 * PI / 4:
+				base_sprite.play("idle_n")
+			else:
+				base_sprite.play("idle_ne")
 		gun_sprite.global_rotation = angle
 
 		#TODO сделать систему свой-чужой
@@ -100,9 +132,26 @@ func update_current_target() -> void:
 
 ## Фунция стрельбы из пушки
 func shoot() -> void:
+	shot_now = true
 	audio_stream_player_2d.play()
-	gun_sprite.play("shot")
-	animation_player.play("shot")
+	if angle < 0:
+		angle += TAU
+	if angle < PI / 4:
+		base_sprite.play("attack_e")
+	elif angle < PI / 2:
+		base_sprite.play("attack_se")
+	elif angle < 3 * PI / 4:
+		base_sprite.play("attack_s")
+	elif angle < PI:
+		base_sprite.play("attack_sw")
+	elif angle < 5 * PI / 4:
+		base_sprite.play("attack_w")
+	elif angle < 3 * PI / 2:
+		base_sprite.play("attack_nw")
+	elif angle < 7 * PI / 4:
+		base_sprite.play("attack_n")
+	else:
+		base_sprite.play("attack_ne")
 	bullet_generator.shot()
 	ray_cast_2d.enabled = false
 
@@ -124,6 +173,7 @@ func find_target(n_target: Node2D = null) -> Node2D:
 
 ## Перезарядка завершена
 func _on_reload_timer_timeout() -> void:
+	shot_now = false
 	ray_cast_2d.enabled = true
 
 ## В зону обнаружения попал объект
