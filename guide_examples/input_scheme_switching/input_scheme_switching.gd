@@ -1,4 +1,4 @@
-## This example shows how to switch the input scheme on the fly. 
+## This example shows how to switch the input scheme on the fly.
 extends Node
 
 @export var joystick_scheme:GUIDEMappingContext
@@ -11,11 +11,10 @@ func _ready():
 	# switch.
 	switch_to_keyboard.triggered.connect(_switch_input_scheme.bind(keyboard_scheme))
 	switch_to_joystick.triggered.connect(_switch_input_scheme.bind(joystick_scheme))
-	
+
 	# And switch now to enable keyboard
 	_switch_input_scheme(keyboard_scheme)
 
 
 func _switch_input_scheme(context:GUIDEMappingContext):
 	GUIDE.enable_mapping_context(context, true)
-	
