@@ -510,7 +510,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_huog1")
 }],
-"loop": true,
+"loop": false,
 "name": &"collect_resurses_r",
 "speed": 9.0
 }, {
@@ -560,7 +560,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i0y2k")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_r",
 "speed": 10.0
 }, {
@@ -616,7 +616,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hpt0v")
 }],
-"loop": true,
+"loop": false,
 "name": &"flaffy_boll_r",
 "speed": 12.0
 }, {
@@ -668,7 +668,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g4twd")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_r",
 "speed": 10.0
 }, {
@@ -703,7 +703,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o2hu6")
 }],
-"loop": true,
+"loop": false,
 "name": &"paw_strike_r",
 "speed": 13.0
 }, {
@@ -825,7 +825,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ck2y6")
 }],
-"loop": true,
+"loop": false,
 "name": &"wound_r",
 "speed": 10.0
 }]

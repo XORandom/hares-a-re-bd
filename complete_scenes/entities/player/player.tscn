@@ -160,8 +160,9 @@ rotation = -0.49620593
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharcterAnim"]
 position = Vector2(-2, -61)
 sprite_frames = ExtResource("5_usp81")
-animation = &"aim_r"
+animation = &"run_r"
 autoplay = "idle_r"
+frame_progress = 0.66276777
 
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")
@@ -396,7 +397,6 @@ script = ExtResource("5_t23pu")
 [node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/CollectResources"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Idle")
-event = &"idle"
 delay_in_seconds = "0.8"
 
 [node name="Shot" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
@@ -405,7 +405,6 @@ script = ExtResource("5_t23pu")
 [node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Shot"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Idle")
-event = &"idle"
 delay_in_seconds = "0.6"
 
 [node name="FluffyBall" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
@@ -415,19 +414,18 @@ script = ExtResource("5_t23pu")
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Run")
 event = &"running"
-delay_in_seconds = "1.2"
+delay_in_seconds = "1.0"
 
 [node name="toWalk" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/FluffyBall"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Walk")
 event = &"walking"
-delay_in_seconds = "1.2"
+delay_in_seconds = "1.0"
 
 [node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/FluffyBall"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Idle")
-event = &"idle"
-delay_in_seconds = "1.2
+delay_in_seconds = "1.0
 "
 
 [node name="BunnyHop" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
@@ -448,7 +446,6 @@ delay_in_seconds = "1.2"
 [node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/BunnyHop"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Idle")
-event = &"idle"
 delay_in_seconds = "1.2"
 
 [node name="Interact" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour"]
@@ -457,7 +454,6 @@ script = ExtResource("5_t23pu")
 [node name="toIdle" type="Node" parent="PlayerStateChart/Root/PlayerBehaviour/Interact"]
 script = ExtResource("6_cjfkd")
 to = NodePath("../../Idle")
-event = &"idle"
 delay_in_seconds = "0.5"
 
 [node name="PlayerMode" type="Node" parent="PlayerStateChart/Root"]
