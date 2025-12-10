@@ -12,7 +12,7 @@ extends Node2D
 
 ## Сам прицел
 @onready var marker_2d: Marker2D = $Marker2D
-@onready var muzzle: Sprite2D = $Muzzle
+@onready var muzzle: Sprite2D = $Marker2D/Muzzle
 
 func _ready() -> void:
 	collision_shape_2d.shape.radius = shotgun_radius
