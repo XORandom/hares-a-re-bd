@@ -27,6 +27,8 @@ extends BaseEntity
 ## Состояние отдыха
 @onready var idle: AtomicState  = $PlayerStateChart/Root/PlayerBehaviour/Idle
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $CharcterAnim/AnimatedSprite2D
+
 func _process(delta: float) -> void:
 	pass
 
@@ -73,7 +75,7 @@ func on_sneak_triggered() -> void:
 
 
 func _on_run_state_processing(delta: float) -> void:
-
+	animated_sprite_2d.animation
 	pass # Replace with function body.
 
 

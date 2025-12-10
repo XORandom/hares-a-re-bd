@@ -280,9 +280,9 @@ rotation = -0.49620593
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharcterAnim"]
 sprite_frames = ExtResource("5_usp81")
-animation = &"sneak"
-frame = 9
-frame_progress = 0.9771269
+animation = &"idle_r"
+autoplay = "idle_r"
+frame_progress = 0.68744296
 
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")
