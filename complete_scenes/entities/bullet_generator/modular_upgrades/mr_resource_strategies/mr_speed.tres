@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SpeedBulletStrategy" load_steps=2 format=3 uid="uid://d30ljv4n0c4np"]
+
+[ext_resource type="Script" uid="uid://bl5rddoadmd20" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_speed_bullet_strategy.gd" id="1_6q4jq"]
+
+[resource]
+script = ExtResource("1_6q4jq")
+metadata/_custom_type_script = "uid://bl5rddoadmd20"
