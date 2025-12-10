@@ -283,7 +283,7 @@ position = Vector2(-2, -61)
 sprite_frames = ExtResource("5_usp81")
 animation = &"flaffy_boll_r"
 autoplay = "idle_r"
-frame_progress = 0.051957253
+frame_progress = 0.5758465
 
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")

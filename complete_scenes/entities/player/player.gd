@@ -96,27 +96,34 @@ func _on_walk_state_processing(delta: float) -> void:
 func _on_sneak_state_processing(delta: float) -> void:
 	pass # Replace with function body.
 
-
+## Делаем здесь, а не в on_run_triggered,
+## потому что конечный автомат также проверяет необходимость
+## и возможность перехода в состояние, в отличии от ввода
 func _on_run_state_entered() -> void:
 	speed = speed_max
+	animated_sprite_2d.play("run_r")
 	pass # Replace with function body.
 
-
+## Сигнал от конечного автомата (FSM PlayerStateChart)
 func _on_walk_state_entered() -> void:
 	speed = speed_normal
+	animated_sprite_2d.play("walk_r")
 	pass # Replace with function body.
 
-
+## Сигнал от конечного автомата (FSM PlayerStateChart)
 func _on_sneak_state_entered() -> void:
 	speed = speed_min
+	animated_sprite_2d.play("sneak_r")
 	pass # Replace with function body.
 
-
+## Сигнал от конечного автомата (FSM PlayerStateChart)
 func _on_idle_state_entered() -> void:
 	speed = speed_normal
+	animated_sprite_2d.play("idle_r")
 	pass # Replace with function body.
 
-
+## Сигнал от конечного автомата (FSM PlayerStateChart)
 func _on_stunned_state_entered() -> void:
 	speed = 0
+	animated_sprite_2d.play("wound_r")
 	pass # Replace with function body.
