@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ParticleBulletStrategy" load_steps=2 format=3 uid="uid://cf8kv6jkaiuqu"]
+
+[ext_resource type="Script" uid="uid://dtyavsrugn7gn" path="res://complete_scenes/entities/bullet_generator/modular_upgrades/m_strategies/m_particle_bullet_strategy.gd" id="1_gl6xy"]
+
+[resource]
+script = ExtResource("1_gl6xy")
+metadata/_custom_type_script = "uid://dtyavsrugn7gn"
