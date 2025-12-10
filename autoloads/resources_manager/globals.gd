@@ -39,6 +39,7 @@ static var player_direction: Vector2
 @onready var MUSIC_BUS_ID:int = AudioServer.get_bus_index("Music")
 
 func _ready() -> void:
+	EventBus.CHARACTER_DIED.connect(game_over)
 	pass
 
 
@@ -46,3 +47,8 @@ func _ready() -> void:
 func orphan_nodes(node: Node) -> void:
 	if node != null and node.get_parent() != null:
 		node.get_parent().remove_child(node)
+
+
+func game_over() -> void:
+	SceneManager.change_scene("uid://bxvpx0511unt")
+	return

@@ -50,14 +50,14 @@ scale = Vector2(3.8554688, 2.1640625)
 texture = SubResource("NoiseTexture2D_abcfb")
 
 [node name="Player" parent="." instance=ExtResource("11_84lrg")]
-position = Vector2(-1141, 422)
+position = Vector2(962, 331)
 
 [node name="LimitedCamera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.93, 0.93)
 limit_left = -1860
 limit_top = -580
-limit_right = 1605
-limit_bottom = 565
+limit_right = 2465
+limit_bottom = 1135
 
 [node name="Level" type="Node2D" parent="."]
 

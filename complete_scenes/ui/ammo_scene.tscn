@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8feg74hucdu7"]
+
+[ext_resource type="Texture2D" uid="uid://d1itr76j100jl" path="res://complete_scenes/entities/shotgun/shotgurn_res/02.png" id="1_gvrdb"]
+
+[node name="AmmoScene" type="TextureRect"]
+offset_left = -6.000002
+offset_top = 4.000001
+offset_right = 17.999998
+offset_bottom = 13.000001
+rotation = 2.1501017
+pivot_offset = Vector2(12, 4)
+texture = ExtResource("1_gvrdb")
+stretch_mode = 6
