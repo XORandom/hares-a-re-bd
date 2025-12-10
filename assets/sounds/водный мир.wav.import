@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://co5l4xcq0jrd3"
+path="res://.godot/imported/водный мир.wav-337e2601ed87393b2cdc34c280a0a7ca.sample"
+
+[deps]
+
+source_file="res://assets/sounds/водный мир.wav"
+dest_files=["res://.godot/imported/водный мир.wav-337e2601ed87393b2cdc34c280a0a7ca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
