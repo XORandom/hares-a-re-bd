@@ -100,7 +100,6 @@ texture = ExtResource("10_iakn2")
 
 [node name="Player" parent="." instance=ExtResource("11_84lrg")]
 position = Vector2(-1141, 422)
-speed = 20000.0
 
 [node name="LimitedCamera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.93, 0.93)
