@@ -56,7 +56,5 @@ tile_set = SubResource("TileSet_hseon")
 
 [node name="LaserTurret" parent="." instance=ExtResource("8_hseon")]
 position = Vector2(1021, 966)
-rotation_speed = null
-reload_time = null
-white_list = null
-black_list = Array[String](["Player"])
+white_list = Array[String](["Player"])
+black_list = Array[String](["Enemy"])

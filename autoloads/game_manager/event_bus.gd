@@ -49,8 +49,8 @@ signal player_change_direction(tree_node: String)
 ## [b]Отправитель:[/b] модуль получения урона #TODO сделать срочно
 ## [br][br]
 ## [b]Получатель:[/b] player_hud
-signal player_health_updated(health: float)
-signal player_health_damage(damage: float)
+signal player_health_updated(new_health: int)
+#signal player_health_damage(damage: float)
  	#Подаем сигнал об изменении здоровья
 	#EventBus.emit_signal("player_health_updated", new_health)
 

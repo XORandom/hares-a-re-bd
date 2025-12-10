@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl85lalhxqw5o"]
+
+[ext_resource type="Texture2D" uid="uid://ceill4wmmlhdv" path="res://complete_scenes/ui/ui_elements/ui_res/04_IconLive_Heart_Love (3)RedBlack.png" id="1_wxnnb"]
+[ext_resource type="Script" uid="uid://dyoelyh144174" path="res://complete_scenes/ui/life.gd" id="2_ql43b"]
+
+[node name="Life" type="TextureRect"]
+texture = ExtResource("1_wxnnb")
+stretch_mode = 5
+script = ExtResource("2_ql43b")
