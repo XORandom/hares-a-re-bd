@@ -30,6 +30,7 @@ res://config/input_actions/action_2d_sneak.tres
 			 1.5
 
 `get_local_mouse_position().normalized()`
+player_direction к примеру
 			 0,-1
 -1,0		  @			1,0
 			 0,1

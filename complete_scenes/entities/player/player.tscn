@@ -279,10 +279,11 @@ parameters/Walk/blend_position = Vector2(0, 0)
 rotation = -0.49620593
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharcterAnim"]
+position = Vector2(-2, -61)
 sprite_frames = ExtResource("5_usp81")
-animation = &"idle_r"
+animation = &"flaffy_boll_r"
 autoplay = "idle_r"
-frame_progress = 0.68744296
+frame_progress = 0.051957253
 
 [node name="PlayerStateChart" type="Node" parent="."]
 script = ExtResource("2_u2bhs")
