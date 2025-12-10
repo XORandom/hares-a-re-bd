@@ -1,15 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgn5o863h2noa"]
+[gd_scene load_steps=8 format=3 uid="uid://dgn5o863h2noa"]
 
 [ext_resource type="Script" uid="uid://p6sx2conrdhw" path="res://complete_scenes/world/levels/level_water.gd" id="1_cakpg"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_aney7"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="3_cakpg"]
-[ext_resource type="Texture2D" uid="uid://nebtmd46a8i4" path="res://assets/textures/parallax_textures/Ocean/0 ocean sky and sun.png" id="3_q86vi"]
-[ext_resource type="Texture2D" uid="uid://bibosl1urdqyl" path="res://assets/textures/parallax_textures/Ocean/1 ocean sea.png" id="4_cakpg"]
-[ext_resource type="Texture2D" uid="uid://dstgo4tcdhski" path="res://assets/textures/parallax_textures/Ocean/2 ocean sun light.png" id="5_aney7"]
-[ext_resource type="Texture2D" uid="uid://dwef861uutcsi" path="res://assets/textures/parallax_textures/Ocean/3 ocean clouds.png" id="6_mifyh"]
-[ext_resource type="Texture2D" uid="uid://c5qivinjd25ca" path="res://assets/textures/parallax_textures/Ocean/4 ocean back mountain.png" id="7_rtu32"]
-[ext_resource type="Texture2D" uid="uid://3uju5i30jvci" path="res://assets/textures/parallax_textures/Ocean/5 ocean sand.png" id="8_wys5a"]
-[ext_resource type="Texture2D" uid="uid://vmbietsv1622" path="res://assets/textures/parallax_textures/Ocean/6 ocean wave.png" id="9_01lsb"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_e21rw"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_3ad0w"]
 [ext_resource type="AudioStream" uid="uid://co5l4xcq0jrd3" path="res://assets/sounds/водный мир.wav" id="12_q86vi"]
@@ -34,63 +27,6 @@ visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_abcfb")
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Sky" type="Parallax2D" parent="Node2D"]
-scroll_offset = Vector2(681, 581)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Sky"]
-position = Vector2(0.2, 1)
-texture = ExtResource("3_q86vi")
-
-[node name="WaterReflex" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.9, 1)
-scroll_offset = Vector2(673, 577)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/WaterReflex"]
-texture = ExtResource("4_cakpg")
-
-[node name="WaterReflexBack" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.9, 1)
-scroll_offset = Vector2(1605, 635)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/WaterReflexBack"]
-position = Vector2(-915, -57)
-scale = Vector2(1, 1.01)
-texture = ExtResource("5_aney7")
-
-[node name="Cloud" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.2, 1)
-scroll_offset = Vector2(663, 770)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Cloud"]
-texture = ExtResource("6_mifyh")
-
-[node name="Mountains" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.375, 1)
-scroll_offset = Vector2(297, 884)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Mountains"]
-texture = ExtResource("7_rtu32")
-
-[node name="IcebergReflex" type="Parallax2D" parent="Node2D"]
-scale = Vector2(0.9170948, 0.5386008)
-scroll_scale = Vector2(0.865, 1)
-scroll_offset = Vector2(818.9999, 854.00006)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/IcebergReflex"]
-scale = Vector2(0.5979245, 0.5979245)
-texture = ExtResource("8_wys5a")
-
-[node name="Iceberg" type="Parallax2D" parent="Node2D"]
-scale = Vector2(0.9170948, 0.5386008)
-scroll_scale = Vector2(0.865, 1)
-scroll_offset = Vector2(931, 897.00006)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Iceberg"]
-scale = Vector2(0.5979245, 0.5979245)
-texture = ExtResource("9_01lsb")
 
 [node name="Player" parent="." instance=ExtResource("11_e21rw")]
 position = Vector2(224, 451)

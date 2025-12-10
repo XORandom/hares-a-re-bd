@@ -1,16 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://b2ptp60qptf3r"]
+[gd_scene load_steps=12 format=3 uid="uid://b2ptp60qptf3r"]
 
 [ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/levels/level_ice.gd" id="1_wardp"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_fsvwh"]
-[ext_resource type="Texture2D" uid="uid://bd5up235qejkl" path="res://assets/textures/parallax_textures/Iceberg/0-water.png" id="3_c773e"]
-[ext_resource type="Texture2D" uid="uid://cdd53ik2goy2" path="res://assets/textures/parallax_textures/Iceberg/1-Sky.png" id="4_7a0g1"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="5_c773e"]
-[ext_resource type="Texture2D" uid="uid://bga5usegnkqr0" path="res://assets/textures/parallax_textures/Iceberg/2-1-water reflex.png" id="5_puybf"]
-[ext_resource type="Texture2D" uid="uid://dhocogw73vvnt" path="res://assets/textures/parallax_textures/Iceberg/2-2-water reflex back.png" id="6_b23k5"]
-[ext_resource type="Texture2D" uid="uid://c8x3du0u204ju" path="res://assets/textures/parallax_textures/Iceberg/2-cloud.png" id="7_whpym"]
-[ext_resource type="Texture2D" uid="uid://bvlj40e86g2kl" path="res://assets/textures/parallax_textures/Iceberg/3-mountains.png" id="8_myj3m"]
-[ext_resource type="Texture2D" uid="uid://p7mjnfjremja" path="res://assets/textures/parallax_textures/Iceberg/4-icebergreflex.png" id="9_xt1kx"]
-[ext_resource type="Texture2D" uid="uid://3ayi106vw5rv" path="res://assets/textures/parallax_textures/Iceberg/5-iceberg.png" id="10_iakn2"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_84lrg"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_hyhj0"]
 [ext_resource type="PackedScene" uid="uid://gjujxrfcpgk7" path="res://complete_scenes/entities/effects/env_effects/wind_trail.tscn" id="13_wardp"]
@@ -53,60 +45,6 @@ visible = false
 position = Vector2(950.9999, 549)
 scale = Vector2(3.8554688, 2.1640625)
 texture = SubResource("NoiseTexture2D_abcfb")
-
-[node name="Water" type="Parallax2D" parent="."]
-
-[node name="Sprite2D2" type="Sprite2D" parent="Water"]
-texture = ExtResource("3_c773e")
-
-[node name="Sky" type="Parallax2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Sky"]
-position = Vector2(0.2, 1)
-texture = ExtResource("4_7a0g1")
-
-[node name="WaterReflex" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.9, 1)
-
-[node name="Sprite2D2" type="Sprite2D" parent="WaterReflex"]
-texture = ExtResource("5_puybf")
-
-[node name="WaterReflexBack" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.9, 1)
-
-[node name="Sprite2D2" type="Sprite2D" parent="WaterReflexBack"]
-texture = ExtResource("6_b23k5")
-
-[node name="Cloud" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.2, 1)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Cloud"]
-texture = ExtResource("7_whpym")
-
-[node name="Mountains" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.375, 1)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Mountains"]
-texture = ExtResource("8_myj3m")
-
-[node name="IcebergReflex" type="Parallax2D" parent="."]
-scale = Vector2(0.9170948, 0.5386008)
-scroll_scale = Vector2(0.865, 1)
-scroll_offset = Vector2(434, 294)
-
-[node name="Sprite2D2" type="Sprite2D" parent="IcebergReflex"]
-scale = Vector2(0.5979245, 0.5979245)
-texture = ExtResource("9_xt1kx")
-
-[node name="Iceberg" type="Parallax2D" parent="."]
-scale = Vector2(0.9170948, 0.5386008)
-scroll_scale = Vector2(0.865, 1)
-scroll_offset = Vector2(434, 274)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Iceberg"]
-position = Vector2(3.4113517, 0)
-scale = Vector2(0.59882224, 0.5979245)
-texture = ExtResource("10_iakn2")
 
 [node name="Player" parent="." instance=ExtResource("11_84lrg")]
 position = Vector2(-1141, 422)
