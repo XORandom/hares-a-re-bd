@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://ck3lqv73gdnwl"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://ck3lqv73gdnwl"]
 
 [ext_resource type="FontFile" uid="uid://bbly8g5hv0mvk" path="res://assets/fonts/wolgadeutsche/Wolgadeutsche.otf" id="1_682gp"]
+[ext_resource type="FontFile" uid="uid://bvh7i0dd7efcb" path="res://assets/fonts/TD Zvonar/TD Zvonar.otf" id="2_3wxkr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5rt5"]
 bg_color = Color(0, 0, 0, 1)
@@ -49,3 +50,4 @@ MarginContainer/constants/margin_right = 5
 MarginContainer/constants/margin_top = 5
 Panel/styles/panel = SubResource("StyleBoxFlat_dhuc7")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_682gp")
+RichTextLabel/fonts/normal_font = ExtResource("2_3wxkr")
