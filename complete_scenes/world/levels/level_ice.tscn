@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2ptp60qptf3r"]
+[gd_scene load_steps=13 format=3 uid="uid://b2ptp60qptf3r"]
 
 [ext_resource type="Script" uid="uid://hjjin0m3qmjd" path="res://complete_scenes/world/levels/level_ice.gd" id="1_wardp"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_fsvwh"]
@@ -20,6 +20,8 @@ frequency = 0.4596
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_abcfb"]
 noise = SubResource("FastNoiseLite_ap5gr")
 color_ramp = SubResource("Gradient_ap5gr")
+
+[sub_resource type="TileSet" id="TileSet_6sqhg"]
 
 [node name="LevelIce" type="Node2D"]
 script = ExtResource("1_wardp")
@@ -56,6 +58,17 @@ limit_top = -580
 limit_right = 1605
 limit_bottom = 565
 
-[node name="WindTrail" parent="." instance=ExtResource("13_wardp")]
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Ground" type="TileMapLayer" parent="Level"]
+tile_set = SubResource("TileSet_6sqhg")
+
+[node name="Obstacles" type="TileMapLayer" parent="Level"]
+tile_set = SubResource("TileSet_6sqhg")
+
+[node name="Interactive" type="TileMapLayer" parent="Level"]
+tile_set = SubResource("TileSet_6sqhg")
+
+[node name="WindTrail" parent="Level" instance=ExtResource("13_wardp")]
 position = Vector2(-171.00002, -92)
 scale = Vector2(9.3, 2.74)

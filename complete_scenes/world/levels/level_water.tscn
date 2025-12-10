@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgn5o863h2noa"]
+[gd_scene load_steps=9 format=3 uid="uid://dgn5o863h2noa"]
 
 [ext_resource type="Script" uid="uid://p6sx2conrdhw" path="res://complete_scenes/world/levels/level_water.gd" id="1_cakpg"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_aney7"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://co5l4xcq0jrd3" path="res://assets/sounds/водный мир.wav" id="12_q86vi"]
 
 [sub_resource type="TileSet" id="TileSet_abcfb"]
+
+[sub_resource type="TileSet" id="TileSet_hseon"]
 
 [node name="LevelWater" type="Node2D"]
 script = ExtResource("1_cakpg")
@@ -38,3 +40,14 @@ limit_left = -1000
 limit_top = 40
 limit_right = 2270
 limit_bottom = 995
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Ground" type="TileMapLayer" parent="Level"]
+tile_set = SubResource("TileSet_hseon")
+
+[node name="Obstacles" type="TileMapLayer" parent="Level"]
+tile_set = SubResource("TileSet_hseon")
+
+[node name="Interactive" type="TileMapLayer" parent="Level"]
+tile_set = SubResource("TileSet_hseon")
