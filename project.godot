@@ -63,6 +63,7 @@ folder_colors={
 "res://addons/": "gray",
 "res://assets/": "red",
 "res://autoloads/": "gray",
+"res://complete_scenes/entities/bullet_generator/modular_upgrades/mr_resource_strategies/": "teal",
 "res://complete_scenes/entities/shotgun/shotgurn_res/": "red",
 "res://complete_scenes/ui/loading_screen/loading_screen_images/": "red",
 "res://complete_scenes/ui/loading_screen/loading_screen_resources/": "teal",
@@ -77,6 +78,12 @@ folder_colors={
 "res://guide_examples/": "pink",
 "res://localization/": "green"
 }
+
+[global_group]
+
+Enemy=""
+Player=""
+Turrets=""
 
 [input]
 

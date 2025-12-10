@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://xn5yhb7a3dga"]
+[gd_scene load_steps=55 format=3 uid="uid://xn5yhb7a3dga"]
 
 [ext_resource type="Script" uid="uid://cmcttel0tywal" path="res://complete_scenes/entities/player/player.gd" id="1_2ja1o"]
 [ext_resource type="Script" uid="uid://bkm2qpcymw18x" path="res://complete_scenes/entities/player/charcter_anim.gd" id="2_cjfkd"]
@@ -546,10 +546,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23pu"]
 radius = 36.013885
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dkd4c"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ld7iu"]
 radius = 900.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Enemy", "Player", "Turrets"]]
 editor_description = "Наш братец-кролик"
 collision_mask = 598
 motion_mode = 1
@@ -964,7 +966,13 @@ metadata/_edit_group_ = true
 self_modulate = Color(5.1329317, 0, 0, 1)
 texture = ExtResource("13_3rt7g")
 
+[node name="BulletArea" type="Area2D" parent="SightHUD/Marker2D"]
+
+[node name="BulletCollision" type="CollisionShape2D" parent="SightHUD/Marker2D/BulletArea"]
+shape = SubResource("CircleShape2D_dkd4c")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SightHUD"]
+visible = false
 shape = SubResource("CircleShape2D_ld7iu")
 metadata/_edit_lock_ = true
 
@@ -981,3 +989,5 @@ metadata/_edit_lock_ = true
 [connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/FluffyBall" to="." method="_on_fluffy_ball_state_entered"]
 [connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/BunnyHop" to="." method="_on_bunny_hop_state_entered"]
 [connection signal="state_entered" from="PlayerStateChart/Root/PlayerBehaviour/Interact" to="." method="_on_interact_state_entered"]
+[connection signal="body_entered" from="SightHUD/Marker2D/BulletArea" to="SightHUD" method="_on_bullet_area_body_entered"]
+[connection signal="body_exited" from="SightHUD/Marker2D/BulletArea" to="SightHUD" method="_on_bullet_area_body_exited"]
