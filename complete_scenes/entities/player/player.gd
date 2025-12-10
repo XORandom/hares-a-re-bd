@@ -5,9 +5,9 @@ extends BaseEntity
 ##
 ## Братец-кролик
 
-##
+## Это выстрел из дробовика (только полсе состояние прицеливания
 @export var action_2d_attack: GUIDEAction = preload("uid://cdxjy5y8av6s3")
-##
+## Это прицеливание
 @export var action_2d_attack_aiming: GUIDEAction = preload("uid://ceprtv2da5m4e")
 ##
 @export var action_2d_attack_fluffy_ball: GUIDEAction = preload("uid://vvijfq34br47")
@@ -36,8 +36,12 @@ extends BaseEntity
 @onready var input_direction: Vector2 = Vector2.ZERO
 ## Последнее направлени движения
 @onready var last_direction: Vector2 = Vector2.ZERO
+
+#region FSM и состояния
+
 ## Конечный автомат игрока
 @onready var player_state_chart: StateChart = $PlayerStateChart
+
 ## Состояние бега
 @onready var run: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/Run
 ## Состояние ходьбы
@@ -46,20 +50,124 @@ extends BaseEntity
 @onready var sneak: AtomicState  = $PlayerStateChart/Root/PlayerBehaviour/Sneak
 ## Состояние отдыха
 @onready var idle: AtomicState  = $PlayerStateChart/Root/PlayerBehaviour/Idle
+## Состояние Получение урона и стан от этого
+@onready var stunned: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/Stunned
+## Состояние Смерть персонажа
+@onready var death: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/Death
+## Состояние Прицеливание
+@onready var aim: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/Aim
+## Состояние Удар лапкой
+@onready var paw_strike: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/PawStrike
+## Состояние Сбор ресурсов
+@onready var collect_resources: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/CollectResources
+## Состояние Выстрел (action_2d_attack)
+@onready var shot: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/Shot
+## Состояние Атака пушистым шаром
+@onready var fluffy_ball: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/FluffyBall
+## Состояние Прыжок
+@onready var bunny_hop: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/BunnyHop
+## Состояние взаимодействия
+@onready var interact: AtomicState = $PlayerStateChart/Root/PlayerBehaviour/Interact
+
+#endregion
+
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $CharcterAnim/AnimatedSprite2D
 
-func _process(delta: float) -> void:
-	pass
+func _ready() -> void:
+	walk_action.triggered.connect(on_walk_triggered)
+	run_action.triggered.connect(on_run_triggered)
+	sneak_action.triggered.connect(on_sneak_triggered)
+	action_2d_attack.triggered.connect(on_action_2d_attack)
+	action_2d_attack_aiming.triggered.connect(on_action_2d_attack_aiming)
+	action_2d_attack_fluffy_ball.triggered.connect(on_action_2d_attack_fluffy_ball)
+	action_2d_bunny_hop.triggered.connect(on_action_2d_bunny_hop)
+	action_2d_collect_resources.triggered.connect(on_action_2d_collect_resources)
+	action_2d_interact.triggered.connect(on_action_2d_interact)
+	action_2d_leap.triggered.connect(on_action_2d_leap)
+	action_2d_paw_strike.triggered.connect(on_action_2d_paw_strike)
+	action_emotion_wheel.triggered.connect(on_action_emotion_wheel)
 
 
+#region Сигналы от действий
+## Сигнал конечному автомату о переходе в состояние ходьбы
+func on_walk_triggered() -> void:
+	DebugPanel.show_debug_info(["on_walk_triggered"], 1)
+	if not walk.active:
+		player_state_chart.send_event("walking")
+
+## Сигнал конечному автомату о переходе в состояние бега
+func on_run_triggered() -> void:
+	DebugPanel.show_debug_info(["on_run_triggered"], 1)
+	if not run.active:
+		player_state_chart.send_event("running")
+
+## Сигнал конечному автомату о переходе в состояние подкрадывания
+func on_sneak_triggered() -> void:
+	DebugPanel.show_debug_info(["on_sneak_triggered"], 1)
+	if not sneak.active:
+		player_state_chart.send_event("sneaking")
+
+## Сигнал конечному автомату о переходе в состояние прицеливания
+func on_action_2d_attack_aiming() -> void:
+	DebugPanel.show_debug_info(["aiming"], 1)
+	if not aim.active:
+		player_state_chart.send_event("aiming")
+
+## Сигнал конечному автомату о переходе в состояние выстрела из дробовика
+## Сработает только если предыдущее состояние прицеливание
+func on_action_2d_attack() -> void:
+	DebugPanel.show_debug_info(["shot"], 1)
+	if not shot.active:
+		player_state_chart.send_event("shot")
+
+
+## Прыжок с атакой пушистым шаром
+func on_action_2d_attack_fluffy_ball() -> void:
+	DebugPanel.show_debug_info(["on_action_2d_attack_fluffy_ball"], 1)
+	if not fluffy_ball.active:
+		player_state_chart.send_event("fluffy_ball")
+
+## Прыжок с разгоном
+func on_action_2d_bunny_hop() -> void:
+	DebugPanel.show_debug_info(["on_action_2d_bunny_hop"], 1)
+	if not bunny_hop.active:
+		player_state_chart.send_event("bunny_hop")
+## Сбор ресурсов
+func on_action_2d_collect_resources() -> void:
+	DebugPanel.show_debug_info(["on_action_2d_collect_resources"], 1)
+	if not collect_resources.active:
+		player_state_chart.send_event("collect")
+## Взаимодействие
+func on_action_2d_interact() -> void:
+	DebugPanel.show_debug_info(["on_action_2d_interact"], 1)
+	if not interact.active:
+		player_state_chart.send_event("interact")
+## Прыжок
+func on_action_2d_leap() -> void:
+	DebugPanel.show_debug_info(["on_action_2d_leap"], 1)
+	#FIXME пока прыжок и баннихот это одно и тоже
+	if not bunny_hop.active:
+		player_state_chart.send_event("bunny_hop")
+## Удар лапкой
+func on_action_2d_paw_strike() -> void:
+	DebugPanel.show_debug_info(["on_action_2d_paw_strike"], 1)
+	if not paw_strike.active:
+		player_state_chart.send_event("paw_strike")
+## Колесо эмоций
+func on_action_emotion_wheel() -> void:
+	DebugPanel.show_debug_info(["on_action_emotion_wheel"], 1)
+	#TODO если будет
+#endregion
 
 func  on_damage_taken() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
 	input_direction = walk_action.value_axis_2d.normalized()
-	if input_direction != last_direction and input_direction != Vector2.ZERO:
+	if input_direction == Vector2.ZERO:
+		player_state_chart.send_event("idle")
+	elif input_direction != last_direction:
 		last_direction = input_direction
 	Globals.player_direction = get_local_mouse_position().normalized() if input_direction == Vector2.ZERO else last_direction
 	##player_direction к примеру
@@ -80,29 +188,8 @@ func _physics_process(delta: float) -> void:
 	DebugPanel.show_debug_info([global_position], 0)
 
 
-func _ready() -> void:
-	walk_action.triggered.connect(on_walk_triggered)
-	run_action.triggered.connect(on_run_triggered)
-	sneak_action.triggered.connect(on_sneak_triggered)
 
-##
-func on_walk_triggered() -> void:
-	DebugPanel.show_debug_info(["on_walk_triggered"], 1)
-	if not walk.active:
-		player_state_chart.send_event("walking")
-
-##
-func on_run_triggered() -> void:
-	DebugPanel.show_debug_info(["on_run_triggered"], 1)
-	if not run.active:
-		player_state_chart.send_event("running")
-
-##
-func on_sneak_triggered() -> void:
-	DebugPanel.show_debug_info(["on_sneak_triggered"], 1)
-	if not sneak.active:
-		player_state_chart.send_event("sneaking")
-
+#region Сигналы с конечного автомата
 ## Делаем здесь, а не в on_run_triggered,
 ## потому что конечный автомат также проверяет необходимость
 ## и возможность перехода в состояние, в отличии от ввода
@@ -142,8 +229,8 @@ func _on_death_state_entered() -> void:
 	EventBus.CHARACTER_DIED.emit()
 
 
-func _on_attack_state_entered() -> void:
-	animated_sprite_2d.play("attack_r")
+func _on_aim_state_entered() -> void:
+	animated_sprite_2d.play("aim_r")
 	pass # Replace with function body.
 
 
@@ -155,3 +242,24 @@ func _on_paw_strike_state_entered() -> void:
 func _on_collect_resources_state_entered() -> void:
 	animated_sprite_2d.play("collect_resurses_r")
 	pass # Replace with function body.
+
+
+func _on_shot_state_entered() -> void:
+	animated_sprite_2d.play("attack_r")
+	pass # Replace with function body.
+
+
+func _on_fluffy_ball_state_entered() -> void:
+	animated_sprite_2d.play("flaffy_boll_r")
+	pass # Replace with function body.
+
+
+func _on_bunny_hop_state_entered() -> void:
+	animated_sprite_2d.play("jump_r")
+	pass # Replace with function body.
+
+
+func _on_interact_state_entered() -> void:
+	animated_sprite_2d.play("collect_resurses_r")
+	pass # Replace with function body.
+#endregion
