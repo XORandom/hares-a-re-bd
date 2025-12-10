@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id="1"]
 script/source = "extends RigidBody2D
 
-@export var explosion_scene: PackedScene = preload(\"res://complete_scenes/entities/effects/explosion/explosion.tscn\")
+@export var explosion_scene: PackedScene = preload(\"uid://c8dy5potnbu4x\")
 
 @onready var effect: Node2D= $FireBallEffect
 @onready var effect_animator := $FireBallEffect/AnimationPlayer
