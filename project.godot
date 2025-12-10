@@ -70,6 +70,7 @@ folder_colors={
 "res://complete_scenes/ui/ui_elements/cogs/cog_textures/": "red",
 "res://complete_scenes/ui/ui_elements/ui_res/": "red",
 "res://complete_scenes/ui/ui_theme/": "teal",
+"res://complete_scenes/world/interactive_objects/lazer_turret/": "orange",
 "res://complete_scenes/world/interactive_objects/lazer_turret/lazer_turret_res/": "red",
 "res://config/": "gray",
 "res://config/input_actions/": "teal",
