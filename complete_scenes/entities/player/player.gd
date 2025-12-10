@@ -23,7 +23,6 @@ extends BaseEntity
 @export var action_2d_paw_strike: GUIDEAction = preload("uid://pcgn6iwjwpka")
 ##
 @export var action_emotion_wheel: GUIDEAction = preload("uid://bjlqm18uk8rbo")
-##
 ## Управление для бега
 @export var run_action: GUIDEAction = preload("uid://btj8l0x5cop8o")
 ## Управление для подкрадывания
@@ -87,6 +86,14 @@ func _ready() -> void:
 	action_2d_leap.triggered.connect(on_action_2d_leap)
 	action_2d_paw_strike.triggered.connect(on_action_2d_paw_strike)
 	action_emotion_wheel.triggered.connect(on_action_emotion_wheel)
+
+	action_2d_attack.ongoing.connect(_update_action_2d_attack)
+	action_2d_attack_aiming.ongoing.connect(_update_action_2d_attack_aiming)
+	action_2d_attack_fluffy_ball.ongoing.connect(_update_action_2d_attack_fluffy_ball)
+	action_2d_bunny_hop.ongoing.connect(_update_action_2d_bunny_hop)
+	action_2d_collect_resources.ongoing.connect(_update_action_2d_collect_resources)
+	action_2d_leap.ongoing.connect(_update_action_2d_leap)
+	action_2d_paw_strike.ongoing.connect(_update_action_2d_paw_strike)
 
 
 #region Сигналы от действий
@@ -164,11 +171,14 @@ func  on_damage_taken() -> void:
 	player_state_chart.send_event("stunned")
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	input_direction = walk_action.value_axis_2d.normalized()
-	if input_direction == Vector2.ZERO:
+	if velocity == Vector2.ZERO:
 		player_state_chart.send_event("idle")
-	elif input_direction != last_direction:
+	DebugPanel.show_debug_info(["velocity ",
+		velocity,
+		], 7)
+	if input_direction != last_direction or input_direction == Vector2.ZERO:
 		last_direction = input_direction
 	Globals.player_direction = get_local_mouse_position().normalized() if input_direction == Vector2.ZERO else last_direction
 	##player_direction к примеру
@@ -181,11 +191,11 @@ func _physics_process(delta: float) -> void:
 		Globals.player_direction.x>0
 		], 11)
 
-	#position += walk_action.value_axis_2d.normalized() * speed * delta
-	#position += run.value_axis_2d.normalized() * speed * delta
-	position += input_direction * speed * delta
-	#velocity = input_direction * speed * delta
-	#move_and_slide()
+	#position += walk_action.value_axis_2d.normalized() * speed * _delta
+	#position += run.value_axis_2d.normalized() * speed * _delta
+	#position += input_direction * speed * _delta
+	velocity = input_direction * speed
+	move_and_slide()
 	DebugPanel.show_debug_info([global_position], 0)
 
 
@@ -264,3 +274,25 @@ func _on_interact_state_entered() -> void:
 	animated_sprite_2d.play("collect_resurses_r")
 	pass # Replace with function body.
 #endregion
+
+
+func _update_action_2d_attack() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_attack"], 12)
+
+func _update_action_2d_attack_fluffy_ball() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_attack_fluffy_ball"], 12)
+
+func _update_action_2d_attack_aiming() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_attack_aiming"], 12)
+
+func _update_action_2d_bunny_hop() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_bunny_hop"], 12)
+
+func _update_action_2d_collect_resources() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_collect_resources"], 12)
+
+func _update_action_2d_leap() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_leap"], 12)
+
+func _update_action_2d_paw_strike() -> void:
+	DebugPanel.show_debug_info(["_update_action_2d_paw_strike"], 12)

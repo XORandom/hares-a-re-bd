@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bxs7nm2sgyl6a" path="res://complete_scenes/entities/shotgun/shotgun.gd" id="1_gu85t"]
 
 [node name="Shotgun" type="Node2D"]
+visible = false
 script = ExtResource("1_gu85t")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
