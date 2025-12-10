@@ -557,7 +557,7 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharcterAnim"]
 position = Vector2(-2, -61)
 sprite_frames = ExtResource("5_usp81")
-animation = &"run_r"
+animation = &"idle_r"
 autoplay = "idle_r"
 
 [node name="AnimationSheets" type="Node2D" parent="CharcterAnim"]
