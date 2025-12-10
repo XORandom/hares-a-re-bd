@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://4fmnr3wtbm7s"]
+[gd_scene load_steps=19 format=4 uid="uid://4fmnr3wtbm7s"]
 
 [ext_resource type="Script" uid="uid://dagvepwai61pw" path="res://complete_scenes/world/levels/level_jungle.gd" id="1_6xlmo"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_kw4o1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_ko8o4"]
 [ext_resource type="PackedScene" uid="uid://b5scy887qcf2e" path="res://complete_scenes/world/interactive_objects/lazer_turret/base_turret.tscn" id="11_wtpsk"]
 [ext_resource type="PackedScene" uid="uid://c4pk3fb211evf" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret.tscn" id="12_6xlmo"]
+[ext_resource type="PackedScene" uid="uid://v7a10sbutsov" path="res://complete_scenes/entities/enemy/black_hare.tscn" id="12_kw4o1"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_mevl2"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="12_wtpsk"]
 [ext_resource type="PackedScene" uid="uid://c1t8m2dogk1at" path="res://complete_scenes/entities/effects/env_effects/rain.tscn" id="13_6xlmo"]
@@ -105,6 +106,150 @@ limit_bottom = 1611
 
 [node name="BaseTurret" parent="." instance=ExtResource("11_wtpsk")]
 position = Vector2(877, -401)
+
+[node name="BlackHare" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(925, 544)
+
+[node name="BlackHare2" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(1544, 119)
+
+[node name="BlackHare3" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(1514, -150)
+
+[node name="BlackHare4" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(1351, -363)
+
+[node name="BlackHare5" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-440, -276)
+
+[node name="BlackHare6" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(160, -580)
+
+[node name="BlackHare7" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(183, 1596)
+
+[node name="BlackHare8" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-90, 1228)
+
+[node name="BlackHare9" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-333, 472)
+
+[node name="BlackHare11" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-969, 714)
+
+[node name="BlackHare12" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-350, 289)
+
+[node name="BlackHare13" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-380, 20)
+
+[node name="BlackHare14" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-543, -193)
+
+[node name="BlackHare15" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1527, 331)
+
+[node name="BlackHare16" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-927, 27)
+
+[node name="BlackHare17" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-904, 2203)
+
+[node name="BlackHare18" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1177, 1835)
+
+[node name="BlackHare19" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(4884, 1631)
+
+[node name="BlackHare20" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(4883, 2132)
+
+[node name="BlackHare21" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(6464, -28)
+
+[node name="BlackHare22" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(6487, 2148)
+
+[node name="BlackHare23" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(6214, 1780)
+
+[node name="BlackHare24" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5971, 1024)
+
+[node name="BlackHare25" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5335, 1266)
+
+[node name="BlackHare26" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5954, 841)
+
+[node name="BlackHare27" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5924, 572)
+
+[node name="BlackHare28" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5761, 359)
+
+[node name="BlackHare29" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(4777, 883)
+
+[node name="BlackHare30" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5377, 579)
+
+[node name="BlackHare31" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5400, 2755)
+
+[node name="BlackHare32" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(5127, 2387)
+
+[node name="BlackHare33" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1420, 1079)
+
+[node name="BlackHare34" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1421, 1580)
+
+[node name="BlackHare35" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-559, 3015)
+
+[node name="BlackHare36" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-536, 5191)
+
+[node name="BlackHare37" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-809, 4823)
+
+[node name="BlackHare38" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1052, 4067)
+
+[node name="BlackHare39" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1688, 4309)
+
+[node name="BlackHare40" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1069, 3884)
+
+[node name="BlackHare41" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1099, 3615)
+
+[node name="BlackHare42" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1262, 3402)
+
+[node name="BlackHare43" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-2246, 3926)
+
+[node name="BlackHare44" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1646, 3622)
+
+[node name="BlackHare45" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1623, 5798)
+
+[node name="BlackHare46" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-1896, 5430)
+
+[node name="BlackHare47" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-2139, 4674)
+
+[node name="BlackHare48" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-2140, 5175)
+
+[node name="BlackHare10" parent="." instance=ExtResource("12_kw4o1")]
+position = Vector2(-334, 973)
 
 [node name="LaserTurret" parent="." instance=ExtResource("12_6xlmo")]
 position = Vector2(1560, 803)

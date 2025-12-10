@@ -22,6 +22,7 @@ var score: int = 0:
 #var user_prefs:
 #var save:
 
+var player_coords: Vector2
 var player_can_move: bool = true
 
 ## Число кадров с секунду

@@ -76,7 +76,6 @@ folder_colors={
 "res://config/": "gray",
 "res://config/input_actions/": "teal",
 "res://docs/": "purple",
-"res://godot_state_charts_examples/": "pink",
 "res://guide_examples/": "pink",
 "res://localization/": "green"
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgn5o863h2noa"]
+[gd_scene load_steps=11 format=3 uid="uid://dgn5o863h2noa"]
 
 [ext_resource type="Script" uid="uid://p6sx2conrdhw" path="res://complete_scenes/world/levels/level_water.gd" id="1_cakpg"]
 [ext_resource type="Script" uid="uid://rrcahhioggsb" path="res://complete_scenes/world/world_metadta.gd" id="2_aney7"]
 [ext_resource type="PackedScene" uid="uid://ta1xkvppt17a" path="res://complete_scenes/ui/start_message.tscn" id="3_cakpg"]
+[ext_resource type="PackedScene" uid="uid://v7a10sbutsov" path="res://complete_scenes/entities/enemy/black_hare.tscn" id="8_ap6xy"]
 [ext_resource type="PackedScene" uid="uid://c4pk3fb211evf" path="res://complete_scenes/world/interactive_objects/lazer_turret/laser_turret.tscn" id="8_hseon"]
 [ext_resource type="PackedScene" uid="uid://xn5yhb7a3dga" path="res://complete_scenes/entities/player/player.tscn" id="11_e21rw"]
 [ext_resource type="PackedScene" uid="uid://bijr6gpgod2m2" path="res://complete_scenes/ui/gui.tscn" id="12_3ad0w"]
@@ -58,3 +59,147 @@ tile_set = SubResource("TileSet_hseon")
 position = Vector2(1021, 966)
 white_list = Array[String](["Player"])
 black_list = Array[String](["Enemy"])
+
+[node name="BlackHare" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-635, -259)
+
+[node name="BlackHare2" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-16, -684)
+
+[node name="BlackHare3" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-46, -953)
+
+[node name="BlackHare4" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-209, -1166)
+
+[node name="BlackHare5" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2000, -1079)
+
+[node name="BlackHare6" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1400, -1383)
+
+[node name="BlackHare7" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1377, 793)
+
+[node name="BlackHare8" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1650, 425)
+
+[node name="BlackHare9" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1893, -331)
+
+[node name="BlackHare11" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2529, -89)
+
+[node name="BlackHare12" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1910, -514)
+
+[node name="BlackHare13" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1940, -783)
+
+[node name="BlackHare14" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2103, -996)
+
+[node name="BlackHare15" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3087, -472)
+
+[node name="BlackHare16" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2487, -776)
+
+[node name="BlackHare17" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2464, 1400)
+
+[node name="BlackHare18" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2737, 1032)
+
+[node name="BlackHare19" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3324, 828)
+
+[node name="BlackHare20" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3323, 1329)
+
+[node name="BlackHare21" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4904, -831)
+
+[node name="BlackHare22" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4927, 1345)
+
+[node name="BlackHare23" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4654, 977)
+
+[node name="BlackHare24" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4411, 221)
+
+[node name="BlackHare25" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3775, 463)
+
+[node name="BlackHare26" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4394, 38)
+
+[node name="BlackHare27" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4364, -231)
+
+[node name="BlackHare28" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(4201, -444)
+
+[node name="BlackHare29" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3217, 80)
+
+[node name="BlackHare30" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3817, -224)
+
+[node name="BlackHare31" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3840, 1952)
+
+[node name="BlackHare32" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(3567, 1584)
+
+[node name="BlackHare33" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2980, 276)
+
+[node name="BlackHare34" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2981, 777)
+
+[node name="BlackHare35" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2119, 2212)
+
+[node name="BlackHare36" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2096, 4388)
+
+[node name="BlackHare37" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2369, 4020)
+
+[node name="BlackHare38" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2612, 3264)
+
+[node name="BlackHare39" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3248, 3506)
+
+[node name="BlackHare40" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2629, 3081)
+
+[node name="BlackHare41" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2659, 2812)
+
+[node name="BlackHare42" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-2822, 2599)
+
+[node name="BlackHare43" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3806, 3123)
+
+[node name="BlackHare44" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3206, 2819)
+
+[node name="BlackHare45" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3183, 4995)
+
+[node name="BlackHare46" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3456, 4627)
+
+[node name="BlackHare47" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3699, 3871)
+
+[node name="BlackHare48" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-3700, 4372)
+
+[node name="BlackHare10" parent="." instance=ExtResource("8_ap6xy")]
+position = Vector2(-1894, 170)

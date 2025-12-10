@@ -173,6 +173,7 @@ func  on_damage_taken() -> void:
 	pass
 
 func _physics_process(_delta: float) -> void:
+	Globals.player_coords = position
 	input_direction = walk_action.value_axis_2d.normalized()
 	if velocity == Vector2.ZERO:
 		player_state_chart.send_event("idle")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://v7a10sbutsov"]
+[gd_scene load_steps=20 format=3 uid="uid://v7a10sbutsov"]
 
 [ext_resource type="Script" uid="uid://c7pyms1hdtafj" path="res://complete_scenes/entities/enemy/black_hare.gd" id="1_6we3h"]
 [ext_resource type="Texture2D" uid="uid://bi66v2u7nhbo0" path="res://assets/textures/enemies/Заяц с клинком. Ходьба..png" id="2_6we3h"]
@@ -114,7 +114,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BlackHare" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_u62no"]
+radius = 67.11929
+
+[node name="BlackHare" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_6we3h")
 metadata/_custom_type_script = "uid://cnildue6kf0hy"
 
@@ -123,4 +126,12 @@ position = Vector2(4, -95)
 sprite_frames = SubResource("SpriteFrames_pdg15")
 animation = &"new_animation"
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-46, -60)
+shape = SubResource("CircleShape2D_u62no")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-46, -60)
+shape = SubResource("CircleShape2D_u62no")
